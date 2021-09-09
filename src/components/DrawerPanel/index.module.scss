@@ -5,3 +5,11 @@
 // .drawerPanel {
 //     (:global)(.aaa) {}
 // }
+
+.drawerPanel {
+  :global .ant-drawer-content {
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    overflow: unset;
+  }
+}

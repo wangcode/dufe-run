@@ -14,6 +14,7 @@ import styles from './index.module.scss';
 import PolylineJSON from './polyline.json';
 import UserToolBar from './components/userToolBar';
 import RunToolBar from './components/runToolBar';
+import UserMark from './components/userMark';
 
 const Points: {position: LatLngExpression}[] = [
     {
@@ -31,6 +32,7 @@ function Map() {
       </div>
       <div className={styles.runToolBar}>
         <RunToolBar />
+        <UserMark />
       </div>
       <MapContainer
         crs={CRS.Simple}
