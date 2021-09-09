@@ -1,5 +1,8 @@
 import React from 'react';
 import { RightOutlined } from '@ant-design/icons';
+
+import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
+
 import { RankUser } from '../rank';
 import styles from './index.module.scss';
 
@@ -9,7 +12,7 @@ const Home = () => {
 
     // const history = useHistory()
 
-    
+    const value = 60;
 
     return (
         <div>
@@ -19,7 +22,24 @@ const Home = () => {
                 <div className={styles.button}>攻略</div>
             </div>
             
-            <div>
+            <div className={styles.progress}>
+
+                <CircularProgressbar
+                    value={value}
+                    circleRatio={0.3}
+                    strokeWidth={6}
+                    text={value.toString()}
+                    counterClockwise
+                    styles={buildStyles({
+                        rotation: 0.65,
+                        // textSize: "36px",
+                        textColor: "#333",
+                        pathColor: `rgba(129, 021, 252, ${value / 100})`,
+                        trailColor: "#B9B9CD"
+                        // backgroundColor: "#B9B9CD"
+                    })}
+                />
+
                 <div>今日步数</div>
                 <div>3688</div>
             </div>

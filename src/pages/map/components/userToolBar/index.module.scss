@@ -21,14 +21,15 @@
 .blockToolbar {
   @extend .toolbar;
   display: inline-block;
-  vertical-align: middle;
 }
 
 .avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 8px;
+  display: inline-block;
   margin-right: 10px;
+}
+.left {
+  display: flex;
+  align-items: center;
 }
 .score {
   font-size: 15px;

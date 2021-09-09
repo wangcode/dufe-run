@@ -51,3 +51,36 @@
   box-shadow: 0px 3px 13px -2px #484848;
   display: inline-block;
 }
+
+.rule {
+  color: #333333;
+  margin-top: 15px;
+  padding: 0px 20px;
+  span {
+    color: #1244a8;
+  }
+}
+
+.progress {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  padding-bottom: 10px;
+  align-items: center;
+  .total {
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    strong {
+      font-size: 20px;
+      color: #1244a8;
+    }
+    em {
+      font-size: 12px;
+    }
+  }
+  .surplus {
+    font-size: 11px;
+    color: #b9b9cd;
+  }
+}

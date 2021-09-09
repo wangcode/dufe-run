@@ -13,6 +13,7 @@ function App() {
 
   return (
     <Map />
+    // <Home />
     // <div>
     //   <CircularProgressbar value={20} />
     // </div>
