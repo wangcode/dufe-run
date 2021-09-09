@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, ImageOverlay, Polyline, Feature
 import MapPNG from './img/map.png';
 
 import { CRS, LatLngExpression } from 'leaflet';
-import { EditControl } from "react-leaflet-draw"
+// import { EditControl } from "react-leaflet-draw"
 
 // import "react-leaflet-draw/dist/leaflet.draw.css";
 import "leaflet/dist/leaflet.css";
