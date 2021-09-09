@@ -1,0 +1,71 @@
+.button {
+  text-align: center;
+  border: 1px solid #0b3b65;
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px;
+}
+
+.entry {
+  margin: 0px 9px;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  .position {
+    position: absolute;
+    width: 100%;
+    bottom: 26px;
+    padding: 0px 30px;
+  }
+}
+.total {
+  color: #b5eef8;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-left: 16px;
+}
+.startBtn {
+  margin: 0 auto;
+  width: 292px;
+  height: 42px;
+  border-radius: 40px;
+  text-align: center;
+  line-height: 42px;
+  color: #fff;
+  font-size: 15px;
+  background-image: linear-gradient(to right, #f98b4f, #f7cd3d);
+}
+
+.rankPanel {
+  margin: 18px 9px;
+  box-shadow: 0px 0px 10px 2px rgba($color: #000000, $alpha: 0.15);
+  border-radius: 10px;
+}
+
+.rankPanelContent {
+  padding: 0 9px;
+}
+
+.rankButton {
+  color: #999;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.rankItem {
+  padding: 15px;
+  border-bottom: 1px solid #eeeeee;
+  &:last-child {
+    border-bottom: none;
+  }
+}

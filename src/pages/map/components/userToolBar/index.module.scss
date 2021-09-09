@@ -1,0 +1,64 @@
+.toolbar {
+  background-color: rgba($color: #ffffff, $alpha: 0.9);
+  border-radius: 23px;
+  padding: 6px 20px;
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+}
+
+.fullToolbar {
+  @extend .toolbar;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .left {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.blockToolbar {
+  @extend .toolbar;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+.score {
+  font-size: 15px;
+  margin-right: 10px;
+}
+.distance {
+  font-size: 12px;
+  span {
+    color: #1244a8;
+  }
+}
+
+.followBtn {
+  width: 100px;
+  height: 30px;
+  background-color: #74d769;
+  color: #fff;
+  font-size: 15px;
+  border-radius: 15px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.scoreBtn {
+  width: 52px;
+  height: 30px;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 30px;
+  background-image: linear-gradient(to right, #f98b4f, #f7cd3d);
+}
