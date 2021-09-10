@@ -10,13 +10,12 @@
     "@ant-design/icons": "^4.6.4",
     "antd": "^4.16.13",
     "leaflet": "^1.7.1",
-    "leaflet-draw": "^1.0.4",
+    "leaflet-geometryutil": "^0.10.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.0",
     "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.0",
     "react-leaflet": "^3.2.1",
-    "react-leaflet-draw": "^0.19.8",
     "sass": "^1.39.0"
   },
   "devDependencies": {
