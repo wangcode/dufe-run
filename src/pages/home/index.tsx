@@ -3,10 +3,11 @@ import { RightOutlined } from '@ant-design/icons';
 
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 
-import { RankUser } from '../rank';
-import styles from './index.module.scss';
 
 import EntryPNG from '../../assets/images/entry.png';
+import UserLine from '../../components/UserLine';
+
+import styles from './index.module.scss';
 
 const Home = () => {
 
@@ -59,13 +60,13 @@ const Home = () => {
                 </div>
                 <div className={styles.rankPanelContent}>
                     <div className={styles.rankItem}>
-                        <RankUser />
+                        <UserLine />
                     </div>
                     <div className={styles.rankItem}>
-                        <RankUser />
+                        <UserLine />
                     </div>
                     <div className={styles.rankItem}>
-                        <RankUser />
+                        <UserLine />
                     </div>
                 </div>
             </div>

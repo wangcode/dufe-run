@@ -32,16 +32,16 @@ function Map() {
 
   const [myStep, setMyStep] = useState(0)
 
-  useEffect(() => {
-    if(myStep===100000) setMyStep(0)
-    setTimeout(() => {
-      setMyStep(myStep+100)
-    }, 100)
-    // setInterval(() => {
-    //   // console.log(myStep+10)
-    //   // setMyStep(myStep+10)
-    // }, 10)
-  }, [myStep])
+  // useEffect(() => {
+  //   if(myStep===100000) setMyStep(0)
+  //   setTimeout(() => {
+  //     setMyStep(myStep+100)
+  //   }, 100)
+  //   // setInterval(() => {
+  //   //   // console.log(myStep+10)
+  //   //   // setMyStep(myStep+10)
+  //   // }, 10)
+  // }, [myStep])
 
   // const Path = useMemo(() => {
   //   return PolylineJSON.map(point => latLng(point[0], point[1]))
@@ -77,14 +77,13 @@ function Map() {
 
   return (
     <div className={styles.main}>
-      {/* <div className={styles.userToolBar}>
+      <div className={styles.userToolBar}>
         <UserToolBar self={true} />
         <UserToolBar self={false} />
       </div>
       <div className={styles.runToolBar}>
         <RunToolBar />
-        <UserMark />
-      </div> */}
+      </div>
       <MapContainer
         crs={CRS.Simple}
         style={{width: "100vw", height:"100vh"}}

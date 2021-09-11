@@ -1,0 +1,36 @@
+.box {
+  //   width: 143px;
+  //   height: 59px;
+  border-radius: 10px;
+  background-color: #eeeeee;
+  padding: 15px 20px;
+}
+.detail {
+  font-size: 12px;
+  font-weight: 600;
+  strong {
+    font-weight: bold;
+    font-size: 18px;
+    color: #1244a8;
+  }
+}
+.extra {
+  color: rgb(185, 185, 205);
+  font-size: 12px;
+}
+
+.blocks {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  font-size: 18px;
+}
+
+.avatar {
+  padding: 0px 20px;
+  position: absolute;
+  top: -27px;
+}

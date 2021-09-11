@@ -8,9 +8,11 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
+    "@types/numeral": "^2.0.1",
     "antd": "^4.16.13",
     "leaflet": "^1.7.1",
     "leaflet-geometryutil": "^0.10.0",
+    "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
     "react": "^17.0.0",
     "react-circular-progressbar": "^2.0.4",

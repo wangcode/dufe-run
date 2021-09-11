@@ -1,3 +1,4 @@
+import { Space } from "antd";
 import React, { CSSProperties } from "react";
 
 import styles from './index.module.scss';
@@ -10,12 +11,16 @@ interface ButtonSizeType {
 
 const ButtonSize: ButtonSizeType = {
     small: {
-        height: "20px"
+        borderRadius: "10px",
+        height: "22px",
+        padding: "0px 14px",
+        fontSize: "11px"
     },
     middle: {
         height: "30px",
         borderRadius: "15px",
-        padding: "0px 35px"
+        // padding: "0px 35px",
+        minWidth: "100px"
     },
     large: {
         height: "45px"
@@ -25,7 +30,7 @@ const ButtonSize: ButtonSizeType = {
 interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
     icon?: React.ReactNode;
     size?: keyof typeof ButtonSize;
-    theme?: "success"|"default"
+    theme?: "success"|"default"|"hot"
 }
 
 
@@ -37,12 +42,15 @@ const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, ch
             className={`${styles.resetButton} ${styles[theme]}`}
             style={{...ButtonSize[size]}}
         >
-           {icon && <span>
-                {icon}
-            </span>}
-            <span>
-                {children}
-            </span>
+            <Space>
+            {icon && <span>
+                    {icon}
+                </span>}
+                <span>
+                    {children}
+                </span>
+            </Space>
+
         </button>
     )
 

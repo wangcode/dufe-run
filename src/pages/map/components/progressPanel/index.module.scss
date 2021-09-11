@@ -1,0 +1,33 @@
+.rule {
+  color: #333333;
+  margin-top: 15px;
+  padding: 0px 20px;
+  span {
+    color: #1244a8;
+  }
+}
+
+.progress {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  padding-bottom: 10px;
+  align-items: center;
+  .total {
+    color: #000000;
+    font-size: 12px;
+    font-weight: 700;
+    strong {
+      font-weight: 700;
+      font-size: 20px;
+      color: #1244a8;
+    }
+    em {
+      font-size: 12px;
+    }
+  }
+  .surplus {
+    font-size: 11px;
+    color: #b9b9cd;
+  }
+}
