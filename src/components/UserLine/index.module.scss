@@ -6,15 +6,10 @@
     align-items: center;
   }
   .avatar {
-    // width: 53px;
-    // height: 53px;
-    // border-radius: 9px;
-    // font-size: 24px;
-    // line-height: 53px;
-    // text-align: center;
-    // background-color: #08c;
-    // color: #fff;
     margin: 0 15px;
+  }
+  .rank {
+    font-weight: 600;
   }
   .name {
     font-size: 15px;
@@ -33,4 +28,26 @@
     color: #999;
     padding: 5px;
   }
+}
+
+.medal {
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 19px;
+  height: 26px;
+}
+
+.silver {
+  @extend .medal;
+  background-image: url(../../assets/images/silver.png);
+}
+
+.gold {
+  @extend .medal;
+  background-image: url(../../assets/images/gold.png);
+}
+
+.bronze {
+  @extend .medal;
+  background-image: url(../../assets/images/bronze.png);
 }

@@ -9,15 +9,18 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
     "@types/numeral": "^2.0.1",
+    "@types/react-router-dom": "^5.1.8",
     "antd": "^4.16.13",
     "leaflet": "^1.7.1",
     "leaflet-geometryutil": "^0.10.0",
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
+    "rc-dialog": "^8.6.0",
     "react": "^17.0.0",
     "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.0",
     "react-leaflet": "^3.2.1",
+    "react-router-dom": "^5.3.0",
     "sass": "^1.39.0"
   },
   "devDependencies": {

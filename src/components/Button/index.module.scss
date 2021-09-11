@@ -21,6 +21,14 @@
   color: #000000d9;
   border-color: #d9d9d9;
   background: #fff;
+  letter-spacing: 1px;
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: #999;
+  background-color: #fff;
+  border-color: #999;
 }
 
 // themes

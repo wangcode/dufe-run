@@ -1,5 +1,6 @@
 import { Badge } from 'antd';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 
 import Avatar from '../../../../components/Avatar';
 import Button from '../../../../components/Button';
@@ -17,8 +18,10 @@ const UserToolBar: React.FC<UserToolBarProps> = ({ self }) => {
 
     const [ visible, setVisible ] = useState(false)
 
+    const history = useHistory()
+
     const handlePointClick = () => {
-        console.log("领积分")
+        history.push("/points")
     }
 
     const handleOnFollow = () => {

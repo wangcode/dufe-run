@@ -1,6 +1,8 @@
 import React from 'react';
 import { RightOutlined } from '@ant-design/icons';
 
+import Dialog from 'rc-dialog';
+
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 
 
@@ -8,18 +10,23 @@ import EntryPNG from '../../assets/images/entry.png';
 import UserLine from '../../components/UserLine';
 
 import styles from './index.module.scss';
+import { useHistory } from 'react-router-dom';
+import { RankList } from '../rank';
 
 const Home = () => {
 
-    // const history = useHistory()
+    const history = useHistory()
 
     const value = 60;
+
+    const steps = 304;
+    const people = 222;
 
     return (
         <div>
 
             <div className={styles.buttons}>
-                <div className={styles.button}>我的排名</div>
+                <div className={styles.button} onClick={() => history.push("/rank")}>我的排名</div>
                 <div className={styles.button}>攻略</div>
             </div>
             
@@ -42,34 +49,22 @@ const Home = () => {
                 />
 
                 <div>今日步数</div>
-                <div>3688</div>
+                <div>{steps}</div>
             </div>
 
             <div className={styles.entry}>
                 <div className={styles.position}>
-                    <div className={styles.total}>共 12112 校友参与</div>
-                    <div className={styles.startBtn}>走路线</div>
+                    <div className={styles.total}>共 {people} 校友参与</div>
+                    <div className={styles.startBtn} onClick={() => history.push("/map")}>走路线</div>
                 </div>
                 <img src={EntryPNG} alt="entry" />
             </div>
 
-            <div className={styles.rankPanel}>
-                <div className={styles.rankButton} onClick={() => alert(123)}>
-                    <span>今日排行榜</span>
-                    <RightOutlined />
-                </div>
-                <div className={styles.rankPanelContent}>
-                    <div className={styles.rankItem}>
-                        <UserLine />
-                    </div>
-                    <div className={styles.rankItem}>
-                        <UserLine />
-                    </div>
-                    <div className={styles.rankItem}>
-                        <UserLine />
-                    </div>
-                </div>
-            </div>
+            <RankList title />
+
+            <Dialog mask title={123} visible={true}>
+                123
+            </Dialog>
 
         </div>
     ) 

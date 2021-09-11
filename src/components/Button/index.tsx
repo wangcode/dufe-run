@@ -30,16 +30,18 @@ const ButtonSize: ButtonSizeType = {
 interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
     icon?: React.ReactNode;
     size?: keyof typeof ButtonSize;
-    theme?: "success"|"default"|"hot"
+    theme?: "success"|"default"|"hot";
+    disabled?: boolean;
 }
 
 
-const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, children}) => {
+const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, disabled, children}) => {
 
 
     return (
         <button
-            className={`${styles.resetButton} ${styles[theme]}`}
+            disabled={disabled}
+            className={`${styles.resetButton} ${styles[disabled?"disabled":theme]}`}
             style={{...ButtonSize[size]}}
         >
             <Space>

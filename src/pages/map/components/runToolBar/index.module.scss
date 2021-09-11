@@ -66,4 +66,12 @@
   color: #fff;
   line-height: 35px;
   border-radius: 17px;
+  display: flex;
+  align-items: center;
+
+  .walk {
+    width: 15px;
+    height: 22px;
+    margin-right: 10px;
+  }
 }

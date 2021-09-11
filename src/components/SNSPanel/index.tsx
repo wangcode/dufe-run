@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Col, Row, Tabs } from 'antd';
+import { Col, DrawerProps, Row, Tabs } from 'antd';
 
 import styles from './index.module.scss';
 import Rank from './rank';
@@ -13,17 +13,22 @@ const bodyStyle = {
     paddingBottom:0
 }
 
+interface SNSPanelProps extends DrawerProps {
+}
 
-const SNSPanel = () => {
+const SNSPanel: React.FC<SNSPanelProps> = ( props ) => {
 
-    const [active, setActive] = useState("follow")
+    const [active, setActive] = useState<string>("follow")
+
+    useEffect(() => {
+        return () => setActive("follow")
+    }, [props.visible])
 
     return (
         <DrawerPanel
+            {...props}
             bodyStyle={bodyStyle}
             destroyOnClose
-            height="55vh"
-            visible={true}
             title={
                 <Tabs className={styles.tabs} centered activeKey={active} onChange={setActive}>
                     <Tabs.TabPane tab="我的关注" key="follow" />

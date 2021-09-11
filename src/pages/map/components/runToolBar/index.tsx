@@ -6,6 +6,7 @@ import SNSPanel from '../../../../components/SNSPanel';
 import ProgressPanel from '../progressPanel';
 
 import styles from './index.module.scss';
+import walk from '../../../../assets/images/walk.png';
 
 
 const RunToolBar = () => {
@@ -25,7 +26,10 @@ const RunToolBar = () => {
                     <div>全程 {total} 公里</div>
                 </div>
                 <div>
-                    {toastVisible && <div className={styles.toast}>收起手机，走一走</div>}
+                    {toastVisible && <div className={styles.toast}>
+                        <img className={styles.walk} src={walk} />
+                        <span className={styles.text}>收起手机，走一走</span>
+                    </div>}
                     <div className={styles.startBtn} onClick={() => setToastVisible(true)}>GO</div>
                 </div>
                 <div className={styles.followBtn} onClick={() => setFollowVisible(true)} >我的关注</div>
@@ -33,9 +37,7 @@ const RunToolBar = () => {
             <DrawerPanel visible={visible} onClose={() => setVisible(false)}>
                 <ProgressPanel />
             </DrawerPanel>
-            {/* <DrawerPanel destroyOnClose height="35vh" visible={followVisible} onClose={() => setFollowVisible(false)}> */}
-                <SNSPanel />
-            {/* </DrawerPanel> */}
+            <SNSPanel height="55vh" visible={followVisible} onClose={() => setFollowVisible(false)} />
         </div>
     )
 
