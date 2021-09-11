@@ -6,6 +6,7 @@ import Button from '../Button';
 import styles from './index.module.scss';
 
 interface UserLineProps {
+    userId?: string;
     name: string;
     avatar: string;
     rank: number;
@@ -17,7 +18,7 @@ interface UserLineProps {
     onFollowClick?: () => void;
 }
 
-const UserLine: React.FC<UserLineProps> = ({ name, avatar, rank, medal, steps, like, likeNum, follow, onFollowClick }) => {
+const UserLine: React.FC<UserLineProps> = ({ userId, name, avatar, rank, medal, steps, like, likeNum, follow, onFollowClick }) => {
 
     return (
         <div className={styles.userItem}>
@@ -38,7 +39,10 @@ const UserLine: React.FC<UserLineProps> = ({ name, avatar, rank, medal, steps, l
                 {steps!==undefined && <div className={styles.steps}>{steps}</div>}
                 <div className={styles.fav}>
                     {likeNum!==undefined && <div>{likeNum}</div>}
-                    {like!==undefined && <div><HeartOutlined /></div>}
+                    {like!==undefined && <div>
+                        {like && <div className={styles.like} />}
+                        {!like && <div className={styles.unlike} />}
+                    </div>}
                 </div>
                 {onFollowClick && <Button size="small" theme={follow?"default":"success"}>{follow?"取消关注":"关注"}</Button>}
             </div>

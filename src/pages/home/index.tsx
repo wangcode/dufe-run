@@ -12,15 +12,18 @@ import UserLine from '../../components/UserLine';
 import styles from './index.module.scss';
 import { useHistory } from 'react-router-dom';
 import { RankList } from '../rank';
+import { useQuery } from 'react-query';
+import { getStepNum } from '../../services';
 
 const Home = () => {
 
     const history = useHistory()
 
+    const { data } = useQuery(["total", "people"], getStepNum)
+
     const value = 60;
 
     const steps = 304;
-    const people = 222;
 
     return (
         <div>
@@ -29,7 +32,7 @@ const Home = () => {
                 <div className={styles.button} onClick={() => history.push("/rank")}>我的排名</div>
                 <div className={styles.button}>攻略</div>
             </div>
-            
+
             <div className={styles.progress}>
 
                 <CircularProgressbar
@@ -54,7 +57,7 @@ const Home = () => {
 
             <div className={styles.entry}>
                 <div className={styles.position}>
-                    <div className={styles.total}>共 {people} 校友参与</div>
+                    <div className={styles.total}>共 {data?.num} 校友参与</div>
                     <div className={styles.startBtn} onClick={() => history.push("/map")}>走路线</div>
                 </div>
                 <img src={EntryPNG} alt="entry" />
@@ -67,7 +70,7 @@ const Home = () => {
             </Dialog>
 
         </div>
-    ) 
+    )
 }
 
 export default Home;

@@ -51,3 +51,16 @@
   @extend .medal;
   background-image: url(../../assets/images/bronze.png);
 }
+
+.like, .unlike{
+  width: 14px;
+  height: 13px;
+  background-size: cover;
+}
+
+.like{
+  background-image: url(../../assets/images/like.png);
+}
+.unlike{
+  background-image: url(../../assets/images/unlike.png);
+}

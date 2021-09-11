@@ -7,6 +7,8 @@ import Rank from './rank';
 import Search from './search';
 import DrawerPanel from '../DrawerPanel';
 import Button from '../Button';
+import { useQuery } from 'react-query';
+import { getPeopleInStep } from '../../services';
 
 const bodyStyle = {
     paddingTop:0,
@@ -20,8 +22,17 @@ const SNSPanel: React.FC<SNSPanelProps> = ( props ) => {
 
     const [active, setActive] = useState<string>("follow")
 
+    const [searchKey, setSearchKey] = useState("")
+
+    const { data } = useQuery(["search", searchKey], () => getPeopleInStep(searchKey))
+
+    const reset = () => {
+        setActive("follow")
+        setSearchKey("")
+    }
+
     useEffect(() => {
-        return () => setActive("follow")
+        return reset
     }, [props.visible])
 
     return (
@@ -34,7 +45,7 @@ const SNSPanel: React.FC<SNSPanelProps> = ( props ) => {
                     <Tabs.TabPane tab="我的关注" key="follow" />
                     <Tabs.TabPane tab="搜索校友" key="search">
                         <Row className={styles.searchHeader} gutter={12}>
-                            <Col flex={1}><input className={styles.searchInput} type="text" /></Col>
+                            <Col flex={1}><input value={searchKey} onChange={e => setSearchKey(e.target.value)} className={styles.searchInput} type="text" /></Col>
                             <Col><Button theme="hot">搜索</Button></Col>
                         </Row>
                     </Tabs.TabPane>
@@ -42,7 +53,7 @@ const SNSPanel: React.FC<SNSPanelProps> = ( props ) => {
             }
         >
             {active === "follow" && <Rank />}
-            {active === "search" && <Search />}
+            {active === "search" && <Search users={data||[]} />}
         </DrawerPanel>
     )
 
