@@ -4,6 +4,8 @@ import numeral from 'numeral';
 
 import Avatar from '../../../../components/Avatar';
 
+import HiPNG from '../../../../assets/images/hi.png';
+
 import styles from './index.module.scss';
 
 const SelfDetailPanel = () => {
@@ -21,7 +23,8 @@ const SelfDetailPanel = () => {
             <div className={styles.avatar}>
                 <Avatar src={avatar} />
             </div>
-            <div>
+            <div className={styles.user}>
+                <img width={70} height={52} src={HiPNG} alt="" />
                 <div className={styles.name}>{name}</div>
             </div>
             <div className={styles.blocks}>

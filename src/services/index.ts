@@ -17,6 +17,17 @@ interface StepsType {
     goodNum: number;
 }
 
+const MockStepsData = {
+    nowRank: 1000,
+    name: "孟浩",
+    nowStep: "200",
+    pic: "孟浩",
+    allStep: "10",
+    userId: "2",
+    allRank: 2,
+    goodNum: 30
+}
+
 interface RankType {
     goodFlag: "0"|"1";
     name: string;
@@ -25,6 +36,16 @@ interface RankType {
     goodId: string;
     userId: string;
     goodNum: number;
+}
+
+const MookRankData: RankType = {
+    goodFlag: "0",
+    name: "孟浩",
+    rowStep: "200",
+    pic: "",
+    goodId: "1",
+    userId: "1",
+    goodNum: 100,
 }
 
 interface UserStepDetailType {
@@ -65,6 +86,8 @@ interface SearchUserType {
  * @url http://yapi.dufe.tech/project/73/interface/api/9085
  */
 export const getMySteps = () => {
+
+    return Promise.resolve(MockStepsData)
     return axios.get<SuccessData<StepsType>>("/alumni/getMySteps").then(res=>res.data.data)
 }
 
@@ -73,6 +96,7 @@ export const getMySteps = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9091
  */
 export const getNowRank = () => {
+    return Promise.resolve([MookRankData, MookRankData, MookRankData])
     return axios.get<SuccessData<RankType[]>>("/alumni/getNowRank").then(res=>res.data.data)
 }
 
@@ -82,6 +106,7 @@ export const getNowRank = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9097
  */
 export const StepUpSomeOne = (userId: string) => {
+    return Promise.resolve(true)
     return axios.post("/alumni/stepUpSomeone", { userId })
 }
 
@@ -91,6 +116,7 @@ export const StepUpSomeOne = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9103
  */
 export const removeStepUp = (userId: string) => {
+    return Promise.resolve(true)
     return axios.post("/alumni/stepUpSomeone", { userId })
 }
 
@@ -99,6 +125,7 @@ export const removeStepUp = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9109
  */
 export const getStepNum = () => {
+    return Promise.resolve({num: 100})
     return axios.get<SuccessData<{num: number}>>("/alumni/getStepNum").then(res=>res.data.data)
 }
 
@@ -125,6 +152,7 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9127
  */
  export const followSomeone = (userId: string) => {
+    return Promise.resolve(true)
     return axios.post("/alumni/followSomeone", { userId })
 }
 
@@ -134,6 +162,7 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9133
  */
  export const removeFollow = (followId: string) => {
+    return Promise.resolve(true)
     return axios.post("/alumni/removeFollow", { followId })
 }
 

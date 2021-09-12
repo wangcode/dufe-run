@@ -4,6 +4,18 @@
   padding: 6px 8px;
   font-size: 12px;
   border-radius: 10px;
+  background-repeat: no-repeat;
+  background-position: 5px center;
+  padding-left: 26px;
+  background-size: 16px 16px;
+}
+.rank {
+  @extend .button;
+  background-image: url(../../assets/images/rank.png);
+}
+.info {
+  @extend .button;
+  background-image: url(../../assets/images/light.png);
 }
 .buttons {
   display: flex;
@@ -13,6 +25,7 @@
 
 .entry {
   margin: 0px 9px;
+  margin-top: 10px;
   position: relative;
   img {
     width: 100%;
@@ -44,7 +57,28 @@
 }
 
 .progress {
-  width: 205px;
-  height: 85px;
+  width: 255px;
+  height: 110px;
   margin: 0 auto;
+  position: relative;
+  color: #333;
+  .progressbar {
+    position: absolute;
+    bottom: 0;
+  }
+  .title {
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  .value {
+    font-size: 36px;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%);
+    font-weight: bold;
+  }
 }

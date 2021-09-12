@@ -7,11 +7,32 @@
   }
 }
 
+.avatar {
+  padding: 0px 20px;
+  position: absolute;
+  top: -27px;
+}
+
+.user {
+  padding-left: 30px;
+  padding-right: 10px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: #000000;
+  align-items: center;
+  .extra {
+    font-size: 12px;
+    color: #888888;
+  }
+}
+
 .progress {
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
-  padding-bottom: 10px;
+  padding-left: 30px;
+  // padding-bottom: 5px;
   align-items: center;
   .total {
     color: #000000;
@@ -26,7 +47,13 @@
     }
   }
   .surplus {
-    font-size: 11px;
-    color: #b9b9cd;
+    font-size: 12px;
+    color: #888888;
   }
+}
+
+.buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
 }

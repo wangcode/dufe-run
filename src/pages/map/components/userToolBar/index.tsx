@@ -6,8 +6,9 @@ import { useHistory } from 'react-router';
 import Avatar from '../../../../components/Avatar';
 import Button from '../../../../components/Button';
 import DrawerPanel from '../../../../components/DrawerPanel';
+import FollowButton from '../../../../components/FollowButton';
 import SNSPanel from '../../../../components/SNSPanel';
-import { followSomeone, getSomeoneStep, removeFollow } from '../../../../services';
+import { getSomeoneStep } from '../../../../services';
 import SelfDetailPanel from '../selfDetailPanel';
 
 import styles from './index.module.scss';
@@ -20,10 +21,6 @@ interface UserToolBarProps {
 export const OtherToolBar: React.FC<UserToolBarProps> = ({ userId }) => {
 
     const { data } = useQuery(["user", userId], () => getSomeoneStep(userId))
-
-    const isFollow = useMemo(() => {
-        return data?.followFlag==="1"
-    }, [data])
 
     const handleOnFollow = () => {
 
@@ -39,7 +36,7 @@ export const OtherToolBar: React.FC<UserToolBarProps> = ({ userId }) => {
                     <div className={styles.score}>{data?.name}</div>
                     <div className={styles.distance}>当前 <span>{data?.allStep} KM</span></div>
                 </div>
-                <Button theme="success" onClick={handleOnFollow}>{isFollow?"关注":"取消关注"}</Button>
+                <FollowButton follow={data?.followFlag==="1"} />
             </div>
         </div>
     )

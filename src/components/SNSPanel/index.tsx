@@ -24,7 +24,12 @@ const SNSPanel: React.FC<SNSPanelProps> = ( props ) => {
 
     const [searchKey, setSearchKey] = useState("")
 
-    const { data } = useQuery(["search", searchKey], () => getPeopleInStep(searchKey))
+    const [ search, setSearch ] = useState(false)
+
+    const { data } = useQuery(["search", searchKey], () => getPeopleInStep(searchKey), {
+        enabled: search,
+        onSuccess: () => setSearch(false)
+    })
 
     const reset = () => {
         setActive("follow")
@@ -46,7 +51,7 @@ const SNSPanel: React.FC<SNSPanelProps> = ( props ) => {
                     <Tabs.TabPane tab="搜索校友" key="search">
                         <Row className={styles.searchHeader} gutter={12}>
                             <Col flex={1}><input value={searchKey} onChange={e => setSearchKey(e.target.value)} className={styles.searchInput} type="text" /></Col>
-                            <Col><Button theme="hot">搜索</Button></Col>
+                            <Col><Button onClick={() => setSearch(true)} theme="hot">搜索</Button></Col>
                         </Row>
                     </Tabs.TabPane>
                 </Tabs>

@@ -24,9 +24,16 @@
   display: flex;
   justify-content: space-between;
 }
-
+.user {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  padding-bottom: 0;
+}
 .name {
+  font-weight: 600;
   font-size: 18px;
+  margin-left: 15px;
 }
 
 .avatar {
