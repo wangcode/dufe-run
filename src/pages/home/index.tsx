@@ -46,7 +46,7 @@ const Home = () => {
                         // backgroundColor: "#B9B9CD"
                     })}
                 />
-
+                <div className={styles.totalSteps}>{mySteps?.allStep}</div>
                 <div className={styles.title}>今日步数</div>
                 <div className={styles.value}>{mySteps?.nowStep}</div>
             </div>

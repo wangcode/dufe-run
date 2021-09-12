@@ -106,7 +106,6 @@ export const getNowRank = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9097
  */
 export const StepUpSomeOne = (userId: string) => {
-    return Promise.resolve(true)
     return axios.post("/alumni/stepUpSomeone", { userId })
 }
 
@@ -116,7 +115,6 @@ export const StepUpSomeOne = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9103
  */
 export const removeStepUp = (userId: string) => {
-    return Promise.resolve(true)
     return axios.post("/alumni/stepUpSomeone", { userId })
 }
 

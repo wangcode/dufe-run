@@ -5,6 +5,7 @@ import { removeStepUp, StepUpSomeOne } from '../../services';
 import Avatar from '../Avatar';
 import Button from '../Button';
 import DrawerPanel from '../DrawerPanel';
+import FollowButton from '../FollowButton';
 import UserPanel from './components/userPanel';
 
 import styles from './index.module.scss';
@@ -14,15 +15,25 @@ interface UserLineProps {
     name: string;
     pic: string;
     rank: number;
-    steps: number;
-    like?: boolean;
-    likeNum?: number;
-    follow?: boolean;
+    steps: string;
+    like?: {
+        likeNum: string;
+        isLike: boolean;
+    }
+    // like?: boolean;
+    // likeNum?: number;
+    follow?: {
+        followId: string;
+        isFollow: boolean;
+        onClick?: () => void;
+    }
+    // follow?: boolean;
+    // followId: string;
     medal?: boolean;
     onFollowClick?: () => void;
 }
 
-const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, steps, like, likeNum, follow, onFollowClick }) => {
+const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, steps, like, follow }) => {
 
     const [ visible, setVisible ] = useState(false)
 
@@ -55,16 +66,17 @@ const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, ste
             </div>
             <div className={styles.extra}>
                 {steps!==undefined && <div className={styles.steps}>{steps} 步</div>}
-                <div className={styles.fav} onClick={handleOnLike}>
-                    {likeNum!==undefined && <div>{likeNum}</div>}
-                    {like && <div className={styles.like} />}
-                    {!like && <div className={styles.unlike} />}
-                </div>
-                {onFollowClick && <Button size="small" theme={follow?"default":"success"}>{follow?"取消关注":"关注"}</Button>}
+                {like && <div className={styles.fav} onClick={handleOnLike}>
+                    {like.likeNum!==undefined && <div>{like.likeNum}</div>}
+                    {<div className={styles.like} />}
+                    {<div className={styles.unlike} />}
+                </div>}
+                {userId && follow && <FollowButton followId={follow.followId} follow={follow.isFollow} userId={userId} onChange={follow.onClick} />}
+                {/* {onFollowClick && <Button size="small" theme={follow?"default":"success"}>{follow?"取消关注":"关注"}</Button>} */}
             </div>
-            <DrawerPanel visible={visible} onClose={() => setVisible(false)} destroyOnClose>
-                <UserPanel name={name} pic={pic} steps={steps} />
-            </DrawerPanel>
+            {userId && <DrawerPanel visible={visible} onClose={() => setVisible(false)} destroyOnClose>
+                <UserPanel userId={userId} />
+            </DrawerPanel>}
         </div>
     )
 }

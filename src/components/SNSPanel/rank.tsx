@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Divider, Tabs } from 'antd';
-
 import UserLine from '../UserLine';
 import { useQuery } from 'react-query';
 import { getMyFollowList } from '../../services';
@@ -14,14 +12,22 @@ const Rank = () => {
     const { data } = useQuery("follows", getMyFollowList)
 
     return (
-        <div>
+        <div className={styles.searchList}>
             {data?.map(item => (
-                <UserLine
-                    key={item.userId}
-                    rank={1}
-                    name={item.name}
-                    avatar={item.pic}
-                />
+                <div className={styles.searchItem}>
+                    <UserLine
+                        key={item.userId}
+                        rank={1}
+                        name={item.name}
+                        pic={item.pic||""}
+                        steps={item.allStep}
+                        userId={item.userId}
+                        follow={{
+                            followId: item.followId,
+                            isFollow: true
+                        }}
+                    />
+                </div>
             ))}
         </div>
     )

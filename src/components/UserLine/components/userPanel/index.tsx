@@ -5,35 +5,39 @@ import React from "react";
 import Avatar from '../../../../components/Avatar';
 import styles from './index.module.scss';
 import FollowButton from "../../../FollowButton";
+import { useQuery } from "react-query";
+import { getSomeoneStep } from "../../../../services";
+import { useHistory } from "react-router";
 
 interface UserPanelProps {
-    pic: string;
-    name: string;
-    steps: number;
-    allSteps: string;
+    userId: string;
 }
 
-const UserPanel: React.FC<UserPanelProps> = ({ pic, name, steps, allSteps }) => {
+const UserPanel: React.FC<UserPanelProps> = ({ userId }) => {
+
+    const history = useHistory();
+
+    const { data, refetch } = useQuery(["users", userId,  "detail"], () => getSomeoneStep(userId))
 
     return (
         <div>
             <div className={styles.avatar}>
-                <Avatar src="https://images.generated.photos/TLpLhkWOu0ROL4_KZsXodUeOYwWXS8evz3jO8KS40ds/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTY2NjgyLmpwZw.jpg" />
+                <Avatar src={data?.pic||""} />
             </div>
             <div className={styles.user}>
-                <div className={styles.total}>孟浩</div>
+                <div className={styles.total}>{data?.name}</div>
                 <div className={styles.extra}>获得积分：356</div>
             </div>
             <Divider style={{margin: "15px 0"}} />
             <div className={styles.progress}>
-                <div className={styles.total}>今日步数：<strong>16364</strong></div>
+                <div className={styles.total}>今日步数：<strong>{data?.nowStep}</strong></div>
             </div>
             <div className={styles.progress}>
-                <div className={styles.total}>已走路程：<strong>15<em>KM</em></strong></div>
+                <div className={styles.total}>已走路程：<strong>{data?.allStep}<em>KM</em></strong></div>
             </div>
             <div className={styles.buttons}>
-                <Button>查看</Button>
-                <FollowButton follow={true} />
+                <Button onClick={() => history.push(`/map?userid=${userId}`)}>查看</Button>
+                <FollowButton userId={userId} follow={data?.followFlag==="1"} onChange={refetch} />
             </div>
         </div>
     )

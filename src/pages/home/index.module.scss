@@ -55,6 +55,13 @@
   font-size: 15px;
   background-image: linear-gradient(to right, #f98b4f, #f7cd3d);
 }
+.totalSteps{
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+  font-size: 12px;
+  color: #999999;
+}
 
 .progress {
   width: 255px;
