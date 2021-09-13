@@ -40,10 +40,8 @@ const Home = () => {
                     styles={buildStyles({
                         rotation: 0.65,
                         // rgba(94, 113, 192)
-                        // textSize: "36px",
                         pathColor: `rgba(129, 021, 252, ${value / 100})`,
                         trailColor: "#B9B9CD"
-                        // backgroundColor: "#B9B9CD"
                     })}
                 />
                 <div className={styles.totalSteps}>{mySteps?.allStep}</div>

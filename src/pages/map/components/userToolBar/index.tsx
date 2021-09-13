@@ -20,11 +20,7 @@ interface UserToolBarProps {
 
 export const OtherToolBar: React.FC<UserToolBarProps> = ({ userId }) => {
 
-    const { data } = useQuery(["user", userId], () => getSomeoneStep(userId))
-
-    const handleOnFollow = () => {
-
-    }
+    const { data, refetch } = useQuery(["user", userId], () => getSomeoneStep(userId))
 
     return (
         <div>
@@ -34,44 +30,41 @@ export const OtherToolBar: React.FC<UserToolBarProps> = ({ userId }) => {
                         <Avatar size="small" src={data?.pic||""} />
                     </div>
                     <div className={styles.score}>{data?.name}</div>
-                    <div className={styles.distance}>当前 <span>{data?.allStep} KM</span></div>
+                    <div className={styles.distance}>当前 <span>{data?.nowStep} KM</span></div>
                 </div>
-                <FollowButton follow={data?.followFlag==="1"} />
+                <FollowButton userId={userId} follow={data?.followFlag==="1"} onChange={refetch} />
             </div>
         </div>
     )
 }
 
 interface SelfToolBar {
+    pic: string;
+    name: string;
+    steps: string;
 }
 
-export const SelfToolBar = () => {
+export const SelfToolBar: React.FC<SelfToolBar> = ({ pic, name, steps }) => {
 
     const history = useHistory()
 
     const [ visible, setVisible ] = useState(false)
 
-    const avatar = "https://images.generated.photos/TLpLhkWOu0ROL4_KZsXodUeOYwWXS8evz3jO8KS40ds/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTY2NjgyLmpwZw.jpg"
-
     const point = 365
-
-    const name = "孟浩"
-
-    const steps = 10.1
 
     return (
         <div>
             <div className={styles.blockToolbar}>
                 <div className={styles.left}>
                     <div className={styles.avatar} onClick={()=>self && setVisible(true)}>
-                        <Avatar size="small" src={avatar} />
+                        <Avatar size="small" src={pic} />
                     </div>
                     {self && <span className={styles.score}>{point}分</span>}
                     {self && <Badge dot><div className={styles.scoreBtn} onClick={() => history.push("/points")}>领积分</div></Badge>}
                 </div>
             </div>
-            <DrawerPanel destroyOnClose height="212px" visible={visible} onClose={() => setVisible(false)}>
-                <SelfDetailPanel />
+            <DrawerPanel destroyOnClose height="230px" visible={visible} onClose={() => setVisible(false)}>
+                <SelfDetailPanel name={name} pic={pic} steps={steps} calorie={(parseInt(steps)*0.5).toString()}  />
             </DrawerPanel>
         </div>
     )

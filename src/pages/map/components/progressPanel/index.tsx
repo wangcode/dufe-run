@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Divider, Progress } from 'antd';
 import styles from './index.module.scss';
+import { TOTAL_LENGTH } from '../../../../services';
 
 const ProgressPanel = () => {
 
@@ -24,7 +25,7 @@ const ProgressPanel = () => {
             </div>
             <Divider /> 
             <div className={styles.progress}>
-                <div className={styles.total}>全程：<strong>{total}<em>KM</em></strong></div>
+                <div className={styles.total}>全程：<strong>{TOTAL_LENGTH/1000}<em>KM</em></strong></div>
                 <div className={styles.surplus}>还差 {distance}km 到达终点</div>
             </div>
             <Progress strokeColor={{from: "#c216fb", to: "#1244A8"}} percent={percent*100} showInfo={false} />

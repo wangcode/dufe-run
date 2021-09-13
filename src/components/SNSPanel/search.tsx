@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { UserAddOutlined } from '@ant-design/icons';
-import { Col, Divider, Row, Space, Tabs } from 'antd';
+import { Col, Divider, Empty, Row, Space, Spin, Tabs } from 'antd';
 
 import styles from './index.module.scss';
 import UserLine from '../UserLine';
 
 import Button from '../Button';
 import Avatar from '../Avatar';
+import FollowButton from '../FollowButton';
 
 export interface SearchUserPorps {
     pic: string;
@@ -17,9 +18,11 @@ export interface SearchUserPorps {
     allStep: string;
     userId: string;
     allRank: string;
+    followId: string;
+    onChange: () => void;
 }
 
-const SearchUser: React.FC<SearchUserPorps> = ({ pic, name, joinFlag, followFlag, allStep, allRank }) => {
+const SearchUser: React.FC<SearchUserPorps> = ({ pic, name, joinFlag, followFlag, userId, followId, allStep, allRank, onChange }) => {
     return (
         <div className={styles.searchUser}>
             <div className={styles.userDetail}>
@@ -38,41 +41,35 @@ const SearchUser: React.FC<SearchUserPorps> = ({ pic, name, joinFlag, followFlag
                     </div>
                 </Space>
             </div>
-            <Button theme="success" icon={<UserAddOutlined />}>关注</Button>
+            <FollowButton onChange={onChange} followId={followId} follow={followFlag==="1"} userId={userId} />
         </div>
     )
 }
 
 
 interface SearchProps {
-    users: SearchUserPorps[]
+    searchKey: string;
+    loading: boolean;
+    users: Omit<SearchUserPorps, "onChange">[];
+    reSearch: () => void;
 }
 
-const Search: React.FC<SearchProps> = ({ users }) => {
+const Search: React.FC<SearchProps> = ({ searchKey, loading, users,reSearch }) => {
 
     return (
-        <div className={styles.searchList}>
-            {users.map(item => (
-                <div key={item.userId} className={styles.searchItem}>
-                    <SearchUser {...item} />
-                </div>
-            ))}
-            {/* <div className={styles.searchItem}>
-                <SearchUser />
+        <Spin spinning={loading}>
+            <div className={styles.searchList}>
+                {users.map(item => (
+                    <div key={item.userId} className={styles.searchItem}>
+                        <SearchUser {...item} onChange={reSearch} />
+                    </div>
+                ))}
+                {users?.length===0 && searchKey && !loading && <div className={styles.empty}>
+                    <Empty description={`未查询到 “${searchKey}”`} />
+                    {/* {<Button theme="success" onClick={() => {}}>去关注</Button>} */}
+                </div>}
             </div>
-            <div className={styles.searchItem}>
-                <SearchUser />
-            </div>
-            <div className={styles.searchItem}>
-                <SearchUser />
-            </div>
-            <div className={styles.searchItem}>
-                <SearchUser />
-            </div>
-            <div className={styles.searchItem}>
-                <SearchUser />
-            </div> */}
-        </div>
+        </Spin>
     )
 
 }

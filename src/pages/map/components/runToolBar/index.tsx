@@ -7,6 +7,7 @@ import ProgressPanel from '../progressPanel';
 
 import styles from './index.module.scss';
 import walk from '../../../../assets/images/walk.png';
+import { TOTAL_LENGTH } from '../../../../services';
 
 
 const RunToolBar = () => {
@@ -16,14 +17,14 @@ const RunToolBar = () => {
     const [ toastVisible, setToastVisible ] = useState(false)
     const [ followVisible, setFollowVisible ] = useState(false)
 
-    const total = 20
+    
 
     return (
         <div className={styles.toolbar}>
             <div className={styles.line}>
                 <div className={styles.detail} onClick={() => setVisible(true)}>
                     <img src={LogoPNG} alt="logo" />
-                    <div>全程 {total} 公里</div>
+                    <div>全程 {TOTAL_LENGTH / 1000} 公里</div>
                 </div>
                 <div>
                     {toastVisible && <div className={styles.toast}>

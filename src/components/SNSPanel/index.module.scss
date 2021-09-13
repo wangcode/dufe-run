@@ -30,7 +30,8 @@
       color: #1f1b40;
       font-size: 15px;
     }
-    .ant-tabs-tab-active .ant-tabs-tab-btn, .ant-tabs-tab-btn:hover {
+    .ant-tabs-tab-active .ant-tabs-tab-btn,
+    .ant-tabs-tab-btn:hover {
       color: #1f1b40 !important;
       font-weight: 700;
     }
@@ -64,6 +65,7 @@
 }
 
 .searchList {
+  min-height: 30vh;
   .searchItem {
     padding: 20px 0;
     border-bottom: 1px solid #f1f1f1;
@@ -73,6 +75,13 @@
   }
 }
 
+.empty {
+  text-align: center;
+  margin: 20px 0;
+  button {
+    margin-top: 20px;
+  }
+}
 
 // .follow {
 //   .followItem{

@@ -22,18 +22,22 @@ const SNSPanel: React.FC<SNSPanelProps> = ( props ) => {
 
     const [active, setActive] = useState<string>("follow")
 
+    const [searchValue, setSearchValue] = useState("")
     const [searchKey, setSearchKey] = useState("")
 
     const [ search, setSearch ] = useState(false)
 
-    const { data } = useQuery(["search", searchKey], () => getPeopleInStep(searchKey), {
-        enabled: search,
+    console.log(searchKey)
+
+    const { data, isLoading, isFetching, refetch } = useQuery(["search", searchKey], () => getPeopleInStep(searchKey), {
+        enabled: searchKey!=="",
         onSuccess: () => setSearch(false)
     })
 
     const reset = () => {
         setActive("follow")
         setSearchKey("")
+        setSearchValue("")
     }
 
     useEffect(() => {
@@ -50,15 +54,15 @@ const SNSPanel: React.FC<SNSPanelProps> = ( props ) => {
                     <Tabs.TabPane tab="我的关注" key="follow" />
                     <Tabs.TabPane tab="搜索校友" key="search">
                         <Row className={styles.searchHeader} gutter={12}>
-                            <Col flex={1}><input value={searchKey} onChange={e => setSearchKey(e.target.value)} className={styles.searchInput} type="text" /></Col>
-                            <Col><Button onClick={() => setSearch(true)} theme="hot">搜索</Button></Col>
+                            <Col flex={1}><input value={searchValue} onChange={e => setSearchValue(e.target.value)} className={styles.searchInput} type="text" /></Col>
+                            <Col><Button onClick={() => setSearchKey(searchValue)} theme="hot">搜索</Button></Col>
                         </Row>
                     </Tabs.TabPane>
                 </Tabs>
             }
         >
-            {active === "follow" && <Rank />}
-            {active === "search" && <Search users={data||[]} />}
+            {active === "follow" && <Rank onClick={() => setActive("search")} />}
+            {active === "search" && <Search reSearch={refetch} loading={isLoading||isFetching} searchKey={searchKey} users={data||[]} />}
         </DrawerPanel>
     )
 

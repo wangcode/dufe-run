@@ -8,20 +8,19 @@ import HiPNG from '../../../../assets/images/hi.png';
 
 import styles from './index.module.scss';
 
-const SelfDetailPanel = () => {
+interface SelfDetailPanelProps {
+    name: string;
+    pic: string;
+    steps: string;
+    calorie: string;
+}
 
-    const avatar = "https://images.generated.photos/TLpLhkWOu0ROL4_KZsXodUeOYwWXS8evz3jO8KS40ds/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTY2NjgyLmpwZw.jpg"
-
-    const name = "王灿"
-
-    const steps = 4636
-
-    const calorie = 115
+const SelfDetailPanel: React.FC<SelfDetailPanelProps> = ({ name, pic, steps, calorie }) => {
 
     return (
         <div>
             <div className={styles.avatar}>
-                <Avatar src={avatar} />
+                <Avatar src={pic} />
             </div>
             <div className={styles.user}>
                 <img width={70} height={52} src={HiPNG} alt="" />

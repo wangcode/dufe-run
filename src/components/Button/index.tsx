@@ -35,7 +35,7 @@ interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes
 }
 
 
-const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, disabled, children}) => {
+const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, disabled, children, ...props}) => {
 
 
     return (
@@ -43,6 +43,7 @@ const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, di
             disabled={disabled}
             className={`${styles.resetButton} ${styles[disabled?"disabled":theme]}`}
             style={{...ButtonSize[size]}}
+            {...props}
         >
             <Space>
             {icon && <span>

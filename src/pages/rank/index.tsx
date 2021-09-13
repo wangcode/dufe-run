@@ -1,6 +1,7 @@
 import { HeartOutlined, RightOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
+import { Avatar, Spin } from 'antd';
 import React from 'react';
+import ContentLoader from 'react-content-loader';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router';
 import UserLine from '../../components/UserLine';
@@ -17,7 +18,7 @@ export const RankList: React.FC<RankListProps> = ({ title, medal }) => {
 
     const history = useHistory()
 
-    const { data } = useQuery("ranks", getNowRank)
+    const { data, refetch, isLoading, isFetching } = useQuery("ranks", getNowRank)
 
     return (
         <div className={styles.rankPanel}>
@@ -25,22 +26,27 @@ export const RankList: React.FC<RankListProps> = ({ title, medal }) => {
                 <span>今日排行榜</span>
                 <RightOutlined />
             </div>}
-            <div className={styles.rankPanelContent}>
-                {data?.map((rank, index) => (
-                    <div key={rank.userId} className={styles.rankItem}>
-                        <UserLine
-                            userId={rank.userId}
-                            rank={index+1}
-                            medal={medal}
-                            name={rank.name}
-                            pic={rank.pic}
-                            like={rank.goodFlag==="1"}
-                            steps={rank.rowStep}
-                            likeNum={rank.goodNum}
-                        />
-                    </div>
-                ))}
-            </div>
+            <Spin spinning={isLoading||isFetching}>
+                <div className={styles.rankPanelContent}>
+                    {data?.map((rank, index) => (
+                        <div key={rank.userId} className={styles.rankItem}>
+                            <UserLine
+                                userId={rank.userId}
+                                rank={index+1}
+                                medal={medal}
+                                name={rank.name}
+                                pic={rank.pic}
+                                like={{
+                                    likeNum: rank.goodNum.toString(),
+                                    isLike: rank.goodFlag==="1",
+                                    onChange: refetch
+                                }}
+                                steps={rank.rowStep}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </Spin>
         </div>
     )
 }
@@ -52,12 +58,17 @@ const Rank = () => {
     return (
         <div>
             {data && <div className={styles.self}>
-                <UserLine like medal
+                <UserLine medal
+                    userId={data?.userId}
+                    like={{
+                        likeNum: data?.goodNum.toString(),
+                        isLike: true,
+                        disabled: true
+                    }}
                     steps={data.allStep}
                     rank={data.allRank}
                     name={data.name}
                     pic={data.pic}
-                    likeNum={data?.goodNum}
                 />
             </div>}
 

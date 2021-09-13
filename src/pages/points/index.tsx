@@ -4,6 +4,7 @@ import Button from '../../components/Button';
 import walk from '../../assets/images/walk.png';
 
 import styles from './index.module.scss';
+import { TOTAL_LENGTH } from '../../services';
 
 const Point = () => {
 
@@ -13,7 +14,7 @@ const Point = () => {
             <div className={styles.total}>
                 <div>今日行程：<span>1.1KM</span></div>
                 <div>累计行程：<span>12KM</span></div>
-                <div>全程：<span>20KM</span></div>
+                <div>全程：<span> {TOTAL_LENGTH / 1000}KM</span></div>
             </div>
             <div className={styles.missionPanel}>
                 <div className={styles.mission}>
