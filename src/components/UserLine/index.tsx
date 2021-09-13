@@ -16,6 +16,7 @@ interface UserLineProps {
     pic: string;
     rank: number;
     steps: string;
+<<<<<<< Updated upstream
     like?: {
         likeNum: string;
         isLike: boolean;
@@ -29,6 +30,11 @@ interface UserLineProps {
     }
     // follow?: boolean;
     // followId: string;
+=======
+    like?: boolean;
+    likeNum?: number;
+    follow?: boolean;
+>>>>>>> Stashed changes
     medal?: boolean;
     onFollowClick?: () => void;
 }
@@ -74,9 +80,9 @@ const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, ste
                 {userId && follow && <FollowButton followId={follow.followId} follow={follow.isFollow} userId={userId} onChange={follow.onClick} />}
                 {/* {onFollowClick && <Button size="small" theme={follow?"default":"success"}>{follow?"取消关注":"关注"}</Button>} */}
             </div>
-            {userId && <DrawerPanel visible={visible} onClose={() => setVisible(false)} destroyOnClose>
-                <UserPanel userId={userId} />
-            </DrawerPanel>}
+            <DrawerPanel visible={visible} onClose={() => setVisible(false)} destroyOnClose>
+                <UserPanel name={name} pic={pic} steps={steps} allSteps="11" />
+            </DrawerPanel>
         </div>
     )
 }

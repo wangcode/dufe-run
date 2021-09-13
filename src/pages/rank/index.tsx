@@ -33,35 +33,13 @@ export const RankList: React.FC<RankListProps> = ({ title, medal }) => {
                             rank={index+1}
                             medal={medal}
                             name={rank.name}
-                            avatar={rank.pic}
+                            pic={rank.pic}
                             like={rank.goodFlag==="1"}
-                            steps={parseInt(rank.rowStep)}
+                            steps={rank.rowStep}
                             likeNum={rank.goodNum}
                         />
                     </div>
                 ))}
-                {/* <div className={styles.rankItem}>
-                    <UserLine
-                        rank={2}
-                        medal={medal}
-                        name="孟浩"
-                        avatar=""
-                        like
-                        steps={111}
-                        likeNum={29}
-                    />
-                </div>
-                <div className={styles.rankItem}>
-                    <UserLine
-                        rank={3}
-                        medal={medal}
-                        name="孟浩"
-                        avatar=""
-                        like
-                        steps={111}
-                        likeNum={29}
-                    />
-                </div> */}
             </div>
         </div>
     )
@@ -75,9 +53,10 @@ const Rank = () => {
         <div>
             {data && <div className={styles.self}>
                 <UserLine like medal
+                    steps={data.allStep}
                     rank={data.allRank}
-                    name={data?.name}
-                    avatar={data?.pic}
+                    name={data.name}
+                    pic={data.pic}
                     likeNum={data?.goodNum}
                 />
             </div>}
