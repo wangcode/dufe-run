@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Dialog from 'rc-dialog';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
@@ -10,10 +10,13 @@ import { getMySteps, getStepNum } from '../../services';
 
 import EntryPNG from '../../assets/images/entry.png';
 import styles from './index.module.scss';
+import StartModal from '../../components/StartModal';
 
 const Home = () => {
 
     const history = useHistory()
+
+    const [ visible, setVisible ] = useState(true);
 
     const { data: mySteps } = useQuery(["mySteps"], getMySteps)
 
@@ -59,9 +62,7 @@ const Home = () => {
 
             <RankList title />
 
-            {/* <Dialog mask title={123} visible={true}>
-                123
-            </Dialog> */}
+            {visible && <StartModal onClose={() => setVisible(false)} />}
 
         </div>
     )

@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/alumni": {
-        target: 'http://yapi.dufe.tech/mock/73/alumni/',
+        target: 'http://172.16.1.19:9091/alumni/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/alumni/, '')
       }

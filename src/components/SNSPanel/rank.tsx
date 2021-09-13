@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentLoader from 'react-content-loader';
+// import ContentLoader from 'react-content-loader';
 import UserLine from '../UserLine';
 import { useQuery } from 'react-query';
 import { getMyFollowList } from '../../services';

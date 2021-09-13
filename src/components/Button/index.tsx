@@ -23,7 +23,10 @@ const ButtonSize: ButtonSizeType = {
         minWidth: "100px"
     },
     large: {
-        height: "45px"
+        height: "45px",
+        borderRadius: "18px",
+        fontSize: "16px",
+        minWidth: "160px"
     }
 }
 

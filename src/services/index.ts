@@ -98,8 +98,6 @@ interface SearchUserType {
  * @url http://yapi.dufe.tech/project/73/interface/api/9085
  */
 export const getMySteps = () => {
-
-    return Promise.resolve(MockStepsData)
     return axios.get<SuccessData<StepsType>>("/alumni/getMySteps").then(res=>res.data.data)
 }
 
@@ -134,7 +132,6 @@ export const removeStepUp = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9109
  */
 export const getStepNum = () => {
-    return Promise.resolve({num: 100})
     return axios.get<SuccessData<{num: number}>>("/alumni/getStepNum").then(res=>res.data.data)
 }
 
@@ -161,7 +158,6 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9127
  */
  export const followSomeone = (userId: string) => {
-    return Promise.resolve(true)
     return axios.post("/alumni/followSomeone", { userId })
 }
 
@@ -171,7 +167,6 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9133
  */
  export const removeFollow = (followId: string) => {
-    return Promise.resolve(true)
     return axios.post("/alumni/removeFollow", { followId })
 }
 

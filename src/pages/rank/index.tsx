@@ -1,7 +1,6 @@
 import { HeartOutlined, RightOutlined } from '@ant-design/icons';
-import { Avatar, Spin } from 'antd';
+import { Avatar, Empty, Spin } from 'antd';
 import React from 'react';
-import ContentLoader from 'react-content-loader';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router';
 import UserLine from '../../components/UserLine';
@@ -47,6 +46,9 @@ export const RankList: React.FC<RankListProps> = ({ title, medal }) => {
                     ))}
                 </div>
             </Spin>
+            {data?.length===0 && <div className={styles.empty}>
+                <Empty description="暂无排行，你是第一位哟~" />
+            </div>}
         </div>
     )
 }
