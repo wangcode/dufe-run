@@ -49,13 +49,22 @@
   .avatar {
     margin-right: 15px;
   }
-  .name {
+  .left {
     font-size: 15px;
     color: #000;
+    display: flex;
+    align-items: center;
+    .name{
+      width: 50px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
     span {
       margin-left: 14px;
       font-size: 11px;
       color: #1244a8;
+      font-style: normal;
     }
   }
   .edu {

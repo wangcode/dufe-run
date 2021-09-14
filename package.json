@@ -9,6 +9,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
     "@types/numeral": "^2.0.1",
+    "@types/qs": "^6.9.7",
     "@types/react-router-dom": "^5.1.8",
     "antd": "^4.16.13",
     "axios": "^0.21.4",
@@ -16,6 +17,7 @@
     "leaflet-geometryutil": "^0.10.0",
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
+    "qs": "^6.10.1",
     "rc-dialog": "^8.6.0",
     "react": "^17.0.0",
     "react-circular-progressbar": "^2.0.4",

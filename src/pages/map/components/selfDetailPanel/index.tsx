@@ -7,35 +7,38 @@ import Avatar from '../../../../components/Avatar';
 import HiPNG from '../../../../assets/images/hi.png';
 
 import styles from './index.module.scss';
+import { useQuery } from "react-query";
+import { getMySteps } from "../../../../services";
+import { Spin } from "antd";
 
 interface SelfDetailPanelProps {
-    name: string;
-    pic: string;
-    steps: string;
-    calorie: string;
 }
 
-const SelfDetailPanel: React.FC<SelfDetailPanelProps> = ({ name, pic, steps, calorie }) => {
+const SelfDetailPanel: React.FC<SelfDetailPanelProps> = ({}) => {
+
+    const { data, isLoading } = useQuery("mySteps", getMySteps)
 
     return (
         <div>
             <div className={styles.avatar}>
-                <Avatar src={pic} />
+                <Avatar src={data?.pic||""} />
             </div>
-            <div className={styles.user}>
-                <img width={70} height={52} src={HiPNG} alt="" />
-                <div className={styles.name}>{name}</div>
-            </div>
-            <div className={styles.blocks}>
-                <div className={styles.box}>
-                    <div className={styles.detail}>总步数：<strong>{numeral(steps).format("0,0")}</strong></div>
-                    <div className={styles.extra}>千里之行，始于足下</div>
+            <Spin spinning={isLoading}>
+                <div className={styles.user}>
+                    <img width={70} height={52} src={HiPNG} alt="" />
+                    <div className={styles.name}>{data?.name||"-"}</div>
                 </div>
-                <div className={styles.box}>
-                    <div className={styles.detail}>消耗卡路里：<strong>{calorie}</strong></div>
-                    <div className={styles.extra}>准备燃烧我的卡路里</div>
+                <div className={styles.blocks}>
+                    <div className={styles.box}>
+                        <div className={styles.detail}>总步数：<strong>{numeral(data?.allStep).format("0,0")}</strong></div>
+                        <div className={styles.extra}>千里之行，始于足下</div>
+                    </div>
+                    <div className={styles.box}>
+                        <div className={styles.detail}>消耗卡路里：<strong>{parseInt(data?.allStep||"0") * 0.5}</strong></div>
+                        <div className={styles.extra}>准备燃烧我的卡路里</div>
+                    </div>
                 </div>
-            </div>
+            </Spin>
         </div>
     )
 

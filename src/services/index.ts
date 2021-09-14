@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs';
 
 export const TOTAL_STEPS = 20000; // 步
 export const TOTAL_LENGTH = 20000; // 米
@@ -6,11 +7,27 @@ const token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3RfdG9rZW4iLCJpYXQiOjE2MzEyNDA0
 
 axios.interceptors.request.use(config => {
     config.headers = {
-        token
+        token,
+        "Content-Type": "application/x-www-form-urlencoded"
     }
 
     return config
 })
+
+export enum FollowFlag {
+    follow = "1",
+    unFollow = "0"
+}
+
+export enum GoodFlag {
+    good = "1",
+    unGood = "0"
+}
+
+export enum JoinFlag {
+    join = "1",
+    unJoin = "0"
+}
 
 interface SuccessData<T> {
     code: string;
@@ -29,35 +46,14 @@ interface StepsType {
     goodNum: number;
 }
 
-const MockStepsData = {
-    nowRank: 1000,
-    name: "孟浩",
-    nowStep: "200",
-    pic: "孟浩",
-    allStep: "10",
-    userId: "2",
-    allRank: 2,
-    goodNum: 30
-}
-
 interface RankType {
-    goodFlag: "0"|"1";
+    goodFlag: GoodFlag;
     name: string;
-    rowStep: string;
+    nowStep: string;
     pic: string;
     goodId: string;
     userId: string;
     goodNum: number;
-}
-
-const MookRankData: RankType = {
-    goodFlag: "0",
-    name: "孟浩",
-    rowStep: "200",
-    pic: "",
-    goodId: "1",
-    userId: "1",
-    goodNum: 100,
 }
 
 interface UserStepDetailType {
@@ -65,7 +61,7 @@ interface UserStepDetailType {
     nowRank: number;
     name: string;
     nowStep: string;
-    followFlag: "0"|"1";
+    followFlag: FollowFlag;
     pic: string;
     allStep: string;
     userId: string;
@@ -84,8 +80,8 @@ interface UserDetailType {
 
 interface SearchUserType {
     name: string;
-    followFlag: "0"|"1";
-    joinFlag: "0"|"1";
+    followFlag: FollowFlag;
+    joinFlag: JoinFlag;
     pic: string;
     allStep: string;
     userId: string;
@@ -115,7 +111,7 @@ export const getNowRank = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9097
  */
 export const StepUpSomeOne = (userId: string) => {
-    return axios.post("/alumni/stepUpSomeone", { userId })
+    return axios.post("/alumni/stepUpSomeone", qs.stringify({ userId }))
 }
 
 /**
@@ -124,7 +120,7 @@ export const StepUpSomeOne = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9103
  */
 export const removeStepUp = (userId: string) => {
-    return axios.post("/alumni/stepUpSomeone", { userId })
+    return axios.post("/alumni/removeStepUp", qs.stringify({ userId }))
 }
 
 /**
@@ -141,7 +137,7 @@ export const getStepNum = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9115
  */
 export const getSomeoneStep = (userId: string) => {
-    return axios.post<SuccessData<UserStepDetailType>>("/alumni/getSomeoneStep", { userId }).then(res=>res.data.data)
+    return axios.post<SuccessData<UserStepDetailType>>("/alumni/getSomeoneStep", qs.stringify({userId}) ).then(res=>res.data.data)
 }
 
 /**
@@ -158,7 +154,7 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9127
  */
  export const followSomeone = (userId: string) => {
-    return axios.post("/alumni/followSomeone", { userId })
+    return axios.post("/alumni/followSomeone", qs.stringify({ userId }))
 }
 
 /**
@@ -167,7 +163,7 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9133
  */
  export const removeFollow = (followId: string) => {
-    return axios.post("/alumni/removeFollow", { followId })
+    return axios.post("/alumni/removeFollow", qs.stringify({ followId }))
 }
 
 /**
@@ -176,5 +172,5 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9133
  */
  export const getPeopleInStep = (name: string) => {
-    return axios.post<SuccessData<SearchUserType[]>>("/alumni/getPeopleInStep", { name }).then(res=>res.data.data)
+    return axios.post<SuccessData<SearchUserType[]>>("/alumni/getPeopleInStep", qs.stringify({ name })).then(res=>res.data.data)
 }

@@ -9,12 +9,13 @@ import UserLine from '../UserLine';
 import Button from '../Button';
 import Avatar from '../Avatar';
 import FollowButton from '../FollowButton';
+import { FollowFlag, JoinFlag } from '../../services';
 
 export interface SearchUserPorps {
     pic: string;
     name: string;
-    joinFlag: "0"|"1";
-    followFlag: "0"|"1";
+    joinFlag: JoinFlag;
+    followFlag: FollowFlag;
     allStep: string;
     userId: string;
     allRank: string;
@@ -28,12 +29,14 @@ const SearchUser: React.FC<SearchUserPorps> = ({ pic, name, joinFlag, followFlag
             <div className={styles.userDetail}>
                 <div className={styles.avatar}><Avatar src={pic} /></div>
                 <Space direction="vertical">
-                    <div className={styles.name}>
-                        {name} <span>{joinFlag?allStep:"未参加"}</span>
+                    <div className={styles.left}>
+                        <div className={styles.name}>{name}</div>
+                        <span>{joinFlag===JoinFlag.join?allStep:"未参加"}</span>
                     </div>
                     {/* <div className={styles.name}>孟浩 <span>未注册|未参加|3.5KM</span></div> */}
                     <div className={styles.edu}>
-                        第{allRank}名
+                        {joinFlag===JoinFlag.join && `第${allRank}名`}
+                        {joinFlag===JoinFlag.unJoin && "-"}
                         {/* <Space>
                             <span>1998年入学</span>
                             <span>会计学院</span>

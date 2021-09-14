@@ -46,7 +46,7 @@ const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, ste
                     {medal && rank===1 && <div className={styles.gold} />}
                     {medal && rank===2 && <div className={styles.silver} />}
                     {medal && rank===3 && <div className={styles.bronze} />}
-                    {medal && rank > 3 && rank}
+                    {medal && rank > 3 && <div className={styles.medal}>{rank}</div>}
                     {!medal && rank}
                 </div>
                 <div className={styles.avatar}>
@@ -64,7 +64,7 @@ const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, ste
                 {follow && <FollowButton followId={follow.followId} follow={follow.isFollow} userId={userId} onChange={follow.onChange} />}
             </div>
             <DrawerPanel visible={visible} onClose={() => setVisible(false)} destroyOnClose>
-                <UserPanel userId={userId} name={name} pic={pic} steps={steps} allSteps="11" />
+                <UserPanel userId={userId} />
             </DrawerPanel>
         </div>
     )

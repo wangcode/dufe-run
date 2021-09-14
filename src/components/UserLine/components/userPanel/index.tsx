@@ -6,19 +6,15 @@ import Avatar from '../../../../components/Avatar';
 import styles from './index.module.scss';
 import FollowButton from "../../../FollowButton";
 import { useQuery } from "react-query";
-import { getSomeoneStep } from "../../../../services";
+import { FollowFlag, getSomeoneStep } from "../../../../services";
 
 interface UserPanelProps {
     userId: string;
-    pic: string;
-    name: string;
-    steps: string;
-    allSteps: string;
 }
 
-const UserPanel: React.FC<UserPanelProps> = ({ userId, pic, name, steps, allSteps }) => {
+const UserPanel: React.FC<UserPanelProps> = ({ userId }) => {
 
-    const { data } = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId))
+    const { data, refetch } = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId))
 
     return (
         <div>
@@ -31,14 +27,14 @@ const UserPanel: React.FC<UserPanelProps> = ({ userId, pic, name, steps, allStep
             </div>
             <Divider style={{margin: "15px 0"}} />
             <div className={styles.progress}>
-                <div className={styles.total}>今日步数：<strong>{}</strong></div>
+                <div className={styles.total}>今日步数：<strong>{data?.nowStep}</strong></div>
             </div>
             <div className={styles.progress}>
                 <div className={styles.total}>已走路程：<strong>{data?.allStep}<em>KM</em></strong></div>
             </div>
             <div className={styles.buttons}>
                 <Button>查看</Button>
-                <FollowButton userId={userId} follow={true} />
+                <FollowButton onChange={refetch} userId={userId} followId={data?.followId} follow={data?.followFlag===FollowFlag.follow} />
             </div>
         </div>
     )
