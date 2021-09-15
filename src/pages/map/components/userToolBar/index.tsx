@@ -64,7 +64,7 @@ export const SelfToolBar: React.FC<SelfToolBar> = ({ pic, name, steps }) => {
                 </div>
             </div>
             <DrawerPanel destroyOnClose height="230px" visible={visible} onClose={() => setVisible(false)}>
-                <SelfDetailPanel name={name} pic={pic} steps={steps} calorie={(parseInt(steps)*0.5).toString()}  />
+                <SelfDetailPanel />
             </DrawerPanel>
         </div>
     )
