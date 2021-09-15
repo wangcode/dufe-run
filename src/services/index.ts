@@ -94,7 +94,7 @@ interface SearchUserType {
  * @url http://yapi.dufe.tech/project/73/interface/api/9085
  */
 export const getMySteps = () => {
-    return axios.get<SuccessData<StepsType>>("/alumni/getMySteps").then(res=>res.data.data)
+    return axios.get<SuccessData<StepsType>>("http://172.16.1.19:9091/alumni/getMySteps").then(res=>res.data.data)
 }
 
 /**
@@ -102,7 +102,7 @@ export const getMySteps = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9091
  */
 export const getNowRank = () => {
-    return axios.get<SuccessData<RankType[]>>("/alumni/getNowRank").then(res=>res.data.data)
+    return axios.get<SuccessData<RankType[]>>("http://172.16.1.19:9091/alumni/getNowRank").then(res=>res.data.data)
 }
 
 /**
@@ -111,7 +111,7 @@ export const getNowRank = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9097
  */
 export const StepUpSomeOne = (userId: string) => {
-    return axios.post("/alumni/stepUpSomeone", qs.stringify({ userId }))
+    return axios.post("http://172.16.1.19:9091/alumni/stepUpSomeone", qs.stringify({ userId }))
 }
 
 /**
@@ -120,7 +120,7 @@ export const StepUpSomeOne = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9103
  */
 export const removeStepUp = (userId: string) => {
-    return axios.post("/alumni/removeStepUp", qs.stringify({ userId }))
+    return axios.post("http://172.16.1.19:9091/alumni/removeStepUp", qs.stringify({ userId }))
 }
 
 /**
@@ -128,7 +128,7 @@ export const removeStepUp = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9109
  */
 export const getStepNum = () => {
-    return axios.get<SuccessData<{num: number}>>("/alumni/getStepNum").then(res=>res.data.data)
+    return axios.get<SuccessData<{num: number}>>("http://172.16.1.19:9091/alumni/getStepNum").then(res=>res.data.data)
 }
 
 /**
@@ -137,7 +137,7 @@ export const getStepNum = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9115
  */
 export const getSomeoneStep = (userId: string) => {
-    return axios.post<SuccessData<UserStepDetailType>>("/alumni/getSomeoneStep", qs.stringify({userId}) ).then(res=>res.data.data)
+    return axios.post<SuccessData<UserStepDetailType>>("http://172.16.1.19:9091/alumni/getSomeoneStep", qs.stringify({userId}) ).then(res=>res.data.data)
 }
 
 /**
@@ -145,7 +145,7 @@ export const getSomeoneStep = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9121
  */
 export const getMyFollowList = () => {
-    return axios.get<SuccessData<UserDetailType[]>>("/alumni/getMyFollowList").then(res=>res.data.data)
+    return axios.get<SuccessData<UserDetailType[]>>("http://172.16.1.19:9091/alumni/getMyFollowList").then(res=>res.data.data)
 }
 
 /**
@@ -154,7 +154,7 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9127
  */
  export const followSomeone = (userId: string) => {
-    return axios.post("/alumni/followSomeone", qs.stringify({ userId }))
+    return axios.post("http://172.16.1.19:9091/alumni/followSomeone", qs.stringify({ userId }))
 }
 
 /**
@@ -163,7 +163,7 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9133
  */
  export const removeFollow = (followId: string) => {
-    return axios.post("/alumni/removeFollow", qs.stringify({ followId }))
+    return axios.post("http://172.16.1.19:9091/alumni/removeFollow", qs.stringify({ followId }))
 }
 
 /**
@@ -172,5 +172,5 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9133
  */
  export const getPeopleInStep = (name: string) => {
-    return axios.post<SuccessData<SearchUserType[]>>("/alumni/getPeopleInStep", qs.stringify({ name })).then(res=>res.data.data)
+    return axios.post<SuccessData<SearchUserType[]>>("http://172.16.1.19:9091/alumni/getPeopleInStep", qs.stringify({ name })).then(res=>res.data.data)
 }
