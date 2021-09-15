@@ -19,9 +19,10 @@ import UserToolBar, { OtherToolBar } from './components/userToolBar';
 import RunToolBar from './components/runToolBar';
 import UserMark from './components/userMark';
 import RunLine from './components/runLine';
-import { useSearchParam } from 'react-use';
+// import { useSearchParam } from 'react-use';
 import { useQuery } from 'react-query';
 import { getMySteps, getSomeoneStep } from '../../services';
+import { useLocation } from 'react-router';
 
 const Points: {position: LatLngExpression}[] = [
     {
@@ -33,9 +34,14 @@ const Interval = 20000000;
 
 function Map() {
 
+  const location = useLocation()
+
   const [myStep, setMyStep] = useState(0)
 
-  const userId = useSearchParam("user")
+  const userId = useMemo(() => {
+    const params = new URLSearchParams(location.search)
+    return params.get("user")
+  }, [location])
 
   const userDetail = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId!), {enabled: !!userId})
   const mySteps = useQuery("mySteps", getMySteps, {enabled: !userId})
