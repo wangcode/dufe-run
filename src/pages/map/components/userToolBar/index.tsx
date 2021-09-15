@@ -1,4 +1,4 @@
-import { Badge } from 'antd';
+import { Badge, Spin } from 'antd';
 import React, { useMemo, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router';
@@ -9,6 +9,7 @@ import DrawerPanel from '../../../../components/DrawerPanel';
 import FollowButton from '../../../../components/FollowButton';
 import SNSPanel from '../../../../components/SNSPanel';
 import { getSomeoneStep } from '../../../../services';
+import { transStep2Kilometer } from '../../../../utils';
 import SelfDetailPanel from '../selfDetailPanel';
 
 import styles from './index.module.scss';
@@ -20,21 +21,21 @@ interface UserToolBarProps {
 
 export const OtherToolBar: React.FC<UserToolBarProps> = ({ userId }) => {
 
-    const { data, refetch } = useQuery(["user", userId], () => getSomeoneStep(userId))
+    const { data, refetch, isLoading } = useQuery(["user", userId], () => getSomeoneStep(userId))
 
     return (
-        <div>
+        <Spin spinning={isLoading}>
             <div className={styles.fullToolbar}>
                 <div className={styles.left}>
                     <div className={styles.avatar}>
-                        <Avatar size="small" src={data?.pic||""} />
+                        <Avatar size="small" src={data?.pic} text={data?.name} />
                     </div>
                     <div className={styles.score}>{data?.name}</div>
-                    <div className={styles.distance}>当前 <span>{data?.nowStep} KM</span></div>
+                    <div className={styles.distance}>当前 <span>{transStep2Kilometer(data?.nowStep)} KM</span></div>
                 </div>
-                <FollowButton userId={userId} follow={data?.followFlag==="1"} onChange={refetch} />
+                <FollowButton followId={data?.followId} userId={userId} follow={data?.followFlag==="1"} onChange={refetch} />
             </div>
-        </div>
+        </Spin>
     )
 }
 
@@ -57,7 +58,7 @@ export const SelfToolBar: React.FC<SelfToolBar> = ({ pic, name, steps }) => {
             <div className={styles.blockToolbar}>
                 <div className={styles.left}>
                     <div className={styles.avatar} onClick={()=>self && setVisible(true)}>
-                        <Avatar size="small" src={pic} />
+                        <Avatar size="small" src={pic} text={name} />
                     </div>
                     {self && <span className={styles.score}>{point}分</span>}
                     {self && <Badge dot><div className={styles.scoreBtn} onClick={() => history.push("/points")}>领积分</div></Badge>}

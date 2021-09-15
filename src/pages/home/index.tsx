@@ -6,11 +6,12 @@ import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import { useHistory } from 'react-router-dom';
 import { RankList } from '../rank';
 import { useQuery } from 'react-query';
-import { getMySteps, getStepNum } from '../../services';
+import { getMySteps, getStepNum, TOTAL_STEPS } from '../../services';
 
 import EntryPNG from '../../assets/images/entry.png';
 import styles from './index.module.scss';
 import StartModal from '../../components/StartModal';
+import { transStep2Metre } from '../../utils';
 
 const Home = () => {
 
@@ -21,8 +22,6 @@ const Home = () => {
     const { data: mySteps } = useQuery(["mySteps"], getMySteps)
 
     const { data } = useQuery(["total", "people"], getStepNum)
-
-    const value = 60;
 
     return (
         <div>
@@ -36,14 +35,15 @@ const Home = () => {
 
                 <CircularProgressbar
                     className={styles.progressbar}
-                    value={value}
+                    value={parseInt(mySteps?.allStep||"0")}
                     circleRatio={0.3}
                     strokeWidth={5}
+                    maxValue={TOTAL_STEPS}
                     counterClockwise
                     styles={buildStyles({
                         rotation: 0.65,
                         // rgba(94, 113, 192)
-                        pathColor: `rgba(129, 021, 252, ${value / 100})`,
+                        pathColor: `rgba(129, 021, 252, 0.5)`,
                         trailColor: "#B9B9CD"
                     })}
                 />

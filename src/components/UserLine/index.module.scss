@@ -23,6 +23,13 @@
     font-size: 15px;
     margin-right: 10px;
   }
+  .length{
+    @extend .steps;
+    color: #1244A8;
+    span{
+      font-size: 11px;
+    }
+  }
   .fav {
     font-size: 12px;
     color: #999;

@@ -17,8 +17,6 @@ const RunToolBar = () => {
     const [ toastVisible, setToastVisible ] = useState(false)
     const [ followVisible, setFollowVisible ] = useState(false)
 
-    
-
     return (
         <div className={styles.toolbar}>
             <div className={styles.line}>
@@ -35,10 +33,10 @@ const RunToolBar = () => {
                 </div>
                 <div className={styles.followBtn} onClick={() => setFollowVisible(true)} >我的关注</div>
             </div>
-            <DrawerPanel visible={visible} onClose={() => setVisible(false)}>
+            <DrawerPanel destroyOnClose visible={visible} onClose={() => setVisible(false)}>
                 <ProgressPanel />
             </DrawerPanel>
-            <SNSPanel height="55vh" visible={followVisible} onClose={() => setFollowVisible(false)} />
+            <SNSPanel destroyOnClose height="55vh" visible={followVisible} onClose={() => setFollowVisible(false)} />
         </div>
     )
 

@@ -10,6 +10,7 @@ import Button from '../Button';
 import Avatar from '../Avatar';
 import FollowButton from '../FollowButton';
 import { FollowFlag, JoinFlag } from '../../services';
+import { transStep2Kilometer } from '../../utils';
 
 export interface SearchUserPorps {
     pic: string;
@@ -27,11 +28,11 @@ const SearchUser: React.FC<SearchUserPorps> = ({ pic, name, joinFlag, followFlag
     return (
         <div className={styles.searchUser}>
             <div className={styles.userDetail}>
-                <div className={styles.avatar}><Avatar src={pic} /></div>
+                <div className={styles.avatar}><Avatar src={pic} text={name} /></div>
                 <Space direction="vertical">
                     <div className={styles.left}>
                         <div className={styles.name}>{name}</div>
-                        <span>{joinFlag===JoinFlag.join?allStep:"未参加"}</span>
+                        <span>{joinFlag===JoinFlag.join?`${transStep2Kilometer(allStep)}km`:"未参加"}</span>
                     </div>
                     {/* <div className={styles.name}>孟浩 <span>未注册|未参加|3.5KM</span></div> */}
                     <div className={styles.edu}>

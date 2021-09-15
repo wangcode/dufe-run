@@ -1,9 +1,8 @@
-import { HeartOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import { removeStepUp, StepUpSomeOne } from '../../services';
 import Avatar from '../Avatar';
-import Button from '../Button';
+import { ButtonSizeType } from '../Button';
 import DrawerPanel from '../DrawerPanel';
 import FollowButton from '../FollowButton';
 import UserPanel from './components/userPanel';
@@ -15,10 +14,10 @@ interface UserLineProps {
     name: string;
     pic: string;
     rank: number;
-    steps: string;
     like?: {
         likeNum: string;
         isLike: boolean;
+        likeId: string;
         disabled?: boolean;
         onChange?: () => void;
     }
@@ -26,16 +25,19 @@ interface UserLineProps {
         followId: string;
         isFollow: boolean;
         onChange?: () => void;
+        buttonSize?: keyof ButtonSizeType
     }
     medal?: boolean;
+    steps?: string; // 步数
+    length?: number; // 公里数
     onFollowClick?: () => void;
 }
 
-const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, steps, like, follow }) => {
+const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, steps, like, follow, length }) => {
 
     const [ visible, setVisible ] = useState(false)
 
-    const { mutate } = useMutation(() => like?.isLike?removeStepUp(userId):StepUpSomeOne(userId), {
+    const { mutate } = useMutation(() => like?.isLike?removeStepUp(like.likeId):StepUpSomeOne(userId), {
         onSuccess: like?.onChange
     })
 
@@ -50,18 +52,20 @@ const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, ste
                     {!medal && rank}
                 </div>
                 <div className={styles.avatar}>
-                    <Avatar src={pic} />
+                    <Avatar src={pic} text={name} />
                 </div>
                 <div className={styles.name}>{name}</div>
             </div>
             <div className={styles.extra}>
-                {steps!==undefined && <div className={styles.steps}>{steps} 步</div>}
+                {length!==undefined && <div className={styles.length}>{length} <span>KM</span></div>}
+                {steps!==undefined && <div className={styles.steps}>{steps==="-1"?0:steps}</div>}
+                {/* todo loading */}
                 {like && <div className={styles.fav} onClick={() => !like?.disabled && mutate()}>
                     {like.likeNum!==undefined && <div>{like.likeNum}</div>}
                     {like?.isLike && <div className={styles.like} />}
                     {!like?.isLike && <div className={styles.unlike} />}
                 </div>}
-                {follow && <FollowButton followId={follow.followId} follow={follow.isFollow} userId={userId} onChange={follow.onChange} />}
+                {follow && <FollowButton size={follow.buttonSize} followId={follow.followId} follow={follow.isFollow} userId={userId} onChange={follow.onChange} />}
             </div>
             <DrawerPanel visible={visible} onClose={() => setVisible(false)} destroyOnClose>
                 <UserPanel userId={userId} />

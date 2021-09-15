@@ -5,12 +5,11 @@ import GeoUtils from 'leaflet-geometryutil';
 
 import {Slider} from 'antd';
 import { FeatureGroup, Marker, Polyline, useMap } from 'react-leaflet';
+import { TOTAL_STEPS } from '../../../../services';
 
 interface RunLineProps {
-  myStep: number;
+  myStep: string;
 }
-
-const TotalSteps = 100000
 
 const RunLine: React.FC<RunLineProps> = ({ myStep }) => {
 
@@ -21,7 +20,7 @@ const RunLine: React.FC<RunLineProps> = ({ myStep }) => {
   const Path = useMemo(() => {
       return PolylineJSON.map(point => latLng(point[0], point[1]))
     }, [PolylineJSON])
-  
+
     // const {lengths, totalLength} = useMemo(() => {
     //   return {
     //     lengths: GeoUtils.accumulatedLengths(Path),
@@ -29,12 +28,12 @@ const RunLine: React.FC<RunLineProps> = ({ myStep }) => {
     //   }
     // }, [Path])
 
-    
-    
+
+
     // const totalPoints = Math.floor(totalLength / Interval);
-    
+
     useEffect(() => {
-      const MyLength = myStep / TotalSteps
+      const MyLength = parseInt(myStep) / TOTAL_STEPS
       const point = GeoUtils.interpolateOnLine(map, Path, MyLength)
       setPoints([point])
     }, [myStep])
@@ -51,7 +50,7 @@ const RunLine: React.FC<RunLineProps> = ({ myStep }) => {
     //     );
 
     //     console.log(points)
-        
+
     //     setPoints(points)
 
     //   }, 0);
@@ -60,7 +59,8 @@ const RunLine: React.FC<RunLineProps> = ({ myStep }) => {
   return (
     <FeatureGroup>
       {points.map((item, index) => <Marker key={index} position={item.latLng} />)}
-      <Polyline color="#ffffff00" positions={Path} />
+      {/* <Polyline color="#ffffff00" positions={Path} /> */}
+      <Polyline positions={Path} />
     </FeatureGroup>
   )
 }

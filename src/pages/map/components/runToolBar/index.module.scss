@@ -54,7 +54,7 @@
 
 .toast {
   text-align: center;
-  width: 193px;
+  // width: 193px;
   left: 50%;
   transform: translate(-50%);
   top: -70px;
@@ -68,6 +68,7 @@
   border-radius: 17px;
   display: flex;
   align-items: center;
+  white-space: nowrap;
 
   .walk {
     width: 15px;

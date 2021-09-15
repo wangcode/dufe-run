@@ -15,10 +15,13 @@ import "leaflet/dist/leaflet.css";
 import styles from './index.module.scss';
 
 import PolylineJSON from './polyline.json';
-import UserToolBar from './components/userToolBar';
+import UserToolBar, { OtherToolBar } from './components/userToolBar';
 import RunToolBar from './components/runToolBar';
 import UserMark from './components/userMark';
 import RunLine from './components/runLine';
+import { useSearchParam } from 'react-use';
+import { useQuery } from 'react-query';
+import { getMySteps, getSomeoneStep } from '../../services';
 
 const Points: {position: LatLngExpression}[] = [
     {
@@ -31,6 +34,11 @@ const Interval = 20000000;
 function Map() {
 
   const [myStep, setMyStep] = useState(0)
+
+  const userId = useSearchParam("user")
+
+  const userDetail = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId!), {enabled: !!userId})
+  const mySteps = useQuery("mySteps", getMySteps, {enabled: !userId})
 
   // useEffect(() => {
   //   if(myStep===100000) setMyStep(0)
@@ -78,12 +86,12 @@ function Map() {
   return (
     <div className={styles.main}>
       <div className={styles.userToolBar}>
-        <UserToolBar self={true} />
-        <UserToolBar self={false} />
+        {!userId && <UserToolBar self={true} />}
+        {userId && <OtherToolBar userId={userId} />}
       </div>
-      <div className={styles.runToolBar}>
+      {!userId && <div className={styles.runToolBar}>
         <RunToolBar />
-      </div>
+      </div>}
       <MapContainer
         crs={CRS.Simple}
         style={{width: "100vw", height:"100vh"}}
@@ -98,14 +106,8 @@ function Map() {
         // 超出拖动弹性值
         maxBoundsViscosity={1}
       >
+        <RunLine myStep={mySteps?.data?.allStep||userDetail?.data?.allStep||"0"} />
         <ImageOverlay url={MapPNG} bounds={[[0,0], [3361,3839]]} />
-        {/* <Polyline positions={Path} /> */}
-        <RunLine myStep={myStep} />
-        {/* <FeatureGroup>
-          {Points.map(point => {
-              return <Marker key={point.position.toString()} position={point.position} />
-          })}
-        </FeatureGroup> */}
       </MapContainer>
     </div>
   )
