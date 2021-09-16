@@ -13,7 +13,7 @@ interface DrawerPanelProps extends DrawerProps {
 const DrawerPanel: React.FC<DrawerPanelProps> = ({ ...drawerProps }) => {
 
     return (
-        <Drawer className={styles.drawerPanel} closeIcon={<CloseIcon />} {...drawerProps} placement="bottom" />
+        <Drawer className={styles.drawerPanel} closeIcon={<CloseIcon />} {...drawerProps} placement="bottom" push={false} />
     )
 
 }

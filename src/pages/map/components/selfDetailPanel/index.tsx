@@ -21,7 +21,7 @@ const SelfDetailPanel: React.FC<SelfDetailPanelProps> = ({}) => {
     return (
         <div>
             <div className={styles.avatar}>
-                <Avatar src={data?.pic||""} />
+                <Avatar src={data?.pic} text={data?.name} />
             </div>
             <Spin spinning={isLoading}>
                 <div className={styles.user}>

@@ -3,13 +3,13 @@ import React, { CSSProperties } from "react";
 
 import styles from './index.module.scss';
 
-interface ButtonSizeType {
+export interface ButtonSizeType {
     small: CSSProperties,
     middle: CSSProperties,
     large: CSSProperties
 }
 
-const ButtonSize: ButtonSizeType = {
+export const ButtonSize: ButtonSizeType = {
     small: {
         borderRadius: "10px",
         height: "22px",
@@ -30,7 +30,7 @@ const ButtonSize: ButtonSizeType = {
     }
 }
 
-interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
+export interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
     icon?: React.ReactNode;
     size?: keyof typeof ButtonSize;
     theme?: "success"|"default"|"hot";

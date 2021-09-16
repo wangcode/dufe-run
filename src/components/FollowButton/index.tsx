@@ -3,22 +3,31 @@ import React from 'react';
 import { useMutation } from 'react-query';
 import { followSomeone, removeFollow } from '../../services';
 
-import Button from '../Button';
+import Button, { ButtonSizeType } from '../Button';
+
+import Toast from 'light-toast';
 
 interface FollowButtonProps {
     userId: string;
     followId?: string;
     follow: boolean;
+    size?: keyof ButtonSizeType;
     onChange?: () => void;
 }
 
-const FollowButton: React.FC<FollowButtonProps> = ({ follow, followId, userId, onChange }) => {
+const FollowButton: React.FC<FollowButtonProps> = ({ follow, followId, userId, size, onChange }) => {
 
     const followMutation = useMutation(followSomeone, {
-        onSuccess: () => onChange?.()
+        onSuccess: () => {
+            Toast.info("关注成功！")
+            onChange?.()
+        }
     })
     const unFollowMutation = useMutation(removeFollow, {
-        onSuccess: () => onChange?.()
+        onSuccess: () => {
+            Toast.info("取消关注成功！")
+            onChange?.()
+        }
     })
 
     const handleOnClick = () => {
@@ -33,7 +42,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({ follow, followId, userId, o
 
     return (
         <Spin spinning={followMutation.isLoading||unFollowMutation.isLoading}>
-            <Button onClick={handleOnClick} theme={follow?"default":"success"}>{follow?"取消关注":"关注"}</Button>
+            <Button size={size} onClick={handleOnClick} theme={follow?"default":"success"}>{follow?"取消关注":"关注"}</Button>
         </Spin>
     )
 

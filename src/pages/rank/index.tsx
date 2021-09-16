@@ -36,6 +36,7 @@ export const RankList: React.FC<RankListProps> = ({ title, medal }) => {
                                 name={rank.name}
                                 pic={rank.pic}
                                 like={{
+                                    likeId: rank.goodId,
                                     likeNum: rank.goodNum.toString(),
                                     isLike: rank.goodFlag===GoodFlag.good,
                                     onChange: refetch
@@ -66,7 +67,8 @@ const Rank = () => {
                     like={{
                         likeNum: data?.goodNum.toString(),
                         isLike: true,
-                        disabled: true
+                        disabled: true,
+                        likeId: ""
                     }}
                     steps={data.allStep}
                     rank={data.allRank}
