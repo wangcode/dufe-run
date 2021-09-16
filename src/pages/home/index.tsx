@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Progress } from 'antd';
 
 import Dialog from 'rc-dialog';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
@@ -32,24 +33,21 @@ const Home = () => {
             </div>
 
             <div className={styles.progress}>
-
-                <CircularProgressbar
+                <Progress
                     className={styles.progressbar}
-                    value={parseInt(mySteps?.allStep||"0")}
-                    circleRatio={0.3}
+                    type="dashboard"
+                    gapDegree={210}
+                    showInfo={false}
+                    gapPosition="top"
                     strokeWidth={5}
-                    maxValue={TOTAL_STEPS}
-                    counterClockwise
-                    styles={buildStyles({
-                        rotation: 0.65,
-                        // rgba(94, 113, 192)
-                        pathColor: `rgba(129, 021, 252, 0.5)`,
-                        trailColor: "#B9B9CD"
-                    })}
+                    width={255}
+                    trailColor="#B9B9CD"
+                    strokeColor={{from: "#5e71c0", to: "#8115fc"}}
+                    percent={parseInt(mySteps?.allStep||"0") / TOTAL_STEPS}
                 />
                 <div className={styles.totalSteps}>{mySteps?.allStep}</div>
                 <div className={styles.title}>今日步数</div>
-                <div className={styles.value}>{mySteps?.nowStep}</div>
+                <div className={styles.value}>{mySteps?.nowStep||"0"}</div>
             </div>
 
             <div className={styles.entry}>

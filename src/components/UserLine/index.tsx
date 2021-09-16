@@ -27,13 +27,14 @@ interface UserLineProps {
         onChange?: () => void;
         buttonSize?: keyof ButtonSizeType
     }
+    userPanel?: boolean;
     medal?: boolean;
     steps?: string; // 步数
     length?: number; // 公里数
     onFollowClick?: () => void;
 }
 
-const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, steps, like, follow, length }) => {
+const UserLine: React.FC<UserLineProps> = ({ userId, name, userPanel=true, pic, rank, medal, steps, like, follow, length }) => {
 
     const [ visible, setVisible ] = useState(false)
 
@@ -43,7 +44,7 @@ const UserLine: React.FC<UserLineProps> = ({ userId, name, pic, rank, medal, ste
 
     return (
         <div className={styles.userItem}>
-            <div className={styles.user} onClick={() => setVisible(true)}>
+            <div className={styles.user} onClick={() => userPanel && setVisible(true)}>
                 <div className={styles.rank}>
                     {medal && rank===1 && <div className={styles.gold} />}
                     {medal && rank===2 && <div className={styles.silver} />}

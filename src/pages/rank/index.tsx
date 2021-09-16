@@ -63,6 +63,7 @@ const Rank = () => {
             {data && <div className={styles.self}>
                 <UserLine
                     medal
+                    userPanel={false}
                     userId={data?.userId}
                     like={{
                         likeNum: data?.goodNum.toString(),

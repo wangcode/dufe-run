@@ -1,7 +1,7 @@
 .self {
   background-image: url(../../assets/images/rankbg.png);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   padding: 20px 25px;
   margin: 14px 9px;
   border-radius: 10px;
@@ -35,6 +35,6 @@
   }
 }
 
-.empty{
+.empty {
   padding: 20px 0;
 }

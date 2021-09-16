@@ -45,7 +45,7 @@ const SearchUser: React.FC<SearchUserPorps> = ({ pic, name, joinFlag, followFlag
                     </div>
                 </Space>
             </div>
-            <FollowButton onChange={onChange} followId={followId} follow={followFlag==="1"} userId={userId} />
+            {joinFlag===JoinFlag.join && <FollowButton onChange={onChange} followId={followId} follow={followFlag==="1"} userId={userId} />}
         </div>
     )
 }
