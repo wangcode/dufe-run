@@ -6,6 +6,8 @@ import Map from './pages/map';
 import Home from './pages/home';
 import Point from './pages/points';
 import Rank from './pages/rank';
+import Introduction from './pages/introduction';
+import Login from './pages/login';
 
 import 'react-circular-progressbar/dist/styles.css';
 import 'antd/dist/antd.css'
@@ -20,6 +22,8 @@ ReactDOM.render(
       <Route exact path="/map"><Map /></Route>
       <Route exact path="/rank"><Rank /></Route>
       <Route exact path="/points"><Point /></Route>
+      <Route exact path="/login"><Login /></Route>
+      <Route exact path="/introduction"><Introduction /></Route>
     </BrowserRouter>
   </QueryClientProvider>,
   document.getElementById('root')
