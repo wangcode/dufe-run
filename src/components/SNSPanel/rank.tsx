@@ -1,7 +1,7 @@
 import React from 'react';
 import UserLine from '../UserLine';
 import { useQuery } from 'react-query';
-import { getMyFollowList } from '../../services';
+import { getMyFollowList } from '../../services/mock';
 
 import styles from './index.module.scss';
 import { Empty, Spin } from 'antd';
@@ -28,8 +28,9 @@ const Rank: React.FC<RankProps> = ({ onClick }) => {
                             length={transStep2Kilometer(item.allStep)}
                             userId={item.userId}
                             // like={{
-                            //     likeNum: item.goodNum,
-                            //     isLike: item.
+                            //     likeId: item.followId,
+                            //     likeNum: item.goodNum.toString(),
+                            //     isLike: item.goodNum===1
                             // }}
                             follow={{
                                 followId: item.followId,

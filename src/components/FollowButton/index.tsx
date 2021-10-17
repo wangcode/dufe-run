@@ -12,10 +12,11 @@ interface FollowButtonProps {
     followId?: string;
     follow: boolean;
     size?: keyof ButtonSizeType;
+    border?: boolean;
     onChange?: () => void;
 }
 
-const FollowButton: React.FC<FollowButtonProps> = ({ follow, followId, userId, size, onChange }) => {
+const FollowButton: React.FC<FollowButtonProps> = ({ follow, followId, userId, size, border, onChange }) => {
 
     const followMutation = useMutation(followSomeone, {
         onSuccess: () => {

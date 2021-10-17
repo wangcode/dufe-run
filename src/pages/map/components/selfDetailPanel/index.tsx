@@ -4,7 +4,8 @@ import numeral from 'numeral';
 
 import Avatar from '../../../../components/Avatar';
 
-import HiPNG from '../../../../assets/images/hi.png';
+// import HiPNG from '../../../../assets/images/hi.png';
+import HelloPNG from '../../../../assets/images/hello.png'
 
 import styles from './index.module.scss';
 import { useQuery } from "react-query";
@@ -25,7 +26,7 @@ const SelfDetailPanel: React.FC<SelfDetailPanelProps> = ({}) => {
             </div>
             <Spin spinning={isLoading}>
                 <div className={styles.user}>
-                    <img width={70} height={52} src={HiPNG} alt="" />
+                    <img width={43} height={46} src={HelloPNG} alt="" />
                     <div className={styles.name}>{data?.name||"-"}</div>
                 </div>
                 <div className={styles.blocks}>

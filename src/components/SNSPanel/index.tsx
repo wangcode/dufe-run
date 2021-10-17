@@ -58,11 +58,13 @@ const SNSPanel: React.FC<SNSPanelProps> = ( props ) => {
                             <Col><Button onClick={() => setSearchKey(searchValue)} theme="hot">搜索</Button></Col>
                         </Row>
                     </Tabs.TabPane>
+                    <Tabs.TabPane tab="排行榜" key="rank" />
                 </Tabs>
             }
         >
             {active === "follow" && <Rank onClick={() => setActive("search")} />}
             {active === "search" && <Search reSearch={refetch} loading={isLoading||isFetching} searchKey={searchKey} users={data||[]} />}
+            {active === "rank" && <Rank onClick={() => setActive("search")} />}
         </DrawerPanel>
     )
 

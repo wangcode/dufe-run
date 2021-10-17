@@ -1,4 +1,4 @@
-import { Badge, Spin } from 'antd';
+import { Badge, Spin, Space } from 'antd';
 import React, { useMemo, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router';
@@ -11,6 +11,10 @@ import SNSPanel from '../../../../components/SNSPanel';
 import { getSomeoneStep } from '../../../../services';
 import { transStep2Kilometer } from '../../../../utils';
 import SelfDetailPanel from '../selfDetailPanel';
+
+import CoinIcon from '../../../../assets/images/coin.png'
+import PersonToggle from '../../../../assets/images/person_toggle.png'
+import GroupToggle from '../../../../assets/images/group_toggle.png'
 
 import styles from './index.module.scss';
 
@@ -25,7 +29,7 @@ export const OtherToolBar: React.FC<UserToolBarProps> = ({ userId }) => {
 
     return (
         <Spin spinning={isLoading}>
-            <div className={styles.fullToolbar}>
+            {/* <div className={styles.fullToolbar}>
                 <div className={styles.left}>
                     <div className={styles.avatar}>
                         <Avatar size="small" src={data?.pic} text={data?.name} />
@@ -34,7 +38,32 @@ export const OtherToolBar: React.FC<UserToolBarProps> = ({ userId }) => {
                     <div className={styles.distance}>当前 <span>{transStep2Kilometer(data?.nowStep)} KM</span></div>
                 </div>
                 <FollowButton followId={data?.followId} userId={userId} follow={data?.followFlag==="1"} onChange={refetch} />
+            </div> */}
+
+            <div className={styles.toolbar_v2}>
+                <div className={styles.left}>
+                    <Space>
+                        <div className={styles.user}>
+                            <div className={styles.avatar}>
+                                <Avatar size="small" src={data?.pic} />
+                            </div>
+                            <div>345分</div>
+                        </div>
+                        <div className={styles.point}>
+                            <img src={CoinIcon} alt="coin" />
+                            <div>领积分</div>
+                        </div>
+                    </Space>
+                </div>
+
+
+                <div className={styles.toggleBtn}>
+                    <img src={false?PersonToggle:GroupToggle} alt="person_group_toggle" />
+                    <div>切换</div>
+                </div>
+
             </div>
+
         </Spin>
     )
 }
@@ -55,7 +84,7 @@ export const SelfToolBar: React.FC<SelfToolBar> = ({ pic, name, steps }) => {
 
     return (
         <div>
-            <div className={styles.blockToolbar}>
+            {/* <div className={styles.blockToolbar}>
                 <div className={styles.left}>
                     <div className={styles.avatar} onClick={()=>self && setVisible(true)}>
                         <Avatar size="small" src={pic} text={name} />
@@ -63,7 +92,34 @@ export const SelfToolBar: React.FC<SelfToolBar> = ({ pic, name, steps }) => {
                     {self && <span className={styles.score}>{point}分</span>}
                     {self && <Badge dot><div className={styles.scoreBtn} onClick={() => history.push("/points")}>领积分</div></Badge>}
                 </div>
+            </div> */}
+
+            <div className={styles.toolbar_v2}>
+                <div className={styles.left}>
+                    <Space align="center">
+                        <div className={styles.user} onClick={()=>self && setVisible(true)}>
+                            <div className={styles.avatar}>
+                                <Avatar size="small" src={pic} />
+                            </div>
+                            <div>345分</div>
+                        </div>
+                        {/* <div className={styles.point}>
+                            <img src={CoinIcon} alt="coin" />
+                            <div>领积分</div>
+                        </div> */}
+                        <FollowButton followId={"123"} userId={"123"} follow={true} onChange={() => {}} />
+                    </Space>
+                </div>
+
+
+                <div className={styles.toggleBtn}>
+                    <img src={false?PersonToggle:GroupToggle} alt="person_group_toggle" />
+                    <div>切换</div>
+                </div>
+
             </div>
+
+
             <DrawerPanel destroyOnClose height="230px" visible={visible} onClose={() => setVisible(false)}>
                 <SelfDetailPanel />
             </DrawerPanel>
