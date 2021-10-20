@@ -11,6 +11,7 @@ import TimeOutlineIcon from 'assets/images/time_outline_icon.png';
 import GroupOutlineIcon from 'assets/images/group_outline_icon.png';
 
 import styles from './index.module.scss';
+import MyTeamPanel from 'components/Panels/MyTeamPanel';
 
 interface TeamSelectProps {
 
@@ -65,7 +66,7 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
             </Card>
 
             <TeamDetailPanel visible={!!selected} destroyOnClose height="85vh" onClose={() => setSelected(undefined)} />
-
+            <MyTeamPanel visible height="80vh" />
         </div>
     )
 

@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+
+import GoldLogo from 'assets/images/gold_logo.png';
+import GoldBar from 'assets/images/gold_bar.png';
+import SilverLogo from 'assets/images/silver_logo.png';
+import SilverBar from 'assets/images/silver_bar.png';
+import BronzeLogo from 'assets/images/bronze_logo.png';
+import BronzeBar from 'assets/images/bronze_bar.png';
+
 import styles from './index.module.scss';
 
-import GoldLogo from '../../assets/images/gold_logo.png';
-import GoldBar from '../../assets/images/gold_bar.png';
-import SilverLogo from '../../assets/images/silver_logo.png';
-import SilverBar from '../../assets/images/silver_bar.png';
-import BronzeLogo from '../../assets/images/bronze_logo.png';
-import BronzeBar from '../../assets/images/bronze_bar.png';
+interface GraphRankProps {
 
-const GraphRank = () => {
+}
+
+const GraphRank: React.FC<GraphRankProps> = () => {
 
     return (
         <div className={styles.rankGraph}>

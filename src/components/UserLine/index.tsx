@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation } from 'react-query';
+
 import { removeStepUp, StepUpSomeOne } from 'services';
+
 import Avatar from 'components/Base/Avatar';
-import { ButtonSizeType } from 'components/Base/Button';
-import DrawerPanel from '../Base/DrawerPanel';
 import FollowButton from 'components/FollowButton';
-import UserPanel from './components/userPanel';
+import { ButtonSizeType } from 'components/Base/Button';
+import UserDetailPanel from 'components/Panels/UserDetailpanel';
 
 import styles from './index.module.scss';
 
@@ -68,9 +69,7 @@ const UserLine: React.FC<UserLineProps> = ({ userId, name, userPanel = true, pic
                 </div>}
                 {follow && <FollowButton size={follow.buttonSize} followId={follow.followId} follow={follow.isFollow} userId={userId} onChange={follow.onChange} />}
             </div>
-            <DrawerPanel visible={visible} onClose={() => setVisible(false)} destroyOnClose>
-                <UserPanel userId={userId} />
-            </DrawerPanel>
+            <UserDetailPanel userId={userId} visible={visible} onClose={() => setVisible(false)} destroyOnClose />
         </div>
     )
 }

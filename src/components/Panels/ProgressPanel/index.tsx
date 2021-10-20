@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
 import { Divider, Progress, Spin } from 'antd';
-import { getMySteps, TOTAL_LENGTH } from 'services';
-import { useQuery } from 'react-query';
-import { transStep2Kilometer } from 'utils';
-
 import styles from './index.module.scss';
+import { getMySteps, TOTAL_LENGTH } from '../../../../services';
+import { useQuery } from 'react-query';
+import { transStep2Kilometer } from '../../../../utils';
 
 const ProgressPanel = () => {
 
@@ -34,7 +33,7 @@ const ProgressPanel = () => {
                     <div className={styles.total}>全程：<strong>{TotalKM}<em>KM</em></strong></div>
                     <div className={styles.surplus}>还差 {TotalKM - LengthKM}km 到达终点</div>
                 </div>
-                <Progress strokeColor={{ from: "#c216fb", to: "#1244A8" }} percent={percent * 100} showInfo={false} />
+                <Progress strokeColor={{from: "#c216fb", to: "#1244A8"}} percent={percent*100} showInfo={false} />
             </Spin>
         </div>
     )
