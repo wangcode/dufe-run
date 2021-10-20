@@ -1,0 +1,30 @@
+.rankGraph{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    .graphRankBase{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+        width: 63px;
+        .detail{
+            margin: 10px 0
+        }
+    }
+
+    .gold{
+        @extend .graphRankBase;
+        color: #ec6b15;
+    }
+    .silver{
+        @extend .graphRankBase;
+        color: #375cd0;
+    }
+
+    .bronze{
+        @extend .graphRankBase;
+        color: #83331e;
+    }
+}

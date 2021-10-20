@@ -1,17 +1,33 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Map from 'pages/map';
+import Home from 'pages/home';
+import Point from 'pages/points';
+import Rank from 'pages/rank';
+import Introduction from 'pages/introduction';
+import Login from 'pages/login';
+import Team from 'pages/team';
+import TeamSelect from 'pages/teamselect';
+
+import 'react-circular-progressbar/dist/styles.css';
+import 'antd/dist/antd.css'
+import "./index.css"
+
+export const queryClient = new QueryClient()
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <Route exact path="/"><Home /></Route>
+      <Route exact path="/map"><Map /></Route>
+      <Route exact path="/rank"><Rank /></Route>
+      <Route exact path="/points"><Point /></Route>
+      <Route exact path="/team"><Team /></Route>
+      <Route exact path="/teamselect"><TeamSelect /></Route>
+      <Route exact path="/login"><Login /></Route>
+      <Route exact path="/introduction"><Introduction /></Route>
+    </BrowserRouter>
+  </QueryClientProvider>,
   document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+)

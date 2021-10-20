@@ -1,0 +1,62 @@
+.head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px  18px 20px;
+
+    .left{
+        img{
+            width: 23px;
+            height: 23px;
+            margin-right: 14px;
+        }
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        color: #000000;
+    }
+
+    .right{
+        @extend .left;
+        color: #6578c0;
+    }
+
+}
+
+
+.teamDetail{
+    padding: 0 20px;
+    font-size: 12px; 
+    color: #000000;
+    width: 100%;
+    .text{
+        margin-bottom: 17px;
+        border-right: 1px solid #dfdfdf;
+    }
+    .number{
+        font-size: 12px;
+        border-radius: 10px;
+        padding:  3px 10px;
+        font-weight: bold;
+        background-color: #dcdcdc;
+        text-align: center;
+        margin:  0 auto;
+    }
+}
+
+.introduce{
+    padding: 15px 20px 20px;
+    .title{
+        font-size: 12px;
+        color: #000000;
+    }
+    .content{
+        font-size: 11px;
+        color: #999999;
+        line-height: 16px;
+    }
+}
+
+.joinBtn{
+    text-align: center;
+}
