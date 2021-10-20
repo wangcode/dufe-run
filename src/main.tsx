@@ -12,6 +12,8 @@ import Login from './pages/login';
 import 'react-circular-progressbar/dist/styles.css';
 import 'antd/dist/antd.css'
 import "./index.css"
+import Team from './pages/team';
+import TeamSelect from './pages/teamselect';
 
 export const queryClient = new QueryClient()
 
@@ -22,6 +24,8 @@ ReactDOM.render(
       <Route exact path="/map"><Map /></Route>
       <Route exact path="/rank"><Rank /></Route>
       <Route exact path="/points"><Point /></Route>
+      <Route exact path="/team"><Team /></Route>
+      <Route exact path="/teamselect"><TeamSelect /></Route>
       <Route exact path="/login"><Login /></Route>
       <Route exact path="/introduction"><Introduction /></Route>
     </BrowserRouter>

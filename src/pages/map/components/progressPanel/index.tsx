@@ -25,7 +25,7 @@ const ProgressPanel = () => {
         <div>
             <Spin spinning={isLoading} >
                 <div className={styles.rule}>
-                    <div>可获得 <span>{points} 积分</span>，<span>{treasureChest} 个宝箱</span>。</div>
+                    <div>可获得 <span>{points} 积分, {treasureChest} 个宝箱</span></div>
                     <div>同行好友越多，到达终点奖励越丰厚</div>
                 </div>
                 <Divider />

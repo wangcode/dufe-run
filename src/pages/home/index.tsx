@@ -9,7 +9,9 @@ import { RankList } from '../rank';
 import { useQuery } from 'react-query';
 import { getMySteps, getStepNum, TOTAL_STEPS } from '../../services';
 
-import EntryPNG from '../../assets/images/entry.png';
+// import EntryPNG from '../../assets/images/entry.png';
+import PersonPNG from '../../assets/images/person.png';
+import GroupPNG from '../../assets/images/group.png';
 import styles from './index.module.scss';
 import StartModal from '../../components/StartModal';
 import { transStep2Metre } from '../../utils';
@@ -29,7 +31,7 @@ const Home = () => {
 
             <div className={styles.buttons}>
                 <div className={styles.rank} onClick={() => history.push("/rank")}>我的排名</div>
-                <div className={styles.info}>攻略</div>
+                {/* <div className={styles.info}>攻略</div> */}
             </div>
 
             <div className={styles.progress}>
@@ -50,12 +52,20 @@ const Home = () => {
                 <div className={styles.value}>{mySteps?.nowStep||"0"}</div>
             </div>
 
-            <div className={styles.entry}>
+            {/* <div className={styles.entry}>
                 <div className={styles.position}>
                     <div className={styles.total}>共 {data?.num} 校友参与</div>
                     <div className={styles.startBtn} onClick={() => history.push("/map")}>走路线</div>
                 </div>
                 <img src={EntryPNG} alt="entry" />
+            </div> */}
+
+            <div className={styles.entry2}>
+                <img src={PersonPNG} alt="entry" />
+            </div>
+
+            <div className={styles.entry2}>
+                <img src={GroupPNG} alt="entry" />
             </div>
 
             <RankList title />

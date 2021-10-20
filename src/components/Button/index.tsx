@@ -34,11 +34,12 @@ export interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAtt
     icon?: React.ReactNode;
     size?: keyof typeof ButtonSize;
     theme?: "success"|"default"|"hot";
+    border?: boolean;
     disabled?: boolean;
 }
 
 
-const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, disabled, children, ...props}) => {
+const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, disabled, border, children, ...props}) => {
 
 
     return (

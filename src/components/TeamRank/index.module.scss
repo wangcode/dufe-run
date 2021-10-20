@@ -1,0 +1,23 @@
+.teamListItem{
+    padding: 25px 20px;
+    border-bottom: 1px solid #eeeeee;
+    &:last-child{
+        border-bottom: 0;
+    }
+}
+
+.single{
+    .people{
+        color: #2554b3;
+    }
+}
+
+.name, .length{
+    font-size: 13px;
+    color: #000;
+    font-weight: bold;
+}
+.rank, .people {
+    font-size: 12px;
+    color: #898989;
+}

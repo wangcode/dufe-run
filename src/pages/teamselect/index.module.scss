@@ -1,0 +1,37 @@
+.teamselect{
+    padding: 9px;
+}
+
+.cardInner{
+    padding: 0px 10px;
+}
+
+.title{
+    display: flex;
+    font-size: 13px;
+    color: #6578c0;
+    align-items: center;
+    padding: 13px 10px;
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 15px;
+    img{
+        width: 15px;
+        height: 15px;
+        margin-right: 10px;
+    }
+}
+
+.title_noborder {
+    @extend .title;
+    border-bottom: 0;
+}
+
+.content{
+    padding: 0px 5px;
+}
+
+.detailBtn{
+    margin-top: 35px;
+    margin-bottom: 10px;
+    text-align: center;
+}

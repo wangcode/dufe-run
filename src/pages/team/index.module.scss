@@ -1,0 +1,21 @@
+.main{
+    padding: 0px 9px;
+}
+.runToolBar{
+    position: absolute;
+    z-index: 800;
+    bottom: 0;
+    width: 100%;
+}
+.topToolbar{
+    padding: 30px 15px;
+}
+
+
+.myTeam{
+    background-image: linear-gradient(to left, #b0d3fb, #f5fafe);
+    // height: 78px;
+    border-radius: 10px;
+    padding: 25px 40px;
+    margin-bottom: 18px;
+}

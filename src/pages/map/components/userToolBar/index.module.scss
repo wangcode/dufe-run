@@ -6,6 +6,10 @@
   // align-items: center;
   // justify-content: space-between;
 }
+.toolbar_v2{
+  display: flex;
+  justify-content: space-between
+}
 
 .fullToolbar {
   @extend .toolbar;
@@ -63,4 +67,59 @@
   text-align: center;
   line-height: 30px;
   background-image: linear-gradient(to right, #f98b4f, #f7cd3d);
+}
+
+.toggleBtn{
+  color: #898989;
+  display: flex;
+  align-items: center;
+  width: 135px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 20px;
+  justify-content: center;
+  padding: 4px;
+  font-size: 9px;
+  img{
+    height: 100%;
+    margin-right: 4px;
+  }
+}
+
+.user{
+  position: relative;
+  width: 58px;
+  height: 40px;
+  background-color: #ffffff;
+  text-align: center;
+  border-radius: 10px;
+  padding-top: 19px;
+  font-size: 12px;
+  color: #000000;
+  .avatar{
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+.left{
+  display: flex;
+}
+
+.point{
+  img{
+    width: 16px;
+    height: 14px;
+    margin-right: 5px;
+  }
+  justify-content: center;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20px;
+  height: 40px;
+  width: 71px;
 }
