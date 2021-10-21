@@ -4,14 +4,15 @@ import { Col, Row } from 'antd';
 import Card from 'components/Base/Card';
 import Button from 'components/Base/Button';
 import TeamBox from 'components/TeamBox';
+
 import TeamDetailPanel from 'components/Panels/TeamDetailPanel';
+import MyTeamPanel from 'components/Panels/MyTeamPanel';
 
 import RuleIcon from 'assets/images/rule_icon.png';
 import TimeOutlineIcon from 'assets/images/time_outline_icon.png';
 import GroupOutlineIcon from 'assets/images/group_outline_icon.png';
 
 import styles from './index.module.scss';
-import MyTeamPanel from 'components/Panels/MyTeamPanel';
 
 interface TeamSelectProps {
 
@@ -66,7 +67,7 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
             </Card>
 
             <TeamDetailPanel visible={!!selected} destroyOnClose height="85vh" onClose={() => setSelected(undefined)} />
-            <MyTeamPanel visible height="80vh" />
+            <MyTeamPanel visible height="80vh" onClose={alert} />
         </div>
     )
 

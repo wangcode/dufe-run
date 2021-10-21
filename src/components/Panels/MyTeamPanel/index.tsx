@@ -50,7 +50,7 @@ const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
             // bodyStyle={tabStyles}
             destroyOnClose
             title={
-                <Tabs className={tabStyles.tabs} activeKey={active} onChange={e => setActive(e as MyTeamActiveKeys)}>
+                <Tabs centered className={tabStyles.tabs} activeKey={active} onChange={e => setActive(e as MyTeamActiveKeys)}>
                     <Tabs.TabPane tab="我的队友" key="MyTeammates" />
                     {/* <Row className={styles.searchHeader} gutter={12}>
                             <Col flex={1}><input value={searchValue} onChange={e => setSearchValue(e.target.value)} className={styles.searchInput} type="text" /></Col>

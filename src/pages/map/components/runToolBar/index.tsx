@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-import logo from 'assets/images/logo_btn.png';
-import DrawerPanel from 'components/Base/DrawerPanel';
 import SNSPanel from 'components/Panels/SNSPanel';
-import ProgressPanel from '../progressPanel';
+import ProgressPanel from 'components/Panels/ProgressPanel';
+
+import foot from 'assets/images/foot_icon.png';
+import logo from 'assets/images/logo_btn.png';
 
 import styles from './index.module.scss';
-import foot from 'assets/images/foot_icon.png';
 
 interface RunToolBarProps {
     mode?: "person" | "team"
@@ -29,7 +29,7 @@ const RunToolBar: React.FC<RunToolBarProps> = ({ mode = "person" }) => {
                 </div>
                 <div>
                     {toastVisible && <div className={styles.toast}>
-                        <img className={styles.foot} src={foot} />
+                        <img className={styles.foot} src={foot} alt="" />
                         <span className={styles.text}>收起手机，走一走</span>
                     </div>}
                     <div className={styles.startBtn} onClick={() => setToastVisible(true)}>GO</div>
@@ -46,7 +46,7 @@ const RunToolBar: React.FC<RunToolBarProps> = ({ mode = "person" }) => {
                 </div>
                 <div>
                     {toastVisible && <div className={styles.toast}>
-                        <img className={styles.foot} src={foot} />
+                        <img className={styles.foot} src={foot} alt="" />
                         <span className={styles.text}>收起手机，走一走</span>
                     </div>}
                     <div className={styles.startBtn} onClick={() => setToastVisible(true)}>GO</div>
@@ -56,9 +56,7 @@ const RunToolBar: React.FC<RunToolBarProps> = ({ mode = "person" }) => {
                     <div className={styles.followBtn} onClick={() => setFollowVisible(true)} >道具记录</div>
                 </div>
             </div>}
-            <DrawerPanel destroyOnClose visible={visible} onClose={() => setVisible(false)}>
-                <ProgressPanel />
-            </DrawerPanel>
+            <ProgressPanel destroyOnClose visible={visible} onClose={() => setVisible(false)} />
             <SNSPanel destroyOnClose height="55vh" visible={followVisible} onClose={() => setFollowVisible(false)} />
         </div>
     )

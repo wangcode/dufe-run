@@ -8,9 +8,13 @@
         border: 0 !important;
       }
       .ant-tabs-ink-bar {
-        height: 3.5px !important;
+        height: 11px !important;
         border-radius: 3px;
-        background: #fba705;
+        background-image: url(./harf_circle_icon.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: transparent;
+        background-size: contain;
       }
       .ant-tabs-nav-list {
         color: #1f1b40;
@@ -21,13 +25,6 @@
         color: #1f1b40 !important;
         font-weight: 700;
       }
-      // .ant-tabs-ink-bar :after{
-      //   content: "";
-      //   background-image: url('../../assets/images/harf_circle_icon.png');
-      //   width: 23px !important;
-      //   height: 10px !important;
-      // }
-      // .ant-tabs-ink-bar-animated
     }
   }
   

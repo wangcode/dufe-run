@@ -10,7 +10,7 @@ import FollowButton from 'components/FollowButton';
 import SNSPanel from 'components/Panels/SNSPanel';
 import { getSomeoneStep } from 'services';
 import { transStep2Kilometer } from 'utils';
-import SelfDetailPanel from '../selfDetailPanel';
+import SelfDetailPanel from 'components/Panels/SelfDetailPanel';
 
 import CoinIcon from 'assets/images/coin.png'
 import PersonToggle from 'assets/images/person_toggle.png'
@@ -119,10 +119,7 @@ export const SelfToolBar: React.FC<SelfToolBar> = ({ pic, name, steps }) => {
 
             </div>
 
-
-            <DrawerPanel destroyOnClose height="230px" visible={visible} onClose={() => setVisible(false)}>
-                <SelfDetailPanel />
-            </DrawerPanel>
+            <SelfDetailPanel destroyOnClose height="230px" visible={visible} onClose={() => setVisible(false)} />
         </div>
     )
 }

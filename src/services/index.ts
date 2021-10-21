@@ -3,10 +3,8 @@ import qs from 'qs';
 import Toast from 'light-toast';
 
 export const TOTAL_STEPS = 20000; // 步
-export const TOTAL_LENGTH = 20000; // 米
-
-const token = localStorage.getItem("token")
-// const token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3RfdG9rZW4iLCJpYXQiOjE2MzEyNDA0ODIsInN1YiI6IntcIm9wZW5JZFwiOlwiMjkzXCIsXCJsb2dpbkRhdGVcIjpcIjIwMjEtMDktMTAgMTA6MjE6MjJcIixcIm9yZ0lkXCI6XCIxZDdkOThkMmE2N2Q0Zjc0YWE0OWE3OTdmNjMwYjI3YlwiLFwib3JnQ29kZVwiOlwiZHVmZVwiLFwidXNlck1vYmlsZVwiOlwiMTU2MTQ0NzIxMDZcIixcInVzZXJOYW1lXCI6XCIxNTYxNDQ3MjEwNlwiLFwidXNlcklkXCI6XCIxYzdkNmYxYjk5ZmM0MjJkOTk5NWM0ZWU2NjI0ZjNlMlwiLFwibmFtZVwiOlwi6bqm5Y-vXCIsXCJ1c2VyTWFjXCI6XCIyMTE0MDMxOTk2MTAyMjgyMTZcIn0iLCJleHAiOjE2MzM4MzI0ODJ9.B5736jMvlp1Nal-tcAFc7Yq8o7sRWB6eVtFgXF9bSjI"
+export const TOTAL_LENGTH = 30000; // 米
+const token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3RfdG9rZW4iLCJpYXQiOjE2MzEyNDA0ODIsInN1YiI6IntcIm9wZW5JZFwiOlwiMjkzXCIsXCJsb2dpbkRhdGVcIjpcIjIwMjEtMDktMTAgMTA6MjE6MjJcIixcIm9yZ0lkXCI6XCIxZDdkOThkMmE2N2Q0Zjc0YWE0OWE3OTdmNjMwYjI3YlwiLFwib3JnQ29kZVwiOlwiZHVmZVwiLFwidXNlck1vYmlsZVwiOlwiMTU2MTQ0NzIxMDZcIixcInVzZXJOYW1lXCI6XCIxNTYxNDQ3MjEwNlwiLFwidXNlcklkXCI6XCIxYzdkNmYxYjk5ZmM0MjJkOTk5NWM0ZWU2NjI0ZjNlMlwiLFwibmFtZVwiOlwi6bqm5Y-vXCIsXCJ1c2VyTWFjXCI6XCIyMTE0MDMxOTk2MTAyMjgyMTZcIn0iLCJleHAiOjE2MzM4MzI0ODJ9.B5736jMvlp1Nal-tcAFc7Yq8o7sRWB6eVtFgXF9bSjI"
 
 axios.interceptors.request.use(config => {
     config.headers = {
@@ -103,12 +101,59 @@ interface SearchUserType {
     followId: string;
 }
 
+const makeUserDetail = (id: number) => ({
+    name: `User-${id}`,
+    pic: "",
+    allStep: (Math.random() * 8000).toFixed(0),
+    userId: id.toString(),
+    goodNum: (Math.random() * 80).toFixed(0),
+    followId: id.toString(),
+})
+
+const makeRank = (id: number): RankType => {
+    return {
+        goodFlag: GoodFlag.good,
+        name: `孟浩-${id}`,
+        nowStep: (Math.random() * 8000).toFixed(0),
+        pic: "",
+        goodId: `${id}`,
+        userId: `${id}`,
+        goodNum: parseInt((Math.random() * 80).toFixed(0))
+    }
+}
+
+const makeUserStepDetail = (id: number): UserStepDetailType => {
+    return {
+        followId: `${id}`,
+        nowRank: 1,
+        name: `孟浩-${id}`,
+        nowStep: (Math.random() * 2000).toFixed(0),
+        followFlag: FollowFlag.follow,
+        pic: "",
+        allStep: (Math.random() * 8000).toFixed(0),
+        userId: `${id}`,
+        allRank: 2,
+        goodNum: 3,
+    }
+}
+
+const fakeMySteps: StepsType = {
+    nowRank: 122,
+    name: "孟浩",
+    nowStep: "1200",
+    pic: "",
+    allStep: "5000",
+    userId: "559",
+    allRank: 1,
+    goodNum: 22
+}
+
 /**
  * @name 我的步数
  * @url http://yapi.dufe.tech/project/73/interface/api/9085
  */
 export const getMySteps = () => {
-    return axios.get<SuccessData<StepsType>>("http://172.16.1.19:9091/alumni/getMySteps").then(res => res.data.data)
+    return Promise.resolve(fakeMySteps)
 }
 
 /**
@@ -116,7 +161,7 @@ export const getMySteps = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9091
  */
 export const getNowRank = () => {
-    return axios.get<SuccessData<RankType[]>>("http://172.16.1.19:9091/alumni/getNowRank").then(res => res.data.data)
+    return [1, 2, 3, 4, 5, 6, 7, 8].map(item => makeRank(item))
 }
 
 /**
@@ -142,7 +187,7 @@ export const removeStepUp = (goodId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9109
  */
 export const getStepNum = () => {
-    return axios.get<SuccessData<{ num: number }>>("http://172.16.1.19:9091/alumni/getStepNum").then(res => res.data.data)
+    return Promise.resolve(201)
 }
 
 /**
@@ -151,7 +196,7 @@ export const getStepNum = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9115
  */
 export const getSomeoneStep = (userId: string) => {
-    return axios.post<SuccessData<UserStepDetailType>>("http://172.16.1.19:9091/alumni/getSomeoneStep", qs.stringify({ userId })).then(res => res.data.data)
+    return Promise.resolve(makeUserStepDetail(parseInt(userId)))
 }
 
 /**
@@ -159,7 +204,7 @@ export const getSomeoneStep = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9121
  */
 export const getMyFollowList = () => {
-    return axios.get<SuccessData<UserDetailType[]>>("http://172.16.1.19:9091/alumni/getMyFollowList").then(res => res.data.data)
+    return Promise.resolve([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(item => makeUserDetail(item)))
 }
 
 /**

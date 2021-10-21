@@ -9,8 +9,9 @@ import FollowButton from "components/FollowButton";
 import { FollowFlag, getSomeoneStep } from "services";
 import { transStep2Kilometer } from "utils";
 
-import styles from './index.module.scss';
 import DrawerPanel from "components/Base/DrawerPanel";
+
+import styles from './index.module.scss';
 
 interface UserDetailPanelProps extends DrawerProps {
     userId: string;
@@ -20,7 +21,7 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, ...props }) =
 
     const history = useHistory()
 
-    const { data, refetch, isLoading } = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId))
+    const { data, refetch, isLoading } = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId), { enabled: props.visible })
 
     return (
         <DrawerPanel {...props}>

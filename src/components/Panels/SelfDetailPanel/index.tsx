@@ -1,25 +1,26 @@
 import React from "react";
-import { Spin } from "antd";
+import { DrawerProps, Spin } from "antd";
 import numeral from 'numeral';
 import { useQuery } from "react-query";
 
-import Avatar from 'components/Base/Avatar';
 import { getMySteps } from "services";
 
-// import HiPNG from 'assets/images/hi.png';
+import Avatar from 'components/Base/Avatar';
+
 import HelloPNG from 'assets/images/hello.png'
 
 import styles from './index.module.scss';
+import DrawerPanel from "components/Base/DrawerPanel";
 
-interface SelfDetailPanelProps {
+interface SelfDetailPanelProps extends DrawerProps {
 }
 
-const SelfDetailPanel: React.FC<SelfDetailPanelProps> = ({ }) => {
+const SelfDetailPanel: React.FC<SelfDetailPanelProps> = (props) => {
 
-    const { data, isLoading } = useQuery("mySteps", getMySteps)
+    const { data, isLoading } = useQuery("mySteps", getMySteps, { enabled: props.visible })
 
     return (
-        <div>
+        <DrawerPanel {...props}>
             <div className={styles.avatar}>
                 <Avatar src={data?.pic} text={data?.name} />
             </div>
@@ -39,7 +40,7 @@ const SelfDetailPanel: React.FC<SelfDetailPanelProps> = ({ }) => {
                     </div>
                 </div>
             </Spin>
-        </div>
+        </DrawerPanel>
     )
 
 }

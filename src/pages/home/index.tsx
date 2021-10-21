@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Progress } from 'antd';
-
-import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
-
 import { useHistory } from 'react-router-dom';
-import { RankList } from '../rank';
 import { useQuery } from 'react-query';
-import { getMySteps, getStepNum, TOTAL_STEPS } from '../../services';
 
-// import EntryPNG from '../../assets/images/entry.png';
-import PersonPNG from '../../assets/images/person.png';
-import GroupPNG from '../../assets/images/group.png';
+import { getMySteps, getStepNum, TOTAL_STEPS } from 'services';
+import { RankList } from '../rank';
+
+import PersonPNG from 'assets/images/person.png';
+import GroupPNG from 'assets/images/group.png';
+import StartModal from 'components/StartModal';
+import { transStep2Metre } from 'utils';
+
 import styles from './index.module.scss';
-import StartModal from '../../components/StartModal';
-import { transStep2Metre } from '../../utils';
 
 const Home = () => {
 

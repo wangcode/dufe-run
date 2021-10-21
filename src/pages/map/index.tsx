@@ -21,7 +21,7 @@ import UserMark from './components/userMark';
 import RunLine from './components/runLine';
 // import { useSearchParam } from 'react-use';
 import { useQuery } from 'react-query';
-import { getMySteps, getSomeoneStep } from '../../services';
+import { getMySteps, getSomeoneStep } from 'services';
 import { useLocation } from 'react-router-dom';
 
 const Points: { position: LatLngExpression }[] = [
