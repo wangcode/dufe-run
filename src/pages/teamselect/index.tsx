@@ -66,8 +66,8 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
                 </div>
             </Card>
 
-            <TeamDetailPanel visible={!!selected} destroyOnClose height="85vh" onClose={() => setSelected(undefined)} />
-            <MyTeamPanel visible height="80vh" onClose={alert} />
+            <TeamDetailPanel teamId={selected?.toFixed(0)} visible={!!selected} destroyOnClose height="85vh" onClose={() => setSelected(undefined)} />
+            <MyTeamPanel visible={false} height="80vh" onClose={alert} />
         </div>
     )
 

@@ -1,8 +1,11 @@
+import TeamUserLine from "components/User/TeamUserLine"
 
 
 const Teammates = () => {
     return (
-        <div>Teammates</div>
+        <div>
+            <TeamUserLine />
+        </div>
     )
 }
 

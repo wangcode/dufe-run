@@ -1,3 +1,4 @@
+import { LoadingOutlined } from "@ant-design/icons";
 import { Space } from "antd";
 import React, { CSSProperties } from "react";
 
@@ -33,29 +34,26 @@ export const ButtonSize: ButtonSizeType = {
 export interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
     icon?: React.ReactNode;
     size?: keyof typeof ButtonSize;
+    loading?: boolean;
     theme?: "success"|"default"|"hot";
     border?: boolean;
     disabled?: boolean;
 }
 
 
-const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, disabled, border, children, ...props}) => {
-
+const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, disabled, loading, border, children, ...props}) => {
 
     return (
         <button
-            disabled={disabled}
+            disabled={loading || disabled}
             className={`${styles.resetButton} ${styles[disabled?"disabled":theme]}`}
             style={{...ButtonSize[size]}}
             {...props}
         >
             <Space>
-            {icon && <span>
-                    {icon}
-                </span>}
-                <span>
-                    {children}
-                </span>
+            {icon && <span>{icon}</span>}
+            {loading && <LoadingOutlined spin /> }
+            <span>{children}</span>
             </Space>
 
         </button>

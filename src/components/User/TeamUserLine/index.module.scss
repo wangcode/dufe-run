@@ -1,0 +1,36 @@
+.iconBtn{
+    img{
+        width: 23px;
+        height: 23px;
+    }
+}
+
+.avatar{
+    margin-right: 23px;
+}
+
+.rank{
+    margin-right: 34px;
+}
+
+.name{
+    font-size: 13px;
+    color: 000;
+}
+
+.mapIcon{
+    @extend .iconBtn;
+    margin: 0px 15px;
+}
+
+.favIcon{
+    @extend .iconBtn;
+    width: 73px;
+    margin: 0px 15px;
+}
+
+.number{
+    font-size: 13px;
+    color: #000000;
+    margin: 0px 9px;
+}
