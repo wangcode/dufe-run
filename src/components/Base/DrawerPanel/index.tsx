@@ -15,7 +15,7 @@ const DrawerPanel: React.FC<DrawerPanelProps> = ({ loading, ...props }) => {
     return (
         <Drawer className={styles.drawerPanel} closeIcon={<CloseIcon />} {...props} placement="bottom" push={false}>
             {/* {loading ? <Spin spinning={loading} /> : props.children} */}
-            <Spin spinning={loading}>
+            <Spin spinning={!!loading}>
                 {props.children}
             </Spin>
         </Drawer>

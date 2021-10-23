@@ -27,6 +27,8 @@ axios.interceptors.response.use(
     }
 )
 
+const apiurl = "http://yapi.dufe.tech/mock/73"
+
 
 export enum FollowFlag {
     follow = "1",
@@ -206,7 +208,7 @@ interface TeamFollowListType {
  * @url http://yapi.dufe.tech/project/73/interface/api/9085
  */
 export const getMySteps = () => {
-    return axios.get<SuccessData<StepsType>>("http://172.16.1.19:9091/alumni/getMySteps").then(res => res.data.data)
+    return axios.get<SuccessData<StepsType>>(`${apiurl}/alumni/getMySteps`).then(res => res.data.data)
 }
 
 /**
@@ -214,7 +216,7 @@ export const getMySteps = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9091
  */
 export const getNowRank = () => {
-    return axios.get<SuccessData<RankType[]>>("http://172.16.1.19:9091/alumni/getNowRank").then(res => res.data.data)
+    return axios.get<SuccessData<RankType[]>>(`${apiurl}/alumni/getNowRank`).then(res => res.data.data)
 }
 
 /**
@@ -223,7 +225,7 @@ export const getNowRank = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9097
  */
 export const StepUpSomeOne = (userId: string) => {
-    return axios.post("http://172.16.1.19:9091/alumni/stepUpSomeone", qs.stringify({ userId }))
+    return axios.post(`${apiurl}/alumni/stepUpSomeone`, qs.stringify({ userId }))
 }
 
 /**
@@ -232,7 +234,7 @@ export const StepUpSomeOne = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9103
  */
 export const removeStepUp = (goodId: string) => {
-    return axios.post("http://172.16.1.19:9091/alumni/removeStepUp", qs.stringify({ goodId }))
+    return axios.post(`${apiurl}/alumni/removeStepUp`, qs.stringify({ goodId }))
 }
 
 /**
@@ -240,7 +242,7 @@ export const removeStepUp = (goodId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9109
  */
 export const getStepNum = () => {
-    return axios.get<SuccessData<{ num: number }>>("http://172.16.1.19:9091/alumni/getStepNum").then(res => res.data.data)
+    return axios.get<SuccessData<{ num: number }>>(`${apiurl}/alumni/getStepNum`).then(res => res.data.data)
 }
 
 /**
@@ -249,7 +251,7 @@ export const getStepNum = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9115
  */
 export const getSomeoneStep = (userId: string) => {
-    return axios.post<SuccessData<UserStepDetailType>>("http://172.16.1.19:9091/alumni/getSomeoneStep", qs.stringify({ userId })).then(res => res.data.data)
+    return axios.post<SuccessData<UserStepDetailType>>(`${apiurl}/alumni/getSomeoneStep`, qs.stringify({ userId })).then(res => res.data.data)
 }
 
 /**
@@ -257,7 +259,7 @@ export const getSomeoneStep = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9121
  */
 export const getMyFollowList = () => {
-    return axios.get<SuccessData<UserDetailType[]>>("http://172.16.1.19:9091/alumni/getMyFollowList").then(res => res.data.data)
+    return axios.get<SuccessData<UserDetailType[]>>(`${apiurl}/alumni/getMyFollowList`).then(res => res.data.data)
 }
 
 /**
@@ -266,7 +268,7 @@ export const getMyFollowList = () => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9127
  */
 export const followSomeone = (userId: string) => {
-    return axios.post("http://172.16.1.19:9091/alumni/followSomeone", qs.stringify({ userId }))
+    return axios.post(`${apiurl}/alumni/followSomeone`, qs.stringify({ userId }))
 }
 
 /**
@@ -275,7 +277,7 @@ export const followSomeone = (userId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9133
  */
 export const removeFollow = (followId: string) => {
-    return axios.post("http://172.16.1.19:9091/alumni/removeFollow", qs.stringify({ followId }))
+    return axios.post(`${apiurl}/alumni/removeFollow`, qs.stringify({ followId }))
 }
 
 /**
@@ -284,7 +286,7 @@ export const removeFollow = (followId: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9133
  */
 export const getPeopleInStep = (name: string) => {
-    return axios.post<SuccessData<SearchUserType[]>>("http://172.16.1.19:9091/alumni/getPeopleInStep", qs.stringify({ name })).then(res => res.data.data)
+    return axios.post<SuccessData<SearchUserType[]>>(`${apiurl}/alumni/getPeopleInStep`, qs.stringify({ name })).then(res => res.data.data)
 }
 
 /**
@@ -293,7 +295,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9181
  */
  export const getStepTeamNum = () => {
-    return axios.get<SuccessData<{num: number; perNum: number}>>("http://172.16.1.19:9091/alumni/getStepTeamNum").then(res => res.data.data)
+    return axios.get<SuccessData<{num: number; perNum: number}>>(`${apiurl}/alumni/getStepTeamNum`).then(res => res.data.data)
 }
 
 /**
@@ -302,7 +304,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9187
  */
  export const getStepMapIntegral = () => {
-    return axios.get<SuccessData<MapIntegralType[]>>("http://172.16.1.19:9091/alumni/getStepMapIntegral").then(res => res.data.data)
+    return axios.get<SuccessData<MapIntegralType[]>>(`${apiurl}/alumni/getStepMapIntegral`).then(res => res.data.data)
 }
 
 /**
@@ -311,7 +313,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9193
  */
  export const saveStepIntegral = (id: string) => {
-    return axios.post<SuccessData<boolean>>("http://172.16.1.19:9091/alumni/saveStepIntegral", qs.stringify({ id })).then(res => res.data.data)
+    return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/saveStepIntegral`, qs.stringify({ id })).then(res => res.data.data)
 }
 
 /**
@@ -320,7 +322,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9199
  */
  export const getMyStepTeam = (id: string) => {
-    return axios.post<SuccessData<MyTeamType>>("http://172.16.1.19:9091/alumni/getMyStepTeam", qs.stringify({ id })).then(res => res.data.data)
+    return axios.post<SuccessData<MyTeamType>>(`${apiurl}/alumni/getMyStepTeam`, qs.stringify({ id })).then(res => res.data.data)
 }
 
 /**
@@ -329,7 +331,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9205
  */
  export const joinStepTeam = (id: string) => {
-    return axios.post<SuccessData<boolean>>("http://172.16.1.19:9091/alumni/getStepProp", qs.stringify({ id })).then(res => res.data.data)
+    return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/getStepProp`, qs.stringify({ id })).then(res => res.data.data)
 }
 
 /**
@@ -337,7 +339,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9211
  */
  export const getStepProp = () => {
-    return axios.get<SuccessData<PropType[]>>("http://172.16.1.19:9091/alumni/getStepProp").then(res => res.data.data)
+    return axios.get<SuccessData<PropType[]>>(`${apiurl}/alumni/getStepProp`).then(res => res.data.data)
 }
 
 /**
@@ -346,7 +348,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9217
  */
  export const getStepPropInfo = (id: string) => {
-    return axios.post<SuccessData<PropDetailType>>("http://172.16.1.19:9091/alumni/getStepPropInfo", qs.stringify({ id })).then(res => res.data.data)
+    return axios.post<SuccessData<PropDetailType>>(`${apiurl}/alumni/getStepPropInfo`, qs.stringify({ id })).then(res => res.data.data)
 }
 
 /**
@@ -356,7 +358,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9223
  */
  export const useStepProp = (id: string, userId: string) => {
-    return axios.post<SuccessData<boolean>>("http://172.16.1.19:9091/alumni/useStepProp", qs.stringify({ id, userId })).then(res => res.data.data)
+    return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/useStepProp`, qs.stringify({ id, userId })).then(res => res.data.data)
 }
 
 /**
@@ -364,7 +366,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9229
  */
  export const getAllStepTeam = () => {
-    return axios.get<SuccessData<TeamType[]>>("http://172.16.1.19:9091/alumni/getAllStepTeam").then(res => res.data.data)
+    return axios.get<SuccessData<TeamType[]>>(`${apiurl}/alumni/getAllStepTeam`).then(res => res.data.data)
 }
 
 /**
@@ -374,7 +376,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9235
  */
  export const getStepTeamPerson = (id: string, name?: string) => {
-    return axios.post<SuccessData<TeamUserType[]>>("http://172.16.1.19:9091/alumni/getStepTeamPerson", qs.stringify({ id, name })).then(res => res.data.data)
+    return axios.post<SuccessData<TeamUserType[]>>(`${apiurl}/alumni/getStepTeamPerson`, qs.stringify({ id, name })).then(res => res.data.data)
 }
 
 /**
@@ -382,7 +384,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9241
  */
  export const getMyStepTeamPersonRank = () => {
-    return axios.get<SuccessData<MyTeamRankType>>("http://172.16.1.19:9091/alumni/getMyStepTeamPersonRank").then(res => res.data.data)
+    return axios.get<SuccessData<MyTeamRankType>>(`${apiurl}/alumni/getMyStepTeamPersonRank`).then(res => res.data.data)
 }
 
 /**
@@ -391,7 +393,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9247
  */
  export const followStepTeam = (id: string) => {
-    return axios.post<SuccessData<boolean>>("http://172.16.1.19:9091/alumni/followStepTeam", qs.stringify({ id })).then(res => res.data.data)
+    return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/followStepTeam`, qs.stringify({ id })).then(res => res.data.data)
 }
 
 /**
@@ -400,7 +402,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9253
  */
  export const followStepTeamPerson = (userId: string) => {
-    return axios.post<SuccessData<boolean>>("http://172.16.1.19:9091/alumni/followStepTeamPerson", qs.stringify({ userId })).then(res => res.data.data)
+    return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/followStepTeamPerson`, qs.stringify({ userId })).then(res => res.data.data)
 }
 
 /**
@@ -409,7 +411,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9259
  */
  export const removeFollowStepTeam = (id: string) => {
-    return axios.post<SuccessData<boolean>>("http://172.16.1.19:9091/alumni/removeFollowStepTeam", qs.stringify({ id })).then(res => res.data.data)
+    return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/removeFollowStepTeam`, qs.stringify({ id })).then(res => res.data.data)
 }
 
 /**
@@ -418,7 +420,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9265
  */
  export const propUseOther = () => {
-    return axios.get<SuccessData<PropUsageLogType[]>>("http://172.16.1.19:9091/alumni/propUseOther").then(res => res.data.data)
+    return axios.get<SuccessData<PropUsageLogType[]>>(`${apiurl}/alumni/propUseOther`).then(res => res.data.data)
 }
 
 /**
@@ -427,7 +429,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9271
  */
  export const propUseMe = () => {
-    return axios.get<SuccessData<PropUsageLogType[]>>("http://172.16.1.19:9091/alumni/propUseMe").then(res => res.data.data)
+    return axios.get<SuccessData<PropUsageLogType[]>>(`${apiurl}/alumni/propUseMe`).then(res => res.data.data)
 }
 
 /**
@@ -436,7 +438,7 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9277
  */
  export const getCumIntegral = () => {
-    return axios.get<SuccessData<PointType[]>>("http://172.16.1.19:9091/alumni/getCumIntegral").then(res => res.data.data)
+    return axios.get<SuccessData<PointType[]>>(`${apiurl}/alumni/getCumIntegral`).then(res => res.data.data)
 }
 
 /**
@@ -445,5 +447,5 @@ export const getPeopleInStep = (name: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9283
  */
  export const getStepTeamFollow = () => {
-    return axios.get<SuccessData<TeamFollowListType>>("http://172.16.1.19:9091/alumni/getStepTeamFollow").then(res => res.data.data)
+    return axios.get<SuccessData<TeamFollowListType>>(`${apiurl}/alumni/getStepTeamFollow`).then(res => res.data.data)
 }

@@ -83,7 +83,11 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({teamId, ...props}) => 
             </div>
 
             <div className={styles.userList}>
-                {users?.map(user => <div key={user.userId} className={styles.user}><TeamUserLine /></div>)}
+                {users?.map(user => (
+                    <div key={user.userId} className={styles.user}>
+                        <TeamUserLine name={user.name} avatar={user.pic} number={`${user.allKm}KM`} />
+                    </div>
+                ))}
             </div>
 
             <div className={styles.joinBtn}>

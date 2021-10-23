@@ -11,12 +11,16 @@ import FavIcon from 'assets/images/fav_map_circle_icon.png';
 
 
 import styles from './index.module.scss';
+import classNames from 'classnames';
 
 interface TeamUserLineProps {
-
+    avatar?: string;
+    name?: string;
+    number?: string;
+    hidden?: boolean;
 }
 
-const TeamUserLine: React.FC<TeamUserLineProps> = () => {
+const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
 
     // const [visible, setVisible] = useState(false)
 
@@ -25,20 +29,24 @@ const TeamUserLine: React.FC<TeamUserLineProps> = () => {
     // })
 
     return (
-        <div className={styles.userItem}>
-            <Row align="middle" justify="space-between">
+        <div
+            className={styles.userItem}
+        >
+            <div className={styles.rank}>1</div>
+            <Row className={styles.detail} align="middle" justify="space-between">
 
                 <Col>
                     <Row align="middle">
-                        <Col className={styles.rank}><div>1</div></Col>
-                        <Col className={styles.avatar}><Avatar text="Wang" /></Col>
-                        <Col className={styles.name}>孟浩</Col>
+                        {/* <Col className={styles.rank}><div>1</div></Col> */}
+                        {props.avatar && <Col className={styles.avatar}><Avatar text="Wang" /></Col>}
+                        {props.name && <Col className={styles.name}>{props.name}</Col>}
                     </Row>
                 </Col>
 
-                <Col>
+                {props.number && <Col className={styles.number}>{props.number}</Col>}
+
+                <Col style={{visibility: props.hidden?"hidden":"visible"}}>
                     <Row align="middle">
-                        <Col className={styles.number}>3.5KM</Col>
                         <Col className={styles.mapIcon}><img src={MapIcon} alt="mapBtn" /></Col>
                         <Col className={styles.iconBtn}><img src={FavIcon} alt="FavBtn" /></Col>
                     </Row>

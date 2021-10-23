@@ -7,6 +7,8 @@ import foot from 'assets/images/foot_icon.png';
 import logo from 'assets/images/logo_btn.png';
 
 import styles from './index.module.scss';
+import MyTeamPanel from 'components/Panels/MyTeamPanel';
+import TeamProgressPanel from 'components/Panels/TeamProgressPanel';
 
 interface RunToolBarProps {
     mode?: "person" | "team"
@@ -17,7 +19,9 @@ const RunToolBar: React.FC<RunToolBarProps> = ({ mode = "person" }) => {
     const [visible, setVisible] = useState(false)
 
     const [toastVisible, setToastVisible] = useState(false)
+    const [teamProgressVisible, setTeamProgressVisible] = useState(false)
     const [followVisible, setFollowVisible] = useState(false)
+    const [myTeamVisible, setMyTeamVisible] = useState(false)
 
     return (
         <div className={styles.toolbar}>
@@ -41,8 +45,8 @@ const RunToolBar: React.FC<RunToolBarProps> = ({ mode = "person" }) => {
             </div>}
             {mode === "team" && <div className={styles.line}>
                 <div className={styles.detail}>
-                    <img src={logo} alt="logo" onClick={() => setVisible(true)} />
-                    <div className={styles.followBtn} onClick={() => setFollowVisible(true)} >战队信息</div>
+                    <img src={logo} alt="logo" onClick={() => setTeamProgressVisible(true)} />
+                    <div className={styles.followBtn} onClick={() => setMyTeamVisible(true)} >战队信息</div>
                 </div>
                 <div>
                     {toastVisible && <div className={styles.toast}>
@@ -57,7 +61,9 @@ const RunToolBar: React.FC<RunToolBarProps> = ({ mode = "person" }) => {
                 </div>
             </div>}
             <ProgressPanel destroyOnClose visible={visible} onClose={() => setVisible(false)} />
+            <TeamProgressPanel destroyOnClose visible={teamProgressVisible} onClose={() => setTeamProgressVisible(false)}/>
             <SNSPanel destroyOnClose height="55vh" visible={followVisible} onClose={() => setFollowVisible(false)} />
+            <MyTeamPanel destroyOnClose height="85vh" visible={myTeamVisible} onClose={() => setMyTeamVisible(false)} />
         </div>
     )
 

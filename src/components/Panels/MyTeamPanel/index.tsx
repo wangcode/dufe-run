@@ -11,8 +11,8 @@ import Teammates from './teammates';
 import Teams from './teams';
 import Follows from './follows';
 
-import styles from './index.module.scss';
 import tabStyles from 'components/Base/Tabs/index.module.scss';
+import styles from './index.module.scss';
 
 interface MyTeamPanelProps extends DrawerProps {
 
@@ -47,22 +47,17 @@ const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
     return (
         <DrawerPanel
             {...props}
-            // bodyStyle={tabStyles}
+            bodyStyle={{padding: "0px 9px"}}
             destroyOnClose
             title={
                 <Tabs centered className={tabStyles.tabs} activeKey={active} onChange={e => setActive(e as MyTeamActiveKeys)}>
                     <Tabs.TabPane tab="我的队友" key="MyTeammates" />
-                    {/* <Row className={styles.searchHeader} gutter={12}>
-                            <Col flex={1}><input value={searchValue} onChange={e => setSearchValue(e.target.value)} className={styles.searchInput} type="text" /></Col>
-                            <Col><Button onClick={() => setSearchKey(searchValue)} theme="hot">搜索</Button></Col>
-                        </Row>
-                    </Tabs.TabPane> */}
                     <Tabs.TabPane tab="全部战队" key="allTeam" />
                     <Tabs.TabPane tab="关注" key="follow" />
                 </Tabs>
             }
         >
-            {active === "MyTeammates" && <Teammates />}
+            {active === "MyTeammates" && <Teammates teamId={"1"} />}
             {active === "allTeam" && <Teams />}
             {active === "follow" && <Follows />}
         </DrawerPanel>

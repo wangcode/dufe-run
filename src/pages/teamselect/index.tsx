@@ -13,6 +13,8 @@ import TimeOutlineIcon from 'assets/images/time_outline_icon.png';
 import GroupOutlineIcon from 'assets/images/group_outline_icon.png';
 
 import styles from './index.module.scss';
+import { useQuery } from 'react-query';
+import { getAllStepTeam } from 'services';
 
 interface TeamSelectProps {
 
@@ -21,6 +23,11 @@ interface TeamSelectProps {
 const TeamSelect: React.FC<TeamSelectProps> = () => {
 
     const [selected, setSelected] = useState<number | undefined>(undefined)
+
+    const { data, isLoading } = useQuery(
+        ["teams"],
+        getAllStepTeam
+    )
 
     return (
         <div className={styles.teamselect}>
@@ -54,11 +61,11 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
                         </div>
                         <div>
                             <Row gutter={[25, 15]}>
-                                <Col onClick={() => setSelected(1)} span={6}><TeamBox name="北京" rank={15} count={6000} /></Col>
-                                <Col onClick={() => setSelected(1)} span={6}><TeamBox name="北京" rank={15} count={6000} /></Col>
-                                <Col onClick={() => setSelected(1)} span={6}><TeamBox name="北京" rank={15} count={6000} /></Col>
-                                <Col onClick={() => setSelected(1)} span={6}><TeamBox name="北京" rank={15} count={6000} /></Col>
-                                <Col onClick={() => setSelected(1)} span={6}><TeamBox name="北京" rank={15} count={6000} /></Col>
+                                {data?.map(team => (
+                                    <Col key={team.id} onClick={() => setSelected(team.id)} span={6}>
+                                        <TeamBox name={team.name} rank={12} count={team.personNum} />
+                                    </Col>
+                                ))}
                             </Row>
                         </div>
                     </div>
@@ -67,7 +74,7 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
             </Card>
 
             <TeamDetailPanel teamId={selected?.toFixed(0)} visible={!!selected} destroyOnClose height="85vh" onClose={() => setSelected(undefined)} />
-            <MyTeamPanel visible={false} height="80vh" onClose={alert} />
+            {/* <MyTeamPanel visible={true} height="80vh"  /> */}
         </div>
     )
 

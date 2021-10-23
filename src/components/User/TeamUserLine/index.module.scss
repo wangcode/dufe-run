@@ -1,3 +1,8 @@
+.userItem{
+    display: flex;
+    align-items: center;
+    padding: 0px 7px;
+}
 .iconBtn{
     img{
         width: 23px;
@@ -10,7 +15,12 @@
 }
 
 .rank{
-    margin-right: 34px;
+    // margin-right: 34px;
+    width: 40px;
+}
+
+.detail{
+    flex: 1;
 }
 
 .name{
@@ -34,3 +44,4 @@
     color: #000000;
     margin: 0px 9px;
 }
+
