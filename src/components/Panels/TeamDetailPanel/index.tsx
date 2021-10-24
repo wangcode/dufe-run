@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Col, Divider, DrawerProps, Row } from 'antd';
+import { Col, Divider, DrawerProps, Modal, Row } from 'antd';
 import Toast from 'light-toast';
 import FollowButton from 'components/FollowButton';
 import DrawerPanel from 'components/Base/DrawerPanel';
@@ -30,12 +30,21 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({teamId, ...props}) => 
 
     const handleOnJoinTeam = () => {
         if(!teamId) return
-        joinTeam(teamId)
-            .then(() => {
-                Toast.info("加入成功！")
-                refetchTeam()
-                refetchUsers()
-            })
+
+        Modal.confirm({
+            content: '确定后不能修改，是否确定该战队？',
+            okText: '确定',
+            cancelText: '再想想',
+            onOk: () => {
+                joinTeam(teamId)
+                    .then(() => {
+                        Toast.info("加入成功！")
+                        refetchTeam()
+                        refetchUsers()
+                    })
+            }
+        })
+
 
     }
 

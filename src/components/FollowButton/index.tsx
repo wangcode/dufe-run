@@ -2,6 +2,7 @@ import { Spin } from 'antd';
 import React from 'react';
 import { useMutation } from 'react-query';
 import { followSomeone, removeFollow } from 'services';
+import FavOutlineIcon from 'assets/images/fav_outline_icon.png';
 
 import Button, { ButtonSizeType } from 'components/Base/Button';
 
@@ -42,9 +43,14 @@ const FollowButton: React.FC<FollowButtonProps> = ({ follow, followId, userId, s
     }
 
     return (
-        <Spin spinning={followMutation.isLoading || unFollowMutation.isLoading}>
-            <Button size={size} onClick={handleOnClick} theme={follow ? "default" : "success"}>{follow ? "取消关注" : "关注"}</Button>
-        </Spin>
+        <Button
+            loading={followMutation.isLoading || unFollowMutation.isLoading}
+            icon={!follow?<img src={FavOutlineIcon} alt='fav' width="13px" height="11px" />:null}
+            size={size}
+            border={border}
+            onClick={handleOnClick}
+            theme={follow ? "default" : "success"}
+        >{follow ? "取消关注" : "关注"}</Button>
     )
 
 }

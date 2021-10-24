@@ -3,7 +3,7 @@ import { Progress } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
-import { getMySteps, getStepNum, TOTAL_STEPS } from 'services';
+import { getMySteps, getStepNum, getStepTeamNum, TOTAL_STEPS } from 'services';
 import { RankList } from '../rank';
 
 import PersonPNG from 'assets/images/person.png';
@@ -21,7 +21,17 @@ const Home = () => {
 
     const { data: mySteps } = useQuery(["mySteps"], getMySteps)
 
-    const { data } = useQuery(["total", "people"], getStepNum)
+    const { data: personData } = useQuery(["total", "person"], getStepNum)
+
+    const { data: teamData } = useQuery(["total", "team"], getStepTeamNum)
+
+    const handleOnTeamClick = () => {
+        if(mySteps?.teamId==="") {
+            history.push("/teamselect")
+        } else {
+            history.push("team")
+        }
+    }
 
     return (
         <div>
@@ -57,11 +67,13 @@ const Home = () => {
                 <img src={EntryPNG} alt="entry" />
             </div> */}
 
-            <div className={styles.entry2}>
+            <div className={styles.entry2} onClick={() => history.push("/map")}>
+                <div className={styles.position}>共 <span>{personData?.num}</span> 校友参与</div>
                 <img src={PersonPNG} alt="entry" />
             </div>
 
-            <div className={styles.entry2}>
+            <div className={styles.entry2} onClick={handleOnTeamClick}>
+                <div className={styles.position}>共 <span>{teamData?.num}</span> 个战队，<span>{teamData?.perNum}</span>个校友参与</div>
                 <img src={GroupPNG} alt="entry" />
             </div>
 

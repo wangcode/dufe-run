@@ -13,10 +13,10 @@ const AvatarSize: {small: React.CSSProperties, middle: React.CSSProperties, larg
         textAlign: "center"
     },
     middle: {
-        width: 53,
-        height: 53,
+        width: 40,
+        height: 40,
         fontSize: "24px",
-        lineHeight: "53px",
+        lineHeight: "40px",
         textAlign: "center"
     },
     large: {}

@@ -1,0 +1,70 @@
+.rule {
+  color: #333333;
+  margin-top: 15px;
+  padding: 0px 20px;
+  span {
+    color: #1244a8;
+  }
+}
+
+.avatar {
+  padding: 0px 20px;
+  position: absolute;
+  top: -27px;
+}
+
+.user {
+  padding-left: 30px;
+  padding-right: 10px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #000000;
+  align-items: center;
+  .extra {
+    font-size: 12px;
+    color: #888888;
+  }
+  .team{
+    display: flex;
+    align-items: center;
+    color: #666666;
+    font-size: 13px;
+    img{
+      width: 16px;
+      height: 16px;
+      margin-right: 10px;
+    }
+  }
+}
+
+.progress {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 30px;
+  // padding-bottom: 5px;
+  align-items: center;
+  .total {
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    strong {
+      font-size: 20px;
+      color: #1244a8;
+    }
+    em {
+      font-size: 12px;
+    }
+  }
+  .surplus {
+    font-size: 12px;
+    color: #888888;
+  }
+}
+
+.buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}

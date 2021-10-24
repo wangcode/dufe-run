@@ -60,6 +60,11 @@ interface StepsType {
     userId: string;
     allRank: number;
     goodNum: number;
+    teamId: string;
+    teamName: string;
+    aveTeamKm: number;
+    aveStep: number;
+    allKm: number
 }
 
 interface RankType {

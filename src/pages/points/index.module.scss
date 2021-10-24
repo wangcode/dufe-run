@@ -2,21 +2,32 @@
   margin: 0 9px;
 }
 .points {
-  font-size: 18px;
-  color: #333;
-  padding: 12px;
+  margin: 20px 13px;
+  background:
+    url(../../assets/images/split_line_re.png) no-repeat left center,
+    url(../../assets/images/split_line.png) no-repeat right center;
+  background-size: 64.5px 7.5px;
   letter-spacing: 1.35px;
+  display: flex;
+  align-items: center;
+  justify-content : center;
+  font-size: 15px;
+  color: #333333;
+  img{
+    width: 22.5px;
+    height: 19.5px;
+    margin-right: 10px;
+  }
   span {
-    font-size: 24px;
-    color: #1244a8;
+    color: #f99a4e;
   }
 }
 
 .total {
-  background-color: #58adfd;
+  background: linear-gradient(to right, #5d6de6, #7955d4);
   border-radius: 10px;
   width: 100%;
-  height: 23px;
+  height: 24px;
   color: #fff;
   font-size: 11px;
   display: flex;
@@ -30,13 +41,10 @@
     }
   }
   span {
-    color: #1244a8;
+    color: #f99a4e;
   }
 }
-.missionButton {
-  display: flex;
-  align-items: center;
-}
+
 .missionPanel {
   margin: 18px 0px;
   box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 15%);
@@ -59,12 +67,12 @@
     display: flex;
     align-items: center;
     .walk {
-      width: 15px;
-      height: 22px;
+      width: 20.5px;
+      height: 20.5px;
       margin-right: 15px;
     }
     span {
-      color: #1244a8;
+      color: #6578c0;
     }
   }
 }

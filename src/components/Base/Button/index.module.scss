@@ -6,7 +6,7 @@
   white-space: nowrap;
   text-align: center;
   background-image: none;
-  border: 1px solid transparent;
+  border: 0px solid transparent;
   //   box-shadow: 0 2px #00000004;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -25,10 +25,10 @@
 }
 
 .disabled {
-  cursor: not-allowed;
-  color: #999;
-  background-color: #fff;
-  border-color: #999;
+  cursor: not-allowed !important;
+  color: #999 !important;
+  background-color: #fff !important;
+  border-color: #999 !important;
 }
 
 // themes
@@ -47,4 +47,12 @@
   border: none;
   color: #ffffff;
   background-image: linear-gradient(to right, #f98b4f, #f7cd3d);
+}
+
+.bordered{
+  border-width: 1px;
+}
+
+.children{
+  flex: 1;
 }

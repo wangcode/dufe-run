@@ -1,5 +1,6 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Space } from "antd";
+import classNames from "classnames";
 import React, { CSSProperties } from "react";
 
 import styles from './index.module.scss';
@@ -41,21 +42,29 @@ export interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAtt
 }
 
 
-const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, disabled, loading, border, children, ...props}) => {
+const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, disabled, loading, border = true, children, ...props}) => {
+
+    const themeClassName = styles[theme]
 
     return (
         <button
             disabled={loading || disabled}
-            className={`${styles.resetButton} ${styles[disabled?"disabled":theme]}`}
+            className={classNames(
+                styles.resetButton,
+                themeClassName,
+                {
+                    [styles.bordered]:border,
+                    [styles.disabled]:disabled
+                }
+            )}
             style={{...ButtonSize[size]}}
             {...props}
         >
             <Space>
-            {icon && <span>{icon}</span>}
-            {loading && <LoadingOutlined spin /> }
-            <span>{children}</span>
+                {loading ? <LoadingOutlined spin /> : null}
+                {icon ? <div>{icon}</div>: null}
+                <div className={styles.children}>{children}</div>
             </Space>
-
         </button>
     )
 
