@@ -8,6 +8,7 @@ import styles from './index.module.scss';
 export interface ButtonSizeType {
     small: CSSProperties,
     middle: CSSProperties,
+    xm: CSSProperties,
     large: CSSProperties
 }
 
@@ -24,6 +25,12 @@ export const ButtonSize: ButtonSizeType = {
         // padding: "0px 35px",
         minWidth: "100px"
     },
+    xm: {
+        height: "40px",
+        borderRadius: "25px",
+        // padding: "0px 35px",
+        minWidth: "115px"
+    },
     large: {
         height: "45px",
         borderRadius: "18px",
@@ -36,7 +43,7 @@ export interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAtt
     icon?: React.ReactNode;
     size?: keyof typeof ButtonSize;
     loading?: boolean;
-    theme?: "success"|"default"|"hot";
+    theme?: "success"|"default"|"hot"|"cheese";
     border?: boolean;
     disabled?: boolean;
 }

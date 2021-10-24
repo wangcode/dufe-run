@@ -15,12 +15,14 @@ import CrownIcon from 'assets/images/crown_outline_icon.png';
 
 import styles from './index.module.scss';
 import { useAsyncFn } from 'react-use';
+import UserDetailPanel from '../UserDetailPanelV2';
 
 interface TeamDetailPanelProps extends DrawerProps {
     teamId?: string;
+    onUserClick?: (userId: string) => void;
 }
 
-const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({teamId, ...props}) => {
+const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({teamId, onUserClick, ...props}) => {
 
     const { data, isLoading, refetch: refetchTeam } = useQuery(["teams", teamId], () => getMyStepTeam(teamId!), {enabled: !!teamId})
 
@@ -49,52 +51,64 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({teamId, ...props}) => 
     }
 
     return (
-        <DrawerPanel loading={isLoading || userLoading} bodyStyle={{paddingLeft: 17, paddingRight: 17}} {...props}>
+        <DrawerPanel
+            loading={isLoading || userLoading}
+            bodyStyle={{paddingLeft: 17, paddingRight: 17}}
+            {...props}
+            title={
+                <div className={styles.headWrap}>
+                    <div className={styles.head}>
+                        <div className={styles.left}>
+                            <img src={TeamIcon} alt="" />
+                            <div>{data?.name}</div>
+                        </div>
+                        {false && <div className={styles.right}>
+                            <img src={CrownIcon} alt="" />
+                            <div>第 {data?.allRank} 名</div>
+                        </div>}
+                        {true && <FollowButton userId={"1"} followId={"1"} follow={false} />}
+                    </div>
 
-            <div className={styles.head}>
-                <div className={styles.left}>
-                    <img src={TeamIcon} alt="" />
-                    <div>{data?.name}</div>
+
+                    <Row justify="space-between" align="top" className={styles.teamDetail}>
+                        <Col flex={0}>
+                            <div className={styles.text}>战队人数</div>
+                            <span className={styles.number}>{data?.personNum} 人</span>
+                        </Col>
+                        <Divider style={{paddingTop: 20}} type="vertical" />
+                        <Col flex={0}>
+                            <div className={styles.text}>战队总路程</div>
+                            <span className={styles.number}>{data?.allKm} km</span>
+                        </Col>
+                        <Divider style={{paddingTop: 20}} type="vertical" />
+                        <Col flex={0}>
+                            <div className={styles.text}>战队人均路程</div>
+                            <span className={styles.number}>{data?.aveKm} km</span>
+                        </Col>
+                    </Row>
+
+                    <div className={styles.introduce}>
+                        <div className={styles.title}>战队介绍：</div>
+                        <div className={styles.content}>{data?.info}</div>
+                    </div>
+
+                    <div className={styles.headline}>
+                        <div className={styles.left}><img src={UserIcon} alt="user" /><span>队员</span></div>
+                        <div>全部 {'>'}</div>
+                    </div>
                 </div>
-                {false && <div className={styles.right}>
-                    <img src={CrownIcon} alt="" />
-                    <div>第 {data?.allRank} 名</div>
-                </div>}
-                {true && <FollowButton userId={"1"} followId={"1"} follow={false} />}
-            </div>
-
-
-            <Row justify="space-between" align="top" className={styles.teamDetail}>
-                <Col flex={0}>
-                    <div className={styles.text}>战队人数</div>
-                    <span className={styles.number}>{data?.personNum} 人</span>
-                </Col>
-                <Divider style={{paddingTop: 20}} type="vertical" />
-                <Col flex={0}>
-                    <div className={styles.text}>战队总路程</div>
-                    <span className={styles.number}>{data?.allKm} km</span>
-                </Col>
-                <Divider style={{paddingTop: 20}} type="vertical" />
-                <Col flex={0}>
-                    <div className={styles.text}>战队人均路程</div>
-                    <span className={styles.number}>{data?.aveKm} km</span>
-                </Col>
-            </Row>
-
-            <div className={styles.introduce}>
-                <div className={styles.title}>战队介绍：</div>
-                <div className={styles.content}>{data?.info}</div>
-            </div>
-
-            <div className={styles.headline}>
-                <div className={styles.left}><img src={UserIcon} alt="user" /><span>队员</span></div>
-                <div>全部 {'>'}</div>
-            </div>
-
+            }
+        >
             <div className={styles.userList}>
                 {users?.map(user => (
                     <div key={user.userId} className={styles.user}>
-                        <TeamUserLine name={user.name} avatar={user.pic} number={`${user.allKm}KM`} />
+                        <TeamUserLine
+                            name={user.name}
+                            avatar={user.pic}
+                            number={`${user.allKm}KM`}
+                            onAvatarClick={() => onUserClick?.(user.userId)}
+                            onMapClick={() => onUserClick?.(user.userId)}
+                        />
                     </div>
                 ))}
             </div>

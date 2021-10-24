@@ -19,7 +19,13 @@ const AvatarSize: {small: React.CSSProperties, middle: React.CSSProperties, larg
         lineHeight: "40px",
         textAlign: "center"
     },
-    large: {}
+    large: {
+        width: 58,
+        height: 58,
+        fontSize: "26px",
+        lineHeight: "58px",
+        textAlign: "center"
+    }
 }
 
 interface AvatarProps {

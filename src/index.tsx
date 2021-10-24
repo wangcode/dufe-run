@@ -13,6 +13,7 @@ import TeamSelect from 'pages/teamselect';
 import 'react-circular-progressbar/dist/styles.css';
 import 'antd/dist/antd.css'
 import "./index.css"
+import PersonMap from 'pages/person';
 
 export const queryClient = new QueryClient()
 
@@ -27,6 +28,7 @@ ReactDOM.render(
       <Route exact path="/teamselect"><TeamSelect /></Route>
       <Route exact path="/login"><Login /></Route>
       <Route exact path="/introduction"><Introduction /></Route>
+      <Route exact path="/person"><PersonMap /></Route>
     </BrowserRouter>
   </QueryClientProvider>,
   document.getElementById('root')

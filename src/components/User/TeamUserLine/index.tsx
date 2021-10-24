@@ -18,6 +18,9 @@ interface TeamUserLineProps {
     name?: string;
     number?: string;
     hidden?: boolean;
+    onFav?: () => void;
+    onAvatarClick?: () => void;
+    onMapClick?: () => void;
 }
 
 const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
@@ -35,7 +38,7 @@ const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
             <div className={styles.rank}>1</div>
             <Row className={styles.detail} align="middle" justify="space-between">
 
-                <Col>
+                <Col onClick={props.onAvatarClick}>
                     <Row align="middle">
                         {/* <Col className={styles.rank}><div>1</div></Col> */}
                         {props.avatar && <Col className={styles.avatar}><Avatar text="Wang" /></Col>}
@@ -47,8 +50,8 @@ const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
 
                 <Col style={{visibility: props.hidden?"hidden":"visible"}}>
                     <Row align="middle">
-                        <Col className={styles.mapIcon}><img src={MapIcon} alt="mapBtn" /></Col>
-                        <Col className={styles.iconBtn}><img src={FavIcon} alt="FavBtn" /></Col>
+                        <Col onClick={props.onMapClick} className={styles.mapIcon}><img src={MapIcon} alt="mapBtn" /></Col>
+                        <Col onClick={props.onFav} className={styles.iconBtn}><img src={FavIcon} alt="FavBtn" /></Col>
                     </Row>
                 </Col>
 

@@ -25,24 +25,3 @@ export const TeamRankItem: React.FC<TeamRankItemProps> = (props) => {
         </Row>
     )
 }
-
-const TeamRank = () => {
-
-    const [teamId, setTeamId] = useState("")
-
-    return (
-        <Card title="战队排行榜">
-            {[1, 2, 3, 4].map(item => {
-                return (
-                    <div className={styles.teamListItem} onClick={() => setTeamId(item.toFixed(0))}>
-                        <TeamRankItem rank={item} name={`战队 - ${item}`} people={item * 11} length={item} />
-                    </div>
-                )
-            })}
-            <TeamDetailPanel height="60vh" destroyOnClose visible={!!teamId} onClose={() => setTeamId("")} teamId={teamId} />
-        </Card>
-    )
-
-}
-
-export default TeamRank;

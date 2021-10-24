@@ -1,0 +1,21 @@
+.topBar{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 401;
+    padding: 30px 15px;
+}
+
+.topBar2{
+    @extend .topBar;
+    padding: 30px 35px;
+}
+
+.bottomBar{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 401;
+}

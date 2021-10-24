@@ -10,11 +10,11 @@ import styles from './index.module.scss';
 import MyTeamPanel from 'components/Panels/MyTeamPanel';
 import TeamProgressPanel from 'components/Panels/TeamProgressPanel';
 
-interface RunToolBarProps {
+interface RunBarProps {
     mode?: "person" | "team"
 }
 
-const RunToolBar: React.FC<RunToolBarProps> = ({ mode = "person" }) => {
+const RunBar: React.FC<RunBarProps> = ({ mode = "person" }) => {
 
     const [visible, setVisible] = useState(false)
 
@@ -69,4 +69,4 @@ const RunToolBar: React.FC<RunToolBarProps> = ({ mode = "person" }) => {
 
 }
 
-export default RunToolBar;
+export default RunBar;

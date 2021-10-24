@@ -10,13 +10,11 @@
 .avatar {
   padding: 0px 20px;
   position: absolute;
-  top: -27px;
+  top: -29px;
 }
 
 .user {
-  padding-left: 30px;
-  padding-right: 10px;
-  margin-top: 30px;
+  padding: 40px 25px 0px 25px;
   display: flex;
   justify-content: space-between;
   font-size: 16px;
@@ -67,4 +65,24 @@
   margin-top: 15px;
   display: flex;
   justify-content: space-around;
+}
+
+
+.count{
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 10px 25px;
+  .badge{
+    margin-top: 13px;
+    font-size: 12px;
+    border-radius: 10px;
+    background-color: #eeeeee;
+    width: 77px;
+    color: #000000;
+  }
+}
+
+.panelHead{
+  padding: 0px 17px;
 }

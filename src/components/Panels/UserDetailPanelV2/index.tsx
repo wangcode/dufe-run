@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { Divider, DrawerProps, Spin } from "antd";
+import { Badge, Divider, DrawerProps, Spin } from "antd";
 import { useHistory } from "react-router-dom";
 
 import Button from 'components/Base/Button';
@@ -21,32 +21,61 @@ interface UserDetailPanelProps extends DrawerProps {
 
 const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, ...props }) => {
 
-    const history = useHistory()
-
     const { data, refetch, isLoading } = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId), { enabled: props.visible })
 
     return (
-        <DrawerPanel {...props}>
-            <div className={styles.avatar}>
-                <Avatar src={data?.pic} text={data?.name} />
-            </div>
+        <DrawerPanel
+            {...props}
+            title={
+                <div className={styles.panelHead}>
+                    <div className={styles.avatar}>
+                        <Avatar size="large" src={data?.pic} text={data?.name} />
+                    </div>
+                    <div className={styles.user}>
+                        <div className={styles.total}>{"孟浩"}</div>
+                        {data?.teamName && <div className={styles.team}>
+                            <img src={TeamOutloneIcon} alt="" />
+                            <div>{"123"}</div>
+                        </div>}
+                        <div className={styles.extra}>
+                            <FollowButton onChange={refetch} userId={userId} followId={data?.followId} follow={data?.followFlag === FollowFlag.follow} />
+                        </div>
+                    </div>
+
+                    <div className={styles.count}>
+
+                        <div>
+                            <div>个人步数</div>
+                            <div className={styles.badge}>16233</div>
+                        </div>
+                        <Divider type="vertical" />
+                        <div>
+                            <div>个人步数</div>
+                            <div className={styles.badge}>16233</div>
+                        </div>
+
+                    </div>
+                    <div className={styles.count}>
+
+                        <div>
+                            <div>个人步数</div>
+                            <div className={styles.badge}>123123123</div>
+                        </div>
+                        <Divider type="vertical" />
+                        <div>
+                            <div>个人步数</div>
+                            <div className={styles.badge}>16233</div>
+                        </div>
+
+                    </div>
+
+                    <Divider style={{ margin: "15px 0" }} />
+                </div>
+            }
+        >
+
             <Spin spinning={isLoading}>
-                <div className={styles.user}>
-                    <div className={styles.total}>{"孟浩"}</div>
-                    <div className={styles.team}>
-                        <img src={TeamOutloneIcon} alt="" />
-                        <div>辽宁战队</div>
-                    </div>
-                    <div className={styles.extra}>
-                        <FollowButton onChange={refetch} userId={userId} followId={data?.followId} follow={data?.followFlag === FollowFlag.follow} />
-                    </div>
-                </div>
 
-                <div>
-
-                </div>
-
-                <Divider style={{ margin: "15px 0" }} />
 
                 <div>
                     <div>道具</div>
