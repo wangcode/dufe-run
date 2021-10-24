@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
+import PersonProgressPanel from 'components/Panels/ProgressPanel';
+import TeamProgressPanel from 'components/Panels/TeamProgressPanel';
 import SNSPanel from 'components/Panels/SNSPanel';
-import ProgressPanel from 'components/Panels/ProgressPanel';
+import MyTeamPanel from 'components/Panels/MyTeamPanel';
 
 import foot from 'assets/images/foot_icon.png';
 import logo from 'assets/images/logo_btn.png';
 
 import styles from './index.module.scss';
-import MyTeamPanel from 'components/Panels/MyTeamPanel';
-import TeamProgressPanel from 'components/Panels/TeamProgressPanel';
 
 interface RunBarProps {
     mode?: "person" | "team"
@@ -60,8 +60,8 @@ const RunBar: React.FC<RunBarProps> = ({ mode = "person" }) => {
                     <div className={styles.followBtn} onClick={() => setFollowVisible(true)} >道具记录</div>
                 </div>
             </div>}
-            <ProgressPanel destroyOnClose visible={visible} onClose={() => setVisible(false)} />
-            <TeamProgressPanel destroyOnClose visible={teamProgressVisible} onClose={() => setTeamProgressVisible(false)}/>
+            <PersonProgressPanel destroyOnClose visible={visible} onClose={() => setVisible(false)} />
+            <TeamProgressPanel height="60vh" destroyOnClose visible={teamProgressVisible} onClose={() => setTeamProgressVisible(false)}/>
             <SNSPanel destroyOnClose height="55vh" visible={followVisible} onClose={() => setFollowVisible(false)} />
             <MyTeamPanel destroyOnClose height="85vh" visible={myTeamVisible} onClose={() => setMyTeamVisible(false)} />
         </div>

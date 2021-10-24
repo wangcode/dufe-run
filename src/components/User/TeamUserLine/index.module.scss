@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     padding: 0px 7px;
+    height: 100%;
 }
 .iconBtn{
     img{
@@ -15,7 +16,14 @@
 }
 
 .rank{
-    // margin-right: 34px;
+    width: 50px;
+}
+
+.ranktext{
+    background: url(../../../assets/images/dot.png) no-repeat;
+    background-size: 6px 6px;
+    padding: 0px 1px;
+    background-position: 100% 85%;
     width: 40px;
 }
 

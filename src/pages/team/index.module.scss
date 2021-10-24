@@ -1,14 +1,25 @@
+.root{
+    position: relative;
+    height: 100vh;
+}
+
 .main{
     padding: 0px 9px;
+    padding-top: 100px;
 }
 .runToolBar{
     position: absolute;
-    z-index: 800;
+    z-index: 401;
     bottom: 0;
     width: 100%;
 }
 .topToolbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 30px 15px;
+    z-index: 401;
 }
 
 

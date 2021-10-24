@@ -2,6 +2,8 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Col, Divider, DrawerProps, Modal, Row } from 'antd';
 import Toast from 'light-toast';
+import { useAsyncFn } from 'react-use';
+import { useHistory } from 'react-router';
 import FollowButton from 'components/FollowButton';
 import DrawerPanel from 'components/Base/DrawerPanel';
 import Button from 'components/Base/Button';
@@ -14,21 +16,22 @@ import TeamIcon from 'assets/images/group_icon.png'
 import CrownIcon from 'assets/images/crown_outline_icon.png';
 
 import styles from './index.module.scss';
-import { useAsyncFn } from 'react-use';
-import UserDetailPanel from '../UserDetailPanelV2';
 
 interface TeamDetailPanelProps extends DrawerProps {
+    type?: "select"|"show"
     teamId?: string;
     onUserClick?: (userId: string) => void;
 }
 
-const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({teamId, onUserClick, ...props}) => {
+const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({type = "show", teamId, onUserClick, ...props}) => {
 
-    const { data, isLoading, refetch: refetchTeam } = useQuery(["teams", teamId], () => getMyStepTeam(teamId!), {enabled: !!teamId})
+    const history = useHistory()
 
-    const { data: users, isLoading: userLoading, refetch: refetchUsers } = useQuery(["teams", teamId, "users"], () => getStepTeamPerson(teamId!), {enabled: !!teamId})
+    const { data, isLoading } = useQuery(["teams", teamId], () => getMyStepTeam(teamId!), {enabled: !!teamId})
 
-    const [{loading: joinLoading}, joinTeam ] = useAsyncFn(joinStepTeam)
+    const { data: users, isLoading: userLoading } = useQuery(["teams", teamId, "users"], () => getStepTeamPerson(teamId!), {enabled: !!teamId})
+
+    const [{loading: joinLoading}, joinTeam] = useAsyncFn(joinStepTeam)
 
     const handleOnJoinTeam = () => {
         if(!teamId) return
@@ -38,16 +41,13 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({teamId, onUserClick, .
             okText: '确定',
             cancelText: '再想想',
             onOk: () => {
-                joinTeam(teamId)
+                return joinTeam(teamId)
                     .then(() => {
                         Toast.info("加入成功！")
-                        refetchTeam()
-                        refetchUsers()
+                        history.replace("/team")
                     })
             }
         })
-
-
     }
 
     return (
@@ -62,11 +62,11 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({teamId, onUserClick, .
                             <img src={TeamIcon} alt="" />
                             <div>{data?.name}</div>
                         </div>
-                        {false && <div className={styles.right}>
+                        {type==="select" && <div className={styles.right}>
                             <img src={CrownIcon} alt="" />
                             <div>第 {data?.allRank} 名</div>
                         </div>}
-                        {true && <FollowButton userId={"1"} followId={"1"} follow={false} />}
+                        {type==="show" && <FollowButton userId={"1"} followId={"1"} follow={false} />}
                     </div>
 
 
@@ -87,10 +87,10 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({teamId, onUserClick, .
                         </Col>
                     </Row>
 
-                    <div className={styles.introduce}>
+                    {type==="select" && <div className={styles.introduce}>
                         <div className={styles.title}>战队介绍：</div>
                         <div className={styles.content}>{data?.info}</div>
-                    </div>
+                    </div>}
 
                     <div className={styles.headline}>
                         <div className={styles.left}><img src={UserIcon} alt="user" /><span>队员</span></div>
@@ -113,9 +113,9 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({teamId, onUserClick, .
                 ))}
             </div>
 
-            <div className={styles.joinBtn}>
+            {type==="select" && <div className={styles.joinBtn}>
                 <Button loading={joinLoading} theme="success" onClick={handleOnJoinTeam}>加入战队</Button>
-            </div>
+            </div>}
 
         </DrawerPanel>
     )

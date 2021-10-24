@@ -1,10 +1,11 @@
 import Button from 'components/Base/Button';
 
+import Toast from 'light-toast';
+import { getMySteps, getStepMapIntegral, saveStepIntegral, TOTAL_LENGTH } from 'services';
+import { useMutation, useQuery } from 'react-query';
+
 import walk from 'assets/images/foot_icon.png';
 import CoinIcon from 'assets/images/coin_point.png';
-
-import { getMySteps, getStepMapIntegral, TOTAL_LENGTH } from 'services';
-import { useQuery } from 'react-query';
 
 import styles from './index.module.scss';
 
@@ -12,10 +13,17 @@ const Point = () => {
 
     const { data: myStep } = useQuery("mySteps", getMySteps)
 
-    const { data, isLoading } = useQuery(
+    const { data, refetch } = useQuery(
         ["points"],
         getStepMapIntegral
     )
+
+    const mutation = useMutation(saveStepIntegral, {
+        onSuccess: () => {
+            Toast.info("领取成功！")
+            refetch()
+        }
+    })
 
     return (
         <div className={styles.main}>
@@ -39,7 +47,7 @@ const Point = () => {
                             point.flag==="1"?
                             <Button disabled>已领取{point.point}积分</Button>
                             :
-                            <Button icon={<div className={styles.coin} />} theme="hot" >
+                            <Button onClick={() => mutation.mutate(point.id.toString())} icon={<div className={styles.coin} />} theme="hot" >
                                 <span>领取{point.point}积分</span>
                             </Button>
                         }

@@ -8,6 +8,7 @@ import { Badge, Space } from 'antd';
 
 import styles from './index.module.scss';
 import classNames from 'classnames';
+import { useHistory } from 'react-router';
 
 interface ToggleButtonProps {
     value: "team"|"person";
@@ -65,8 +66,9 @@ interface GetPointButtonProps {
 }
 
 export const GetPointButton: React.FC<GetPointButtonProps> = (props) => {
+    const history = useHistory()
     return (
-        <div className={classNames(
+        <div onClick={() => history.push("/points")} className={classNames(
             styles.getPoint,
             {[styles.shadow]: props.shadow}
         )}>

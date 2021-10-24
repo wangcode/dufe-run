@@ -10,9 +10,11 @@ import { TeamRankItem } from 'components/TeamRank';
 import TeamDetailPanel from 'components/Panels/TeamDetailPanel';
 import UserDetailPanel from 'components/Panels/UserDetailPanelV2';
 import { AvatarBox, GetPointButton, ToggleButton } from 'components/FloatComponents';
+import Map from 'components/Map';
 
 import styles from './index.module.scss';
 import PropsModal from 'components/PropsModal';
+import MapRoute from 'components/Map/route';
 
 const Team = () => {
 
@@ -21,9 +23,8 @@ const Team = () => {
     const [userId, setUserId] = useState("")
     const [teamId, setTeamId] = useState("")
 
-
     return (
-        <div>
+        <div className={styles.root}>
 
             <div className={styles.topToolbar}>
                 <Row justify='space-between' align="middle">
@@ -37,13 +38,11 @@ const Team = () => {
                 </Row>
             </div>
 
-            {userId==="" && <div className={styles.main}>
+            <div style={{display:!!userId?"none":"block"}} className={styles.main}>
                 <GraphRank />
-
                 <div className={styles.myTeam}>
                     <TeamRankItem single rank={15} name="上海战队" people={221} length={1.5} />
                 </div>
-
                 <div>
                     <Card title="战队排行榜">
                         {[1, 2, 3, 4].map(item => {
@@ -55,8 +54,13 @@ const Team = () => {
                         })}
                     </Card>
                 </div>
+            </div>
 
-            </div>}
+            <div style={{display:!!userId?"block":"none"}}>
+                <Map>
+                    <MapRoute myStep={"222"} />
+                </Map>
+            </div>
 
             <UserDetailPanel
                 visible={!!userId}

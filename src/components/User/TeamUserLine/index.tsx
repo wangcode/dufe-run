@@ -11,13 +11,14 @@ import FavIcon from 'assets/images/fav_map_circle_icon.png';
 
 
 import styles from './index.module.scss';
-import classNames from 'classnames';
 
 interface TeamUserLineProps {
+    rank?: number;
     avatar?: string;
     name?: string;
     number?: string;
     hidden?: boolean;
+    customRight?: React.ReactNode;
     onFav?: () => void;
     onAvatarClick?: () => void;
     onMapClick?: () => void;
@@ -35,7 +36,9 @@ const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
         <div
             className={styles.userItem}
         >
-            <div className={styles.rank}>1</div>
+            <div className={styles.rank}>
+                <span className={styles.ranktext}>{props.rank}</span>
+            </div>
             <Row className={styles.detail} align="middle" justify="space-between">
 
                 <Col onClick={props.onAvatarClick}>
@@ -48,12 +51,12 @@ const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
 
                 {props.number && <Col className={styles.number}>{props.number}</Col>}
 
-                <Col style={{visibility: props.hidden?"hidden":"visible"}}>
+                {props.customRight ? props.customRight : <Col style={{visibility: props.hidden?"hidden":"visible"}}>
                     <Row align="middle">
                         <Col onClick={props.onMapClick} className={styles.mapIcon}><img src={MapIcon} alt="mapBtn" /></Col>
                         <Col onClick={props.onFav} className={styles.iconBtn}><img src={FavIcon} alt="FavBtn" /></Col>
                     </Row>
-                </Col>
+                </Col>}
 
             </Row>
         </div>

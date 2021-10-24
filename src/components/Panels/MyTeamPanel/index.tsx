@@ -1,11 +1,10 @@
-import { Row, Col, DrawerProps, Tabs } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { DrawerProps, Tabs } from 'antd';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 
-import { getPeopleInStep } from 'services';
+import { getMySteps } from 'services';
 
 import DrawerPanel from 'components/Base/DrawerPanel';
-import Button from 'components/Base/Button';
 
 import Teammates from './teammates';
 import Teams from './teams';
@@ -15,7 +14,6 @@ import tabStyles from 'components/Base/Tabs/index.module.scss';
 import styles from './index.module.scss';
 
 interface MyTeamPanelProps extends DrawerProps {
-
 }
 
 type MyTeamActiveKeys = "MyTeammates" | "allTeam" | "follow"
@@ -24,25 +22,10 @@ const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
 
     const [active, setActive] = useState<MyTeamActiveKeys>("MyTeammates")
 
-    // const [searchValue, setSearchValue] = useState("")
-    // const [searchKey, setSearchKey] = useState("")
-
-    // const [search, setSearch] = useState(false)
-
-    // const { data, isLoading, isFetching, refetch } = useQuery(["search", searchKey], () => getPeopleInStep(searchKey), {
-    //     enabled: searchKey !== "",
-    //     onSuccess: () => setSearch(false)
-    // })
-
-    // const reset = () => {
-    //     setActive("follow")
-    //     setSearchKey("")
-    //     setSearchValue("")
-    // }
-
-    // useEffect(() => {
-    //     return reset
-    // }, [props.visible])
+    const { data } = useQuery(
+        ["mySteps"],
+        getMySteps
+    )
 
     return (
         <DrawerPanel
@@ -57,8 +40,8 @@ const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
                 </Tabs>
             }
         >
-            {active === "MyTeammates" && <Teammates teamId={"1"} />}
-            {active === "allTeam" && <Teams />}
+            {active === "MyTeammates" && <Teammates teamId={data?.teamId||""} />}
+            {active === "allTeam" && <Teams rank={11} name={data?.teamName||""} number={`${data?.aveTeamKm}KM`}  />}
             {active === "follow" && <Follows />}
         </DrawerPanel>
     )
