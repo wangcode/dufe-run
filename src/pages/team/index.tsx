@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Col, Modal, Row } from 'antd';
+import { Col, Row } from 'antd';
 import { useHistory } from 'react-router';
 
 import RunToolBar from 'pages/map/components/runToolBar';
@@ -13,77 +13,97 @@ import { AvatarBox, GetPointButton, ToggleButton } from 'components/FloatCompone
 import Map from 'components/Map';
 
 import styles from './index.module.scss';
-import PropsModal from 'components/PropsModal';
 import MapRoute from 'components/Map/route';
+import { useQuery } from 'react-query';
+import { getAllStepTeam, getMySteps, getMyStepTeam } from 'services';
 
 const Team = () => {
 
-    const history = useHistory()
+  const history = useHistory()
 
-    const [userId, setUserId] = useState("")
-    const [teamId, setTeamId] = useState("")
+  const [userId, setUserId] = useState("")
+  const [teamId, setTeamId] = useState("")
 
-    return (
-        <div className={styles.root}>
+  const mySteps = useQuery(["mySteps"], getMySteps)
+  const teams = useQuery(["teams"], getAllStepTeam)
 
-            <div className={styles.topToolbar}>
-                <Row justify='space-between' align="middle">
-                    <Col>
-                        <Row align="middle" gutter={10}>
-                            <Col><AvatarBox shadow avatar="123" score="123分" /></Col>
-                            <Col><GetPointButton shadow /></Col>
-                        </Row>
-                    </Col>
-                    <Col><ToggleButton shadow value="team" onChange={() => history.push("/person")} /></Col>
-                </Row>
-            </div>
+  const myTeam = useQuery(["teams", mySteps.data?.teamId], () => getMyStepTeam(mySteps.data?.teamId!), { enabled: !!mySteps.data?.teamId })
 
-            <div style={{display:!!userId?"none":"block"}} className={styles.main}>
-                <GraphRank />
-                <div className={styles.myTeam}>
-                    <TeamRankItem single rank={15} name="上海战队" people={221} length={1.5} />
+  // const MyTeam = useMemo(() => {
+  //   if (!mySteps.data || !teams.data) return undefined
+  //   const index = teams.data.findIndex(team => team.id === parseInt(mySteps.data.teamId))
+  //   if (index === -1) return undefined
+  //   console.log(index)
+  //   return {
+  //     rank: index,
+  //     team: teams.data[index]
+  //   }
+  // }, [mySteps.data, teams.data])
+
+  return (
+    <div className={styles.root}>
+
+      <div className={styles.topToolbar}>
+        <Row justify='space-between' align="middle">
+          <Col>
+            <Row align="middle" gutter={10}>
+              <Col><AvatarBox shadow avatar="123" score="123分" /></Col>
+              <Col><GetPointButton shadow /></Col>
+            </Row>
+          </Col>
+          <Col><ToggleButton shadow value="team" onChange={() => history.push("/person")} /></Col>
+        </Row>
+      </div>
+
+      <div style={{ display: !!userId ? "none" : "block" }} className={styles.main}>
+        <GraphRank />
+
+        {myTeam.data && <div className={styles.myTeam}>
+          <TeamRankItem single rank={myTeam.data.allRank} name={myTeam.data.name} people={myTeam.data.personNum} length={`${myTeam.data.aveKm}KM`} />
+        </div>}
+
+        <div>
+          <Card title="战队排行榜">
+            {teams.data?.map((item, index) => {
+              return (
+                <div className={styles.teamListItem} onClick={() => setTeamId(item.id.toString())}>
+                  <TeamRankItem rank={index + 1} name={item.name} people={item.personNum} length={`${item.aveKm}KM`} />
                 </div>
-                <div>
-                    <Card title="战队排行榜">
-                        {[1, 2, 3, 4].map(item => {
-                            return (
-                                <div className={styles.teamListItem} onClick={() => setTeamId(item.toFixed(0))}>
-                                    <TeamRankItem rank={item} name={`战队 - ${item}`} people={item * 11} length={item} />
-                                </div>
-                            )
-                        })}
-                    </Card>
-                </div>
-            </div>
-
-            <div style={{display:!!userId?"block":"none"}}>
-                <Map>
-                    <MapRoute myStep={"222"} />
-                </Map>
-            </div>
-
-            <UserDetailPanel
-                visible={!!userId}
-                userId={userId}
-                height="50vh"
-                onClose={() => setUserId("")}
-                destroyOnClose
-            />
-            <TeamDetailPanel
-                onUserClick={setUserId}
-                height="60vh"
-                destroyOnClose
-                visible={!!teamId && !userId}
-                onClose={() => setTeamId("")}
-                teamId={teamId}
-            />
-
-            <div className={styles.runToolBar}>
-                <RunToolBar mode="team" />
-            </div>
-
+              )
+            })}
+          </Card>
         </div>
-    )
+      </div>
+
+      <div style={{ display: !!userId ? "block" : "none" }}>
+        <Map>
+          <MapRoute myStep={"222"} />
+        </Map>
+      </div>
+
+      <UserDetailPanel
+        visible={!!userId}
+        userId={userId}
+        height="50vh"
+        onClose={() => setUserId("")}
+        destroyOnClose
+      />
+      <TeamDetailPanel
+        type="show"
+        onUserClick={setUserId}
+        height="60vh"
+        destroyOnClose
+        visible={!!teamId && !userId}
+        onClose={() => setTeamId("")}
+        teamId={teamId}
+      />
+
+      <div className={styles.runToolBar}>
+        <RunToolBar mode="team" onTeamUserClick={setUserId} hideDrawer={!!userId} />
+      </div>
+
+    </div>
+  )
 }
 
 export default Team;

@@ -1,55 +1,56 @@
-.userItem{
-    display: flex;
-    align-items: center;
-    padding: 0px 7px;
-    height: 100%;
+.userItem {
+  display: flex;
+  align-items: center;
+  padding: 0px 7px;
+  padding-right: 0;
+  height: 100%;
 }
-.iconBtn{
-    img{
-        width: 23px;
-        height: 23px;
-    }
-}
-
-.avatar{
-    margin-right: 23px;
+.iconBtn {
+  img {
+    width: 23px;
+    height: 23px;
+  }
 }
 
-.rank{
-    width: 50px;
+.avatar {
+  margin-right: 15px;
 }
 
-.ranktext{
-    background: url(../../../assets/images/dot.png) no-repeat;
-    background-size: 6px 6px;
-    padding: 0px 1px;
-    background-position: 100% 85%;
-    width: 40px;
+.rank {
+  width: 40px;
 }
 
-.detail{
-    flex: 1;
+.ranktext {
+  background: url(../../../assets/images/dot.png) no-repeat;
+  background-size: 6px 6px;
+  padding: 0px 1px;
+  background-position: 100% 85%;
+  width: 40px;
 }
 
-.name{
-    font-size: 13px;
-    color: 000;
+.detail {
+  flex: 1;
 }
 
-.mapIcon{
-    @extend .iconBtn;
-    margin: 0px 15px;
+.name {
+  font-size: 13px;
+  color: #000;
+  width: 70px;
 }
 
-.favIcon{
-    @extend .iconBtn;
-    width: 73px;
-    margin: 0px 15px;
+.mapIcon {
+  @extend .iconBtn;
+  margin: 0px 10px;
 }
 
-.number{
-    font-size: 13px;
-    color: #000000;
-    margin: 0px 9px;
+.favIcon {
+  @extend .iconBtn;
+  width: 73px;
+  margin: 0px 10px;
 }
 
+.number {
+  font-size: 13px;
+  color: #000000;
+  margin: 0px 9px;
+}

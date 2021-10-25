@@ -10,7 +10,7 @@ const token = localStorage.getItem("token")
 
 axios.interceptors.request.use(config => {
     config.headers = {
-        token,
+        token: "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3RfdG9rZW4iLCJpYXQiOjE2MzUxMjMyOTAsInN1YiI6IntcIm9wZW5JZFwiOlwiMjkzXCIsXCJsb2dpbkRhdGVcIjpcIjIwMjEtMTAtMjUgMDg6NTQ6NTBcIixcIm9yZ0lkXCI6XCIxZDdkOThkMmE2N2Q0Zjc0YWE0OWE3OTdmNjMwYjI3YlwiLFwib3JnQ29kZVwiOlwiZHVmZVwiLFwidXNlck1vYmlsZVwiOlwiMTU2MTQ0NzIxMDZcIixcInVzZXJOYW1lXCI6XCIxNTYxNDQ3MjEwNlwiLFwidXNlcklkXCI6XCIxYzdkNmYxYjk5ZmM0MjJkOTk5NWM0ZWU2NjI0ZjNlMlwiLFwibmFtZVwiOlwi6bqm5Y-vXCIsXCJ1c2VyTWFjXCI6XCIyMTE0MDMxOTk2MTAyMjgyMTZcIn0iLCJleHAiOjE2Mzc3MTUyOTB9.eQ5KyRur9UNXkQpGCV0PAfrgErB3Z8mqbnSwyieGA28",
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
@@ -27,7 +27,7 @@ axios.interceptors.response.use(
     }
 )
 
-const apiurl = "http://yapi.dufe.tech/mock/73"
+const apiurl = "http://172.16.1.19:9091"
 
 
 export enum FollowFlag {
@@ -200,7 +200,7 @@ interface TeamFollowListType {
     personList: {
         followId: number;
         name: string;
-        allkm: number;
+        allKm: number;
         pic: string;
         userId: string;
     }[];
@@ -341,7 +341,7 @@ export const getMyStepTeam = (id: string) => {
  * @url http://yapi.dufe.tech/project/73/interface/api/9205
  */
 export const joinStepTeam = (id: string) => {
-    return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/getStepProp`, qs.stringify({ id })).then(res => res.data.data)
+    return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/joinStepTeam`, qs.stringify({ id })).then(res => res.data.data)
 }
 
 /**

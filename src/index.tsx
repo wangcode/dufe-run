@@ -15,7 +15,14 @@ import 'antd/dist/antd.css'
 import "./index.css"
 import PersonMap from 'pages/person';
 
-export const queryClient = new QueryClient()
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false
+    }
+  }
+})
 
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>

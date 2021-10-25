@@ -14,37 +14,45 @@ import tabStyles from 'components/Base/Tabs/index.module.scss';
 import styles from './index.module.scss';
 
 interface MyTeamPanelProps extends DrawerProps {
+  onTeamUserClick?: (id: string) => void;
 }
 
 type MyTeamActiveKeys = "MyTeammates" | "allTeam" | "follow"
 
 const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
 
-    const [active, setActive] = useState<MyTeamActiveKeys>("MyTeammates")
+  const [active, setActive] = useState<MyTeamActiveKeys>("MyTeammates")
 
-    const { data } = useQuery(
-        ["mySteps"],
-        getMySteps
-    )
+  const mySteps = useQuery(
+    ["mySteps"],
+    getMySteps,
+    { enabled: props.visible }
+  )
 
-    return (
-        <DrawerPanel
-            {...props}
-            bodyStyle={{padding: "0px 9px"}}
-            destroyOnClose
-            title={
-                <Tabs centered className={tabStyles.tabs} activeKey={active} onChange={e => setActive(e as MyTeamActiveKeys)}>
-                    <Tabs.TabPane tab="我的队友" key="MyTeammates" />
-                    <Tabs.TabPane tab="全部战队" key="allTeam" />
-                    <Tabs.TabPane tab="关注" key="follow" />
-                </Tabs>
-            }
-        >
-            {active === "MyTeammates" && <Teammates teamId={data?.teamId||""} />}
-            {active === "allTeam" && <Teams rank={11} name={data?.teamName||""} number={`${data?.aveTeamKm}KM`}  />}
-            {active === "follow" && <Follows />}
-        </DrawerPanel>
-    )
+  const handleOnclose = (e: any) => {
+    setActive("MyTeammates")
+    props.onClose?.(e)
+  }
+
+  return (
+    <DrawerPanel
+      {...props}
+      bodyStyle={{ padding: "0px 9px" }}
+      onClose={handleOnclose}
+      destroyOnClose
+      title={
+        <Tabs centered className={tabStyles.tabs} activeKey={active} onChange={e => setActive(e as MyTeamActiveKeys)}>
+          <Tabs.TabPane tab="我的队友" key="MyTeammates" />
+          <Tabs.TabPane tab="全部战队" key="allTeam" />
+          <Tabs.TabPane tab="关注" key="follow" />
+        </Tabs>
+      }
+    >
+      {active === "MyTeammates" && <Teammates onUserClick={props.onTeamUserClick} teamId={mySteps.data?.teamId || "1"} />}
+      {active === "allTeam" && <Teams teamId={mySteps.data?.teamId || "1"} />}
+      {active === "follow" && <Follows onUserClick={props.onTeamUserClick} teamId={mySteps.data?.teamId || '1'} />}
+    </DrawerPanel>
+  )
 
 }
 

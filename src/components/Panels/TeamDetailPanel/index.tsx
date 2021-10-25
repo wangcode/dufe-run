@@ -4,7 +4,7 @@ import { Col, Divider, DrawerProps, Modal, Row } from 'antd';
 import Toast from 'light-toast';
 import { useAsyncFn } from 'react-use';
 import { useHistory } from 'react-router';
-import FollowButton from 'components/FollowButton';
+import { FollowTeamButton } from 'components/FollowButton';
 import DrawerPanel from 'components/Base/DrawerPanel';
 import Button from 'components/Base/Button';
 import TeamUserLine from 'components/User/TeamUserLine';
@@ -18,107 +18,115 @@ import CrownIcon from 'assets/images/crown_outline_icon.png';
 import styles from './index.module.scss';
 
 interface TeamDetailPanelProps extends DrawerProps {
-    type?: "select"|"show"
-    teamId?: string;
-    onUserClick?: (userId: string) => void;
+  type?: "select" | "show"
+  teamId?: string;
+  onUserClick?: (userId: string) => void;
 }
 
-const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({type = "show", teamId, onUserClick, ...props}) => {
+const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId, onUserClick, ...props }) => {
 
-    const history = useHistory()
+  const history = useHistory()
 
-    const { data, isLoading } = useQuery(["teams", teamId], () => getMyStepTeam(teamId!), {enabled: !!teamId})
+  const { data, isLoading, refetch } = useQuery(["teams", teamId], () => getMyStepTeam(teamId!), { enabled: !!teamId })
 
-    const { data: users, isLoading: userLoading } = useQuery(["teams", teamId, "users"], () => getStepTeamPerson(teamId!), {enabled: !!teamId})
+  const users = useQuery(["teams", teamId, "users"], () => getStepTeamPerson(teamId!), { enabled: !!teamId })
 
-    const [{loading: joinLoading}, joinTeam] = useAsyncFn(joinStepTeam)
+  const [{ loading: joinLoading }, joinTeam] = useAsyncFn(joinStepTeam)
 
-    const handleOnJoinTeam = () => {
-        if(!teamId) return
+  const handleOnJoinTeam = () => {
+    if (!teamId) return
 
-        Modal.confirm({
-            content: '确定后不能修改，是否确定该战队？',
-            okText: '确定',
-            cancelText: '再想想',
-            onOk: () => {
-                return joinTeam(teamId)
-                    .then(() => {
-                        Toast.info("加入成功！")
-                        history.replace("/team")
-                    })
-            }
-        })
-    }
+    Modal.confirm({
+      content: '确定后不能修改，是否加入该战队？',
+      okText: '确定',
+      cancelText: '再想想',
+      onOk: () => {
+        return joinTeam(teamId)
+          .then(() => {
+            Toast.info("加入成功！")
+            history.replace("/team")
+          })
+      }
+    })
+  }
 
-    return (
-        <DrawerPanel
-            loading={isLoading || userLoading}
-            bodyStyle={{paddingLeft: 17, paddingRight: 17}}
-            {...props}
-            title={
-                <div className={styles.headWrap}>
-                    <div className={styles.head}>
-                        <div className={styles.left}>
-                            <img src={TeamIcon} alt="" />
-                            <div>{data?.name}</div>
-                        </div>
-                        {type==="select" && <div className={styles.right}>
-                            <img src={CrownIcon} alt="" />
-                            <div>第 {data?.allRank} 名</div>
-                        </div>}
-                        {type==="show" && <FollowButton userId={"1"} followId={"1"} follow={false} />}
-                    </div>
-
-
-                    <Row justify="space-between" align="top" className={styles.teamDetail}>
-                        <Col flex={0}>
-                            <div className={styles.text}>战队人数</div>
-                            <span className={styles.number}>{data?.personNum} 人</span>
-                        </Col>
-                        <Divider style={{paddingTop: 20}} type="vertical" />
-                        <Col flex={0}>
-                            <div className={styles.text}>战队总路程</div>
-                            <span className={styles.number}>{data?.allKm} km</span>
-                        </Col>
-                        <Divider style={{paddingTop: 20}} type="vertical" />
-                        <Col flex={0}>
-                            <div className={styles.text}>战队人均路程</div>
-                            <span className={styles.number}>{data?.aveKm} km</span>
-                        </Col>
-                    </Row>
-
-                    {type==="select" && <div className={styles.introduce}>
-                        <div className={styles.title}>战队介绍：</div>
-                        <div className={styles.content}>{data?.info}</div>
-                    </div>}
-
-                    <div className={styles.headline}>
-                        <div className={styles.left}><img src={UserIcon} alt="user" /><span>队员</span></div>
-                        <div>全部 {'>'}</div>
-                    </div>
-                </div>
-            }
-        >
-            <div className={styles.userList}>
-                {users?.map(user => (
-                    <div key={user.userId} className={styles.user}>
-                        <TeamUserLine
-                            name={user.name}
-                            avatar={user.pic}
-                            number={`${user.allKm}KM`}
-                            onAvatarClick={() => onUserClick?.(user.userId)}
-                            onMapClick={() => onUserClick?.(user.userId)}
-                        />
-                    </div>
-                ))}
+  return (
+    <DrawerPanel
+      loading={isLoading || users.isLoading}
+      bodyStyle={{ paddingLeft: 17, paddingRight: 17 }}
+      {...props}
+      title={
+        <div className={styles.headWrap}>
+          <div className={styles.head}>
+            <div className={styles.left}>
+              <img src={TeamIcon} alt="" />
+              <div>{data?.name}</div>
             </div>
-
-            {type==="select" && <div className={styles.joinBtn}>
-                <Button loading={joinLoading} theme="success" onClick={handleOnJoinTeam}>加入战队</Button>
+            {type === "select" && <div className={styles.right}>
+              <img src={CrownIcon} alt="" />
+              <div>第 {data?.allRank} 名</div>
             </div>}
+            {/* todo flagId */}
+            {type === "show" && data && <FollowTeamButton teamId={data?.id.toString()} followId={'1'} follow={data?.flag === "1"} onChange={refetch} />}
+          </div>
 
-        </DrawerPanel>
-    )
+
+          <Row justify="space-between" align="top" className={styles.teamDetail}>
+            <Col flex={0}>
+              <div className={styles.text}>战队人数</div>
+              <span className={styles.number}>{data?.personNum} 人</span>
+            </Col>
+            <Divider style={{ paddingTop: 20 }} type="vertical" />
+            <Col flex={0}>
+              <div className={styles.text}>战队总路程</div>
+              <span className={styles.number}>{data?.allKm} km</span>
+            </Col>
+            <Divider style={{ paddingTop: 20 }} type="vertical" />
+            <Col flex={0}>
+              <div className={styles.text}>战队人均路程</div>
+              <span className={styles.number}>{data?.aveKm} km</span>
+            </Col>
+          </Row>
+
+          {type === "select" && <div className={styles.introduce}>
+            <div className={styles.title}>战队介绍：</div>
+            <div className={styles.content}>{data?.info}</div>
+          </div>}
+
+          <div className={styles.headline}>
+            <div className={styles.left}><img src={UserIcon} alt="user" /><span>队员</span></div>
+            <div>全部 {'>'}</div>
+          </div>
+        </div>
+      }
+    >
+      <div className={styles.userList}>
+        {users.data?.map((user, index) => (
+          <div key={user.userId} className={styles.user}>
+            <TeamUserLine
+              rank={index + 1}
+              id={user.userId}
+              name={user.name}
+              avatar={user.pic}
+              number={`${user.allKm}KM`}
+              follow={{
+                follow: user.flag === "1",
+                followId: "1"
+              }}
+              onAvatarClick={() => onUserClick?.(user.userId)}
+              onMapClick={() => onUserClick?.(user.userId)}
+              onFav={users.refetch}
+            />
+          </div>
+        ))}
+      </div>
+
+      {type === "select" && <div className={styles.joinBtn}>
+        <Button loading={joinLoading} theme="success" onClick={handleOnJoinTeam}>加入战队</Button>
+      </div>}
+
+    </DrawerPanel>
+  )
 
 }
 

@@ -42,7 +42,7 @@
   color: #fff;
   border-color: #74d769;
 }
-.cheese{
+.cheese {
   background-color: #feedcd;
   color: #ffa800;
   border-color: #feedcd;
@@ -53,10 +53,21 @@
   background-image: linear-gradient(to right, #f98b4f, #f7cd3d);
 }
 
-.bordered{
+.bordered {
   border-width: 1px;
 }
 
-.children{
+.children {
   flex: 1;
+}
+
+.loading {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

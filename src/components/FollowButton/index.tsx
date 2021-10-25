@@ -136,7 +136,7 @@ export const FollowTeamUserButton: React.FC<FollowTeamUserButtonProps> = ({ foll
     }
   }
 
-  if (!follow) return <img onClick={handleOnClick} src={FavIcon} alt="FavBtn" />
+  if (!follow) return <div style={{ width: "74px", textAlign: "center" }}><img onClick={handleOnClick} src={FavIcon} alt="FavBtn" /></div>
 
   return (
     <Button
