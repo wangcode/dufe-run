@@ -1,30 +1,27 @@
+import { useEffect } from 'react';
 import { Spin } from 'antd';
-import React, { useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useSearchParam } from 'react-use';
 
 
 const Login = () => {
 
-    const location = useLocation()
-    const history = useHistory()
+  const history = useHistory()
 
-    useEffect(() => {
-        const params = new URLSearchParams(location.search)
-        // const token = params.get("token")
-        const token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3RfdG9rZW4iLCJpYXQiOjE2MzEyNDA0ODIsInN1YiI6IntcIm9wZW5JZFwiOlwiMjkzXCIsXCJsb2dpbkRhdGVcIjpcIjIwMjEtMDktMTAgMTA6MjE6MjJcIixcIm9yZ0lkXCI6XCIxZDdkOThkMmE2N2Q0Zjc0YWE0OWE3OTdmNjMwYjI3YlwiLFwib3JnQ29kZVwiOlwiZHVmZVwiLFwidXNlck1vYmlsZVwiOlwiMTU2MTQ0NzIxMDZcIixcInVzZXJOYW1lXCI6XCIxNTYxNDQ3MjEwNlwiLFwidXNlcklkXCI6XCIxYzdkNmYxYjk5ZmM0MjJkOTk5NWM0ZWU2NjI0ZjNlMlwiLFwibmFtZVwiOlwi6bqm5Y-vXCIsXCJ1c2VyTWFjXCI6XCIyMTE0MDMxOTk2MTAyMjgyMTZcIn0iLCJleHAiOjE2MzM4MzI0ODJ9.B5736jMvlp1Nal-tcAFc7Yq8o7sRWB6eVtFgXF9bSjI"
+  const token = useSearchParam("token")
 
-        if (token) {
-            localStorage.setItem("token", token)
-            history.replace("/")
-        }
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token || "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3RfdG9rZW4iLCJpYXQiOjE2MzUxMjMyOTAsInN1YiI6IntcIm9wZW5JZFwiOlwiMjkzXCIsXCJsb2dpbkRhdGVcIjpcIjIwMjEtMTAtMjUgMDg6NTQ6NTBcIixcIm9yZ0lkXCI6XCIxZDdkOThkMmE2N2Q0Zjc0YWE0OWE3OTdmNjMwYjI3YlwiLFwib3JnQ29kZVwiOlwiZHVmZVwiLFwidXNlck1vYmlsZVwiOlwiMTU2MTQ0NzIxMDZcIixcInVzZXJOYW1lXCI6XCIxNTYxNDQ3MjEwNlwiLFwidXNlcklkXCI6XCIxYzdkNmYxYjk5ZmM0MjJkOTk5NWM0ZWU2NjI0ZjNlMlwiLFwibmFtZVwiOlwi6bqm5Y-vXCIsXCJ1c2VyTWFjXCI6XCIyMTE0MDMxOTk2MTAyMjgyMTZcIn0iLCJleHAiOjE2Mzc3MTUyOTB9.eQ5KyRur9UNXkQpGCV0PAfrgErB3Z8mqbnSwyieGA28")
+      history.replace("/")
+    }
+  }, [history, token])
 
-
-    }, [location])
-
-
-    return <Spin spinning={true} />
-
-
+  return (
+    <Spin spinning={true}>
+      <div style={{ width: "100vw", height: "100vh" }} />
+    </Spin>
+  )
 }
 
 export default Login;

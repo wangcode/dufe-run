@@ -5,3 +5,6 @@ body {
   margin: 0;
   color: #333333;
 }
+.leaflet-control-attribution{
+  display: none;
+}

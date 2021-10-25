@@ -22,13 +22,13 @@ ReactDOM.render(
     <BrowserRouter>
       <Route exact path="/"><Home /></Route>
       <Route exact path="/map"><Map /></Route>
-      <Route exact path="/rank"><Rank /></Route>
-      <Route exact path="/points"><Point /></Route>
+      <Route exact path="/person"><PersonMap /></Route>
       <Route exact path="/team"><Team /></Route>
       <Route exact path="/teamselect"><TeamSelect /></Route>
+      <Route exact path="/rank"><Rank /></Route>
+      <Route exact path="/points"><Point /></Route>
       <Route exact path="/login"><Login /></Route>
       <Route exact path="/introduction"><Introduction /></Route>
-      <Route exact path="/person"><PersonMap /></Route>
     </BrowserRouter>
   </QueryClientProvider>,
   document.getElementById('root')

@@ -117,7 +117,7 @@ interface SearchUserType {
 
 interface MapIntegralType {
     amount: string;
-    flag: "0"|"1";
+    flag: "0" | "1";
     name: string;
     id: number;
     surplusAmount: number;
@@ -125,7 +125,7 @@ interface MapIntegralType {
 }
 
 interface MyTeamType {
-    flag: "0"|"1";
+    flag: "0" | "1";
     aveStep: number;
     name: string;
     allKm: number;
@@ -163,7 +163,7 @@ interface TeamType {
 }
 
 interface TeamUserType {
-    flag: "0"|"1";
+    flag: "0" | "1";
     name: string;
     allKm: number;
     pic: string;
@@ -191,7 +191,7 @@ interface PropUsageLogType {
 
 interface PointType {
     id: number;
-    flag: "0"|"1"|"2";
+    flag: "0" | "1" | "2";
     name: string;
     point: string;
 }
@@ -304,8 +304,8 @@ export const getPeopleInStep = (name: string) => {
  * @param followId
  * @url http://yapi.dufe.tech/project/73/interface/api/9181
  */
- export const getStepTeamNum = () => {
-    return axios.get<SuccessData<{num: number; perNum: number}>>(`${apiurl}/alumni/getStepTeamNum`).then(res => res.data.data)
+export const getStepTeamNum = () => {
+    return axios.get<SuccessData<{ num: number; perNum: number }>>(`${apiurl}/alumni/getStepTeamNum`).then(res => res.data.data)
 }
 
 /**
@@ -313,7 +313,7 @@ export const getPeopleInStep = (name: string) => {
  * @param followId
  * @url http://yapi.dufe.tech/project/73/interface/api/9187
  */
- export const getStepMapIntegral = () => {
+export const getStepMapIntegral = () => {
     return axios.get<SuccessData<MapIntegralType[]>>(`${apiurl}/alumni/getStepMapIntegral`).then(res => res.data.data)
 }
 
@@ -322,7 +322,7 @@ export const getPeopleInStep = (name: string) => {
  * @param id
  * @url http://yapi.dufe.tech/project/73/interface/api/9193
  */
- export const saveStepIntegral = (id: string) => {
+export const saveStepIntegral = (id: string) => {
     return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/saveStepIntegral`, qs.stringify({ id })).then(res => res.data.data)
 }
 
@@ -331,7 +331,7 @@ export const getPeopleInStep = (name: string) => {
  * @param id
  * @url http://yapi.dufe.tech/project/73/interface/api/9199
  */
- export const getMyStepTeam = (id: string) => {
+export const getMyStepTeam = (id: string) => {
     return axios.post<SuccessData<MyTeamType>>(`${apiurl}/alumni/getMyStepTeam`, qs.stringify({ id })).then(res => res.data.data)
 }
 
@@ -340,7 +340,7 @@ export const getPeopleInStep = (name: string) => {
  * @param id
  * @url http://yapi.dufe.tech/project/73/interface/api/9205
  */
- export const joinStepTeam = (id: string) => {
+export const joinStepTeam = (id: string) => {
     return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/getStepProp`, qs.stringify({ id })).then(res => res.data.data)
 }
 
@@ -348,7 +348,7 @@ export const getPeopleInStep = (name: string) => {
  * @name 道具列表
  * @url http://yapi.dufe.tech/project/73/interface/api/9211
  */
- export const getStepProp = () => {
+export const getStepProp = () => {
     return axios.get<SuccessData<PropType[]>>(`${apiurl}/alumni/getStepProp`).then(res => res.data.data)
 }
 
@@ -357,7 +357,7 @@ export const getPeopleInStep = (name: string) => {
  * @param id
  * @url http://yapi.dufe.tech/project/73/interface/api/9217
  */
- export const getStepPropInfo = (id: string) => {
+export const getStepPropInfo = (id: string) => {
     return axios.post<SuccessData<PropDetailType>>(`${apiurl}/alumni/getStepPropInfo`, qs.stringify({ id })).then(res => res.data.data)
 }
 
@@ -367,7 +367,7 @@ export const getPeopleInStep = (name: string) => {
  * @param userId
  * @url http://yapi.dufe.tech/project/73/interface/api/9223
  */
- export const useStepProp = (id: string, userId: string) => {
+export const useStepProp = (id: string, userId: string) => {
     return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/useStepProp`, qs.stringify({ id, userId })).then(res => res.data.data)
 }
 
@@ -375,7 +375,7 @@ export const getPeopleInStep = (name: string) => {
  * @name 全部战队
  * @url http://yapi.dufe.tech/project/73/interface/api/9229
  */
- export const getAllStepTeam = () => {
+export const getAllStepTeam = () => {
     return axios.get<SuccessData<TeamType[]>>(`${apiurl}/alumni/getAllStepTeam`).then(res => res.data.data)
 }
 
@@ -385,7 +385,7 @@ export const getPeopleInStep = (name: string) => {
  * @param name
  * @url http://yapi.dufe.tech/project/73/interface/api/9235
  */
- export const getStepTeamPerson = (id: string, name?: string) => {
+export const getStepTeamPerson = (id: string, name?: string) => {
     return axios.post<SuccessData<TeamUserType[]>>(`${apiurl}/alumni/getStepTeamPerson`, qs.stringify({ id, name })).then(res => res.data.data)
 }
 
@@ -393,7 +393,7 @@ export const getPeopleInStep = (name: string) => {
  * @name 我的队内排名
  * @url http://yapi.dufe.tech/project/73/interface/api/9241
  */
- export const getMyStepTeamPersonRank = () => {
+export const getMyStepTeamPersonRank = () => {
     return axios.get<SuccessData<MyTeamRankType>>(`${apiurl}/alumni/getMyStepTeamPersonRank`).then(res => res.data.data)
 }
 
@@ -402,7 +402,7 @@ export const getPeopleInStep = (name: string) => {
  * @param id
  * @url http://yapi.dufe.tech/project/73/interface/api/9247
  */
- export const followStepTeam = (id: string) => {
+export const followStepTeam = (id: string) => {
     return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/followStepTeam`, qs.stringify({ id })).then(res => res.data.data)
 }
 
@@ -411,7 +411,7 @@ export const getPeopleInStep = (name: string) => {
  * @param userId
  * @url http://yapi.dufe.tech/project/73/interface/api/9253
  */
- export const followStepTeamPerson = (userId: string) => {
+export const followStepTeamPerson = (userId: string) => {
     return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/followStepTeamPerson`, qs.stringify({ userId })).then(res => res.data.data)
 }
 
@@ -420,7 +420,7 @@ export const getPeopleInStep = (name: string) => {
  * @param id
  * @url http://yapi.dufe.tech/project/73/interface/api/9259
  */
- export const removeFollowStepTeam = (id: string) => {
+export const removeFollowStepTeam = (id: string) => {
     return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/removeFollowStepTeam`, qs.stringify({ id })).then(res => res.data.data)
 }
 
@@ -429,7 +429,7 @@ export const getPeopleInStep = (name: string) => {
  * @param followId
  * @url http://yapi.dufe.tech/project/73/interface/api/9265
  */
- export const propUseOther = () => {
+export const propUseOther = () => {
     return axios.get<SuccessData<PropUsageLogType[]>>(`${apiurl}/alumni/propUseOther`).then(res => res.data.data)
 }
 
@@ -438,7 +438,7 @@ export const getPeopleInStep = (name: string) => {
  * @param followId
  * @url http://yapi.dufe.tech/project/73/interface/api/9271
  */
- export const propUseMe = () => {
+export const propUseMe = () => {
     return axios.get<SuccessData<PropUsageLogType[]>>(`${apiurl}/alumni/propUseMe`).then(res => res.data.data)
 }
 
@@ -447,7 +447,7 @@ export const getPeopleInStep = (name: string) => {
  * @param followId
  * @url http://yapi.dufe.tech/project/73/interface/api/9277
  */
- export const getCumIntegral = () => {
+export const getCumIntegral = () => {
     return axios.get<SuccessData<PointType[]>>(`${apiurl}/alumni/getCumIntegral`).then(res => res.data.data)
 }
 
@@ -456,6 +456,6 @@ export const getPeopleInStep = (name: string) => {
  * @param followId
  * @url http://yapi.dufe.tech/project/73/interface/api/9283
  */
- export const getStepTeamFollow = () => {
+export const getStepTeamFollow = () => {
     return axios.get<SuccessData<TeamFollowListType>>(`${apiurl}/alumni/getStepTeamFollow`).then(res => res.data.data)
 }

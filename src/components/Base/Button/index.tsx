@@ -39,17 +39,17 @@ export const ButtonSize: ButtonSizeType = {
     }
 }
 
-export interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
+export interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     icon?: React.ReactNode;
     size?: keyof typeof ButtonSize;
     loading?: boolean;
-    theme?: "success"|"default"|"hot"|"cheese";
+    theme?: "success" | "default" | "hot" | "cheese";
     border?: boolean;
     disabled?: boolean;
 }
 
 
-const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, disabled, loading, border = true, children, ...props}) => {
+const Button: React.FC<ButtonProps> = ({ size = "middle", theme = "default", icon, disabled, loading, border = true, children, ...props }) => {
 
     const themeClassName = styles[theme]
 
@@ -60,16 +60,16 @@ const Button: React.FC<ButtonProps> = ({size="middle", theme="default", icon, di
                 styles.resetButton,
                 themeClassName,
                 {
-                    [styles.bordered]:border,
-                    [styles.disabled]:disabled
+                    [styles.bordered]: border,
+                    [styles.disabled]: disabled
                 }
             )}
-            style={{...ButtonSize[size]}}
+            style={{ ...ButtonSize[size] }}
             {...props}
         >
             <Space>
                 {loading ? <LoadingOutlined spin /> : null}
-                {icon ? <div>{icon}</div>: null}
+                {icon ? <div>{icon}</div> : null}
                 <div className={styles.children}>{children}</div>
             </Space>
         </button>

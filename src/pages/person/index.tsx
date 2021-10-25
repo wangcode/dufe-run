@@ -66,14 +66,14 @@ function PersonMap() {
       </div>}
 
       {!!userId && <div className={styles.topBar2}>
-          <Row justify="space-between">
-              <Col>
-                <Space>
-                    <AvatarBox name="孟浩" number="123分" avatar="123" />
-                    <FollowButton border={false} userId="1" follow={false} followId={"1"} />
-                </Space>
-              </Col>
-          </Row>
+        <Row justify="space-between">
+          <Col>
+            <Space>
+              <AvatarBox name="孟浩" number="123分" avatar="123" />
+              <FollowButton border={false} userId="1" follow={false} followId={"1"} />
+            </Space>
+          </Col>
+        </Row>
       </div>}
 
       <div className={styles.bottomBar}>
@@ -81,7 +81,7 @@ function PersonMap() {
       </div>
 
       <Map>
-          <MapRoute myStep={mySteps.data?.allStep||"0"} />
+        <MapRoute myStep={mySteps.data?.allStep || "0"} />
       </Map>
     </div>
   )

@@ -1,6 +1,6 @@
 export const transStep2Metre = (step?: string) => {
-    if(!step) return 0
-    return parseInt(step) * 0.5
+    if (!step) return 0
+    return parseInt(step) * 0.6
 }
 
 export const transStep2Kilometer = (step?: string) => {
