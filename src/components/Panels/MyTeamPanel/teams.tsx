@@ -9,6 +9,7 @@ import styles from './index.module.scss';
 
 interface TeamsProps {
   teamId?: string;
+  onTeamClick?: (id: string) => void;
 }
 
 const Teams: React.FC<TeamsProps> = (props) => {
@@ -45,6 +46,7 @@ const Teams: React.FC<TeamsProps> = (props) => {
                 followId: '',
                 follow: team.flag === "1"
               }}
+              onAvatarClick={() => props.onTeamClick?.(team.id.toString())}
               hiddenMap
               rank={index + 1}
               name={team.name}

@@ -1,6 +1,5 @@
 .resetButton {
   line-height: 1.5715;
-  position: relative;
   display: inline-block;
   font-weight: 400;
   white-space: nowrap;
@@ -22,6 +21,10 @@
   border-color: #d9d9d9;
   background: #fff;
   letter-spacing: 1px;
+}
+.btnWrap {
+  display: inline-block;
+  position: relative;
 }
 
 .disabled {
@@ -70,4 +73,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba($color: #ffffff, $alpha: 0.5);
 }

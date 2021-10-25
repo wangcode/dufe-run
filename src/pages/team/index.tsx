@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Col, Row } from 'antd';
 import { useHistory } from 'react-router';
+import { useQuery } from 'react-query';
 
 import RunToolBar from 'pages/map/components/runToolBar';
 
@@ -10,12 +11,12 @@ import { TeamRankItem } from 'components/TeamRank';
 import TeamDetailPanel from 'components/Panels/TeamDetailPanel';
 import UserDetailPanel from 'components/Panels/UserDetailPanelV2';
 import { AvatarBox, GetPointButton, ToggleButton } from 'components/FloatComponents';
+import MapRoute from 'components/Map/route';
 import Map from 'components/Map';
 
-import styles from './index.module.scss';
-import MapRoute from 'components/Map/route';
-import { useQuery } from 'react-query';
 import { getAllStepTeam, getMySteps, getMyStepTeam } from 'services';
+
+import styles from './index.module.scss';
 
 const Team = () => {
 
@@ -28,17 +29,6 @@ const Team = () => {
   const teams = useQuery(["teams"], getAllStepTeam)
 
   const myTeam = useQuery(["teams", mySteps.data?.teamId], () => getMyStepTeam(mySteps.data?.teamId!), { enabled: !!mySteps.data?.teamId })
-
-  // const MyTeam = useMemo(() => {
-  //   if (!mySteps.data || !teams.data) return undefined
-  //   const index = teams.data.findIndex(team => team.id === parseInt(mySteps.data.teamId))
-  //   if (index === -1) return undefined
-  //   console.log(index)
-  //   return {
-  //     rank: index,
-  //     team: teams.data[index]
-  //   }
-  // }, [mySteps.data, teams.data])
 
   return (
     <div className={styles.root}>
@@ -59,7 +49,7 @@ const Team = () => {
         <GraphRank />
 
         {myTeam.data && <div className={styles.myTeam}>
-          <TeamRankItem single rank={myTeam.data.allRank} name={myTeam.data.name} people={myTeam.data.personNum} length={`${myTeam.data.aveKm}KM`} />
+          <TeamRankItem single rank={myTeam.data.allRank} name={myTeam.data.name} people={myTeam.data.personNum} length={`${myTeam.data.aveKm || "0"}KM`} />
         </div>}
 
         <div>
@@ -67,7 +57,7 @@ const Team = () => {
             {teams.data?.map((item, index) => {
               return (
                 <div className={styles.teamListItem} onClick={() => setTeamId(item.id.toString())}>
-                  <TeamRankItem rank={index + 1} name={item.name} people={item.personNum} length={`${item.aveKm}KM`} />
+                  <TeamRankItem rank={index + 1} name={item.name} people={item.personNum || 0} length={`${item.aveKm || 0}KM`} />
                 </div>
               )
             })}

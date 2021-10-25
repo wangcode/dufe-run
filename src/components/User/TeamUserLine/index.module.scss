@@ -13,7 +13,7 @@
 }
 
 .avatar {
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .rank {
@@ -40,17 +40,17 @@
 
 .mapIcon {
   @extend .iconBtn;
-  margin: 0px 10px;
+  // margin: 0px 10px;
 }
 
 .favIcon {
   @extend .iconBtn;
   width: 73px;
-  margin: 0px 10px;
+  // margin: 0px 10px;
 }
 
 .number {
   font-size: 13px;
   color: #000000;
-  margin: 0px 9px;
+  // margin: 0px 9px;
 }

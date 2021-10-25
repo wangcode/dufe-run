@@ -41,10 +41,10 @@ const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
       <div className={styles.rank}>
         <span className={styles.ranktext}>{props.rank}</span>
       </div>
-      <Row wrap={false} className={styles.detail} align="middle" justify="space-between">
+      <Row gutter={10} wrap={false} className={styles.detail} align="middle" justify="space-between">
 
         <Col onClick={props.onAvatarClick}>
-          <Row wrap={false} align="middle">
+          <Row gutter={10} wrap={false} align="middle">
             {props.avatar !== undefined && <Col className={styles.avatar}><Avatar text="Wang" /></Col>}
             {props.name && <Col className={styles.name}>{props.name}</Col>}
           </Row>
@@ -53,7 +53,7 @@ const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
         {props.number && <Col className={styles.number}>{props.number}</Col>}
 
         {props.customRight ? props.customRight : <Col style={{ visibility: props.hidden === true ? "hidden" : "visible" }}>
-          <Row wrap={false} align="middle">
+          <Row gutter={10} wrap={false} align="middle">
             {!props.hiddenMap && <Col onClick={props.onMapClick} className={styles.mapIcon}><img src={MapIcon} alt="mapBtn" /></Col>}
             <Col className={styles.iconBtn}>
               <FollowTeamUserButton

@@ -54,25 +54,27 @@ const Button: React.FC<ButtonProps> = ({ size = "middle", theme = "default", ico
   const themeClassName = styles[theme]
 
   return (
-    <button
-      disabled={loading || disabled}
-      className={classNames(
-        styles.resetButton,
-        themeClassName,
-        {
-          [styles.bordered]: border,
-          [styles.disabled]: disabled
-        }
-      )}
-      style={{ ...ButtonSize[size] }}
-      {...props}
-    >
-      <Space>
-        {loading ? <div className={styles.loading}><LoadingOutlined spin /></div> : null}
-        {icon ? <div>{icon}</div> : null}
-        <div className={styles.children}>{children}</div>
-      </Space>
-    </button>
+    <div className={styles.btnWrap}>
+      {loading ? <div className={styles.loading}><LoadingOutlined spin /></div> : null}
+      <button
+        disabled={loading || disabled}
+        className={classNames(
+          styles.resetButton,
+          themeClassName,
+          {
+            [styles.bordered]: border,
+            [styles.disabled]: disabled
+          }
+        )}
+        style={{ ...ButtonSize[size] }}
+        {...props}
+      >
+        <Space>
+          {icon ? <div>{icon}</div> : null}
+          <div className={styles.children}>{children}</div>
+        </Space>
+      </button>
+    </div>
   )
 
 }

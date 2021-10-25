@@ -7,9 +7,10 @@ import styles from "./index.module.scss";
 interface FollowsProps {
   teamId: string;
   onUserClick?: (id: string) => void;
+  onTeamClick?: (id: string) => void;
 }
 
-const Follows: React.FC<FollowsProps> = ({ teamId, onUserClick }) => {
+const Follows: React.FC<FollowsProps> = ({ teamId, onUserClick, onTeamClick }) => {
   const { data } = useQuery(["team", "follows"], getStepTeamFollow);
 
   const teams = useQuery(["teams"], getAllStepTeam)
@@ -32,6 +33,7 @@ const Follows: React.FC<FollowsProps> = ({ teamId, onUserClick }) => {
                 id={team.teamId}
                 name={team.name}
                 number={`${team.allKm}KM`}
+                onAvatarClick={() => onTeamClick?.(team.teamId)}
               />
             </div>
           ))}

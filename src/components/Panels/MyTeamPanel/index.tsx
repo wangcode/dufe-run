@@ -12,6 +12,7 @@ import Follows from './follows';
 
 import tabStyles from 'components/Base/Tabs/index.module.scss';
 import styles from './index.module.scss';
+import TeamDetailPanel from '../TeamDetailPanel';
 
 interface MyTeamPanelProps extends DrawerProps {
   onTeamUserClick?: (id: string) => void;
@@ -22,6 +23,7 @@ type MyTeamActiveKeys = "MyTeammates" | "allTeam" | "follow"
 const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
 
   const [active, setActive] = useState<MyTeamActiveKeys>("MyTeammates")
+  const [teamId, setTeamId] = useState("")
 
   const mySteps = useQuery(
     ["mySteps"],
@@ -49,8 +51,19 @@ const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
       }
     >
       {active === "MyTeammates" && <Teammates onUserClick={props.onTeamUserClick} teamId={mySteps.data?.teamId || "1"} />}
-      {active === "allTeam" && <Teams teamId={mySteps.data?.teamId || "1"} />}
-      {active === "follow" && <Follows onUserClick={props.onTeamUserClick} teamId={mySteps.data?.teamId || '1'} />}
+      {active === "allTeam" && <Teams onTeamClick={setTeamId} teamId={mySteps.data?.teamId || "1"} />}
+      {active === "follow" && <Follows onTeamClick={setTeamId} onUserClick={props.onTeamUserClick} teamId={mySteps.data?.teamId || '1'} />}
+
+      <TeamDetailPanel
+        type="show"
+        onUserClick={props.onTeamUserClick}
+        height="60vh"
+        destroyOnClose
+        visible={!!teamId}
+        onClose={() => setTeamId("")}
+        teamId={teamId}
+      />
+
     </DrawerPanel>
   )
 
