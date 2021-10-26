@@ -8,13 +8,15 @@
 }
 
 .avatar {
-  padding: 0px 20px;
+  margin: 0px 20px;
   position: absolute;
   top: -29px;
+  box-shadow: 0px 0px 15px 1px rgba($color: #000000, $alpha: 0.2);
+  border-radius: 10px;
 }
 
 .user {
-  padding: 40px 25px 0px 25px;
+  padding: 40px 25px 10px 25px;
   display: flex;
   justify-content: space-between;
   font-size: 16px;
@@ -24,12 +26,12 @@
     font-size: 12px;
     color: #888888;
   }
-  .team{
+  .team {
     display: flex;
     align-items: center;
     color: #666666;
     font-size: 13px;
-    img{
+    img {
       width: 16px;
       height: 16px;
       margin-right: 10px;
@@ -67,13 +69,19 @@
   justify-content: space-around;
 }
 
-
-.count{
+.statistic {
+  width: 45%;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+.count {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
-  padding: 10px 25px;
-  .badge{
+  padding: 10px 15px;
+  .badge {
     margin-top: 13px;
     font-size: 12px;
     border-radius: 10px;
@@ -83,6 +91,6 @@
   }
 }
 
-.panelHead{
+.panelHead {
   padding: 0px 17px;
 }

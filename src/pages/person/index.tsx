@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 
 // import { useSearchParam } from 'react-use';
 import { useQuery } from 'react-query';
-import { getMySteps, getSomeoneStep } from 'services';
+import { getCumIntegral, getMySteps, getSomeoneStep } from 'services';
 import { useHistory } from 'react-router-dom';
 import { useSearchParam } from 'react-use';
 
@@ -16,6 +16,7 @@ import RunToolBar from 'components/RunBar';
 
 import Map from 'components/Map';
 import MapRoute from 'components/Map/route';
+import { useMemo } from "react";
 
 
 function PersonMap() {
@@ -25,6 +26,15 @@ function PersonMap() {
   const userId = useSearchParam("user")
 
   const mySteps = useQuery("mySteps", getMySteps, { enabled: !userId })
+
+  const points = useQuery("points", getCumIntegral, { enabled: !userId })
+  const { totalPoint, hasPoint } = useMemo(() => {
+    return {
+      totalPoint: points.data?.filter(item => item.flag === "2").reduce((prev, curr) => prev + parseInt(curr.point), 0).toString() || "0",
+      hasPoint: points.data?.some(item => item.flag === "1") || false
+    }
+  }, [points.data])
+
 
   const userDetail = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId!), { enabled: !!userId })
 
@@ -37,8 +47,8 @@ function PersonMap() {
         <Row justify="space-between">
           <Col>
             <Space>
-              <AvatarBox score={"123分"} avatar={mySteps.data?.pic} />
-              <GetPointButton />
+              <AvatarBox score={`${totalPoint} 分`} avatar={mySteps.data?.pic} />
+              <GetPointButton dot={hasPoint} />
             </Space>
           </Col>
           <Col><ToggleButton value="person" onChange={() => history.push("/team")} /></Col>

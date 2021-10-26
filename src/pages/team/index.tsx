@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Col, Row } from 'antd';
 import { useHistory } from 'react-router';
 import { useQuery } from 'react-query';
 
-import RunToolBar from 'pages/map/components/runToolBar';
+import RunToolBar from 'components/RunBar';
 
 import Card from 'components/Base/Card';
 import GraphRank from 'components/GraphRank';
@@ -14,7 +14,7 @@ import { AvatarBox, GetPointButton, ToggleButton } from 'components/FloatCompone
 import MapRoute from 'components/Map/route';
 import Map from 'components/Map';
 
-import { getAllStepTeam, getMySteps, getMyStepTeam } from 'services';
+import { getAllStepTeam, getCumIntegral, getMySteps, getMyStepTeam } from 'services';
 
 import styles from './index.module.scss';
 
@@ -30,6 +30,16 @@ const Team = () => {
 
   const myTeam = useQuery(["teams", mySteps.data?.teamId], () => getMyStepTeam(mySteps.data?.teamId!), { enabled: !!mySteps.data?.teamId })
 
+  // const user = useQuery(["teams", "users", userId], () => getStepTeamPerson(userId), { enabled: !!userId })
+
+  const points = useQuery("points", getCumIntegral, { enabled: !userId })
+  const { totalPoint, hasPoint } = useMemo(() => {
+    return {
+      totalPoint: points.data?.filter(item => item.flag === "2").reduce((prev, curr) => prev + parseInt(curr.point), 0).toString() || "0",
+      hasPoint: points.data?.some(item => item.flag === "1") || false
+    }
+  }, [points.data])
+
   return (
     <div className={styles.root}>
 
@@ -37,8 +47,8 @@ const Team = () => {
         <Row justify='space-between' align="middle">
           <Col>
             <Row align="middle" gutter={10}>
-              <Col><AvatarBox shadow avatar="123" score="123分" /></Col>
-              <Col><GetPointButton shadow /></Col>
+              <Col><AvatarBox shadow avatar={mySteps.data?.pic} score={`${totalPoint} 分`} /></Col>
+              <Col><GetPointButton shadow dot={hasPoint} /></Col>
             </Row>
           </Col>
           <Col><ToggleButton shadow value="team" onChange={() => history.push("/person")} /></Col>
@@ -46,7 +56,7 @@ const Team = () => {
       </div>
 
       <div style={{ display: !!userId ? "none" : "block" }} className={styles.main}>
-        <GraphRank />
+        <GraphRank list={teams.data} onClick={teamId => setTeamId(teamId.toString())} />
 
         {myTeam.data && <div className={styles.myTeam}>
           <TeamRankItem single rank={myTeam.data.allRank} name={myTeam.data.name} people={myTeam.data.personNum} length={`${myTeam.data.aveKm || "0"}KM`} />

@@ -24,8 +24,8 @@ interface TeamUserLineProps {
   // hidden?: boolean;
   customRight?: React.ReactNode;
   follow?: {
-    followId: string;
     follow: boolean;
+    followId?: number;
   };
   onFav?: () => void;
   onAvatarClick?: () => void;

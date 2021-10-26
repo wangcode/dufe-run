@@ -5,11 +5,11 @@ import { useHistory, useLocation } from 'react-router';
 
 const Introduction = () => {
 
-    return (
-        <div>
-            123
-        </div>
-    )
+  return (
+    <div>
+      123
+    </div>
+  )
 
 
 }

@@ -67,9 +67,8 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
               <div>第 {data?.allRank} 名</div>
             </div>}
             {/* todo flagId */}
-            {type === "show" && data && <FollowTeamButton teamId={data?.id.toString()} followId={'1'} follow={data?.flag === "1"} onChange={refetch} />}
+            {type === "show" && data && <FollowTeamButton teamId={data?.id.toString()} followId={data?.followId} follow={data?.flag === "1"} onChange={refetch} />}
           </div>
-
 
           <Row justify="space-between" align="top" className={styles.teamDetail}>
             <Col flex={0}>
@@ -111,7 +110,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
               number={`${user.allKm}KM`}
               follow={{
                 follow: user.flag === "1",
-                followId: "1"
+                followId: user.followId
               }}
               onAvatarClick={() => onUserClick?.(user.userId)}
               onMapClick={() => onUserClick?.(user.userId)}

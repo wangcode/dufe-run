@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import PolylineJSON from '../../polyline.json';
 import GeoUtils from 'leaflet-geometryutil';
 
-import { Slider } from 'antd';
 import { FeatureGroup, Marker, Polyline, useMap } from 'react-leaflet';
 import { TOTAL_STEPS } from '../../../../services';
 
@@ -19,7 +18,7 @@ const RunLine: React.FC<RunLineProps> = ({ myStep }) => {
 
   const Path = useMemo(() => {
     return PolylineJSON.map(point => latLng(point[0], point[1]))
-  }, [PolylineJSON])
+  }, [])
 
   // const {lengths, totalLength} = useMemo(() => {
   //   return {

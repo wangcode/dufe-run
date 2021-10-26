@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react'
+// import React, { useEffect, useMemo, useState } from 'react'
 import { MapContainer, ImageOverlay } from 'react-leaflet'
 
 import MapPNG from './img/map.png';
 
-import { CRS, latLng, LatLngExpression } from 'leaflet';
+import { CRS } from 'leaflet';
 
-import GeoUtils from 'leaflet-geometryutil';
+// import GeoUtils from 'leaflet-geometryutil';
 
 // import { EditControl } from "react-leaflet-draw"
 
@@ -14,32 +14,32 @@ import "leaflet/dist/leaflet.css";
 
 import styles from './index.module.scss';
 
-import PolylineJSON from './polyline.json';
-import UserToolBar, { OtherToolBar } from './components/userToolBar';
+// import PolylineJSON from './polyline.json';
+// import UserToolBar, { OtherToolBar } from './components/userToolBar';
 import RunToolBar from './components/runToolBar';
-import UserMark from './components/userMark';
+// import UserMark from './components/userMark';
 import RunLine from './components/runLine';
 // import { useSearchParam } from 'react-use';
 import { useQuery } from 'react-query';
 import { getMySteps, getSomeoneStep } from 'services';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import { useSearchParam } from 'react-use';
 
-const Points: { position: LatLngExpression }[] = [
-  {
-    position: [1230, 1480]
-  }
-]
+// const Points: { position: LatLngExpression }[] = [
+//   {
+//     position: [1230, 1480]
+//   }
+// ]
 
-const Interval = 20000000;
+// const Interval = 20000000;
 
 function Map() {
 
 
   const userId = useSearchParam("user")
-  const type = useSearchParam("type") || "person"
+  // const type = useSearchParam("type") || "person"
 
-  const [myStep, setMyStep] = useState(0)
+  // const [myStep, setMyStep] = useState(0)
 
 
   const userDetail = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId!), { enabled: !!userId })
@@ -91,8 +91,8 @@ function Map() {
   return (
     <div className={styles.main}>
       <div className={styles.userToolBar}>
-        {!userId && <UserToolBar self={true} />}
-        {userId && <OtherToolBar userId={userId} />}
+        {/* {!userId && <UserToolBar self={true} />}
+        {userId && <OtherToolBar userId={userId} />} */}
       </div>
 
       {!userId && <div className={styles.runToolBar}>

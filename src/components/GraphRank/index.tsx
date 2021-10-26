@@ -8,40 +8,46 @@ import BronzeBar from 'assets/images/bronze_bar.png';
 
 import styles from './index.module.scss';
 
+interface RankItemType {
+  id: number;
+  name: string;
+  aveKm: number;
+}
 interface GraphRankProps {
-
+  list?: RankItemType[];
+  onClick?: (id: number) => void;
 }
 
-const GraphRank: React.FC<GraphRankProps> = () => {
+const GraphRank: React.FC<GraphRankProps> = ({ list, onClick }) => {
 
-    return (
-        <div className={styles.rankGraph}>
-            <div className={styles.silver}>
-                <img src={SilverLogo} alt="" />
-                <div className={styles.detail}>
-                    <div>辽宁战队</div>
-                    <div>30KM</div>
-                </div>
-                <img src={SilverBar} alt="" />
-            </div>
-            <div className={styles.gold}>
-                <img src={GoldLogo} alt="" />
-                <div className={styles.detail}>
-                    <div>辽宁战队</div>
-                    <div>30KM</div>
-                </div>
-                <img src={GoldBar} alt="" />
-            </div>
-            <div className={styles.bronze}>
-                <img src={BronzeLogo} alt="" />
-                <div className={styles.detail}>
-                    <div>辽宁战队</div>
-                    <div>30KM</div>
-                </div>
-                <img src={BronzeBar} alt="" />
-            </div>
+  return (
+    <div className={styles.rankGraph}>
+      {list && list.length > 1 && <div className={styles.silver} onClick={() => onClick?.(list[1].id)}>
+        <img src={SilverLogo} alt="" />
+        <div className={styles.detail}>
+          <div>{list[1].name}</div>
+          <div>{list[1].aveKm}KM</div>
         </div>
-    )
+        <img src={SilverBar} alt="" />
+      </div>}
+      {list && list.length > 0 && <div className={styles.gold} onClick={() => onClick?.(list[0].id)}>
+        <img src={GoldLogo} alt="" />
+        <div className={styles.detail}>
+          <div>{list[0].name}</div>
+          <div>{list[0].aveKm}KM</div>
+        </div>
+        <img src={GoldBar} alt="" />
+      </div>}
+      {list && list.length > 2 && <div className={styles.bronze} onClick={() => onClick?.(list[2].id)}>
+        <img src={BronzeLogo} alt="" />
+        <div className={styles.detail}>
+          <div>{list[2].name}</div>
+          <div>{list[2].aveKm}KM</div>
+        </div>
+        <img src={BronzeBar} alt="" />
+      </div>}
+    </div>
+  )
 }
 
 export default GraphRank;

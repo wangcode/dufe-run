@@ -1,13 +1,10 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { Badge, Divider, DrawerProps, Spin } from "antd";
-import { useHistory } from "react-router-dom";
+import { Divider, DrawerProps, Spin } from "antd";
 
-import Button from 'components/Base/Button';
 import Avatar from 'components/Base/Avatar';
-import FollowButton, { FollowTeamUserButton } from "components/FollowButton";
+import { FollowTeamUserButton } from "components/FollowButton";
 import { FollowFlag, getSomeoneStep } from "services";
-import { transStep2Kilometer } from "utils";
 
 import DrawerPanel from "components/Base/DrawerPanel";
 
@@ -38,18 +35,24 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, ...props }) =
               <div>{data?.teamName}</div>
             </div>}
             <div className={styles.extra}>
-              <FollowTeamUserButton onChange={refetch} userId={userId} followId={data?.followId} follow={data?.followFlag === FollowFlag.follow} />
+              <FollowTeamUserButton
+                mapBtn={false}
+                onChange={refetch}
+                userId={userId}
+                followId={parseInt(data?.followId || "0")}
+                follow={data?.followFlag === FollowFlag.follow}
+              />
             </div>
           </div>
 
           <div className={styles.count}>
 
-            <div>
+            <div className={styles.statistic}>
               <div>个人步数</div>
               <div className={styles.badge}>{data?.allStep}</div>
             </div>
             <Divider type="vertical" />
-            <div>
+            <div className={styles.statistic}>
               <div>个人路程</div>
               <div className={styles.badge}>{data?.allKm}</div>
             </div>
@@ -57,12 +60,12 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, ...props }) =
           </div>
           <div className={styles.count}>
 
-            <div>
+            <div className={styles.statistic}>
               <div>战队人均步数</div>
               <div className={styles.badge}>{data?.aveStep}</div>
             </div>
             <Divider type="vertical" />
-            <div>
+            <div className={styles.statistic}>
               <div>战队人均路程</div>
               <div className={styles.badge}>{data?.aveTeamKm}</div>
             </div>

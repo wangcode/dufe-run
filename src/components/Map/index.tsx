@@ -7,9 +7,14 @@ import MapPNG from './map.png';
 
 interface MapProps {
   style?: CSSProperties;
+  center?: [number, number];
 }
 
-const Map: React.FC<MapProps> = ({ style = { width: "100vw", height: "100vh" }, ...props }) => {
+const Map: React.FC<MapProps> = ({
+  style = { width: "100vw", height: "100vh" },
+  center,
+  ...props
+}) => {
 
   return (
     <MapContainer

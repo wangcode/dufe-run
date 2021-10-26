@@ -1,0 +1,31 @@
+.propsLine {
+  border-bottom: 1px solid #eeeeee;
+  padding: 18px 13px;
+}
+
+.propsItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .datetime {
+    width: 80px;
+    font-size: 12px;
+    color: #1f1b40;
+    span {
+      color: #999999;
+    }
+  }
+}
+
+.content {
+  width: 150px;
+}
+
+.mapIcon {
+  img {
+    width: 22px;
+    height: 22px;
+  }
+  padding: 5px;
+  margin-left: 10px;
+}

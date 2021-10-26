@@ -59,7 +59,7 @@ export default FollowButton;
 
 interface FollowTeamButtonProps {
   teamId: string;
-  followId?: string;
+  followId?: number;
   follow: boolean;
   size?: keyof ButtonSizeType;
   border?: boolean;
@@ -84,7 +84,7 @@ export const FollowTeamButton: React.FC<FollowTeamButtonProps> = ({ follow, foll
 
   const handleOnClick = () => {
     if (follow) {
-      followId && unFollowMutation.mutateAsync(followId)
+      followId && unFollowMutation.mutateAsync(followId.toString())
     } else {
       teamId && followMutation.mutateAsync(teamId)
     }
@@ -105,15 +105,16 @@ export const FollowTeamButton: React.FC<FollowTeamButtonProps> = ({ follow, foll
 
 interface FollowTeamUserButtonProps {
   userId: string;
-  followId?: string;
+  followId?: number;
   follow: boolean;
   size?: keyof ButtonSizeType;
   border?: boolean;
+  mapBtn?: boolean;
   onChange?: () => void;
 }
 
 // 关注战队用户
-export const FollowTeamUserButton: React.FC<FollowTeamUserButtonProps> = ({ follow, followId, userId, size, border, onChange }) => {
+export const FollowTeamUserButton: React.FC<FollowTeamUserButtonProps> = ({ mapBtn = true, follow, followId, userId, size, border, onChange }) => {
 
   const followMutation = useMutation(followStepTeamPerson, {
     onSuccess: () => {
@@ -130,13 +131,13 @@ export const FollowTeamUserButton: React.FC<FollowTeamUserButtonProps> = ({ foll
 
   const handleOnClick = () => {
     if (follow) {
-      followId && unFollowMutation.mutateAsync(followId)
+      followId && unFollowMutation.mutateAsync(followId.toString())
     } else {
       userId && followMutation.mutateAsync(userId)
     }
   }
 
-  if (!follow) return <div style={{ width: "74px", textAlign: "center" }}><img onClick={handleOnClick} src={FavIcon} alt="FavBtn" /></div>
+  if (!follow && mapBtn) return <div style={{ width: "74px", textAlign: "center" }}><img onClick={handleOnClick} src={FavIcon} alt="FavBtn" /></div>
 
   return (
     <Button

@@ -20,7 +20,7 @@ const Teams: React.FC<TeamsProps> = (props) => {
     { enabled: !!props.teamId }
   )
 
-  const { data } = useQuery(
+  const { data, refetch } = useQuery(
     ["teams"],
     getAllStepTeam
   )
@@ -43,9 +43,10 @@ const Teams: React.FC<TeamsProps> = (props) => {
             <TeamUserLine
               id={team.id.toString()}
               follow={{
-                followId: '',
+                followId: team.followId,
                 follow: team.flag === "1"
               }}
+              onFav={refetch}
               onAvatarClick={() => props.onTeamClick?.(team.id.toString())}
               hiddenMap
               rank={index + 1}

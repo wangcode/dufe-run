@@ -43,14 +43,21 @@ const Point = () => {
               <img src={walk} className={styles.walk} alt="1" />
               <div>{point.name}</div>
             </div>
-            {
-              point.flag === "1" ?
-                <Button disabled>已领取{point.point}积分</Button>
-                :
-                <Button onClick={() => mutation.mutate(point.id.toString())} icon={<div className={styles.coin} />} theme="hot" >
-                  <span>领取{point.point}积分</span>
-                </Button>
-            }
+            {point.flag === "0" && <Button
+              disabled
+              onClick={() => mutation.mutate(point.id.toString())}
+              icon={<div className={styles.coin} />}
+            >
+              <span>领取{point.point}积分</span>
+            </Button>}
+            {point.flag === "1" && <Button
+              onClick={() => mutation.mutate(point.id.toString())}
+              icon={<div className={styles.coin} />}
+              theme="hot"
+            >
+              <span>领取{point.point}积分</span>
+            </Button>}
+            {point.flag === "2" && <Button disabled>已领取{point.point}积分</Button>}
           </div>
         ))}
       </div>

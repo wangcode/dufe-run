@@ -6,7 +6,6 @@ import Button from 'components/Base/Button';
 import TeamBox from 'components/TeamBox';
 
 import TeamDetailPanel from 'components/Panels/TeamDetailPanel';
-import MyTeamPanel from 'components/Panels/MyTeamPanel';
 
 import RuleIcon from 'assets/images/rule_icon.png';
 import TimeOutlineIcon from 'assets/images/time_outline_icon.png';
@@ -24,7 +23,7 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
 
   const [selected, setSelected] = useState<number | undefined>(undefined)
 
-  const { data, isLoading } = useQuery(
+  const { data } = useQuery(
     ["teams"],
     getAllStepTeam
   )
