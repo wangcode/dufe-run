@@ -6,11 +6,11 @@ import { useQuery } from "react-query";
 import { getMySteps } from "services";
 
 import Avatar from 'components/Base/Avatar';
+import DrawerPanel from "components/Base/DrawerPanel";
 
 import HelloPNG from 'assets/images/hello.png'
 
 import styles from './index.module.scss';
-import DrawerPanel from "components/Base/DrawerPanel";
 
 interface SelfDetailPanelProps extends DrawerProps {
 }

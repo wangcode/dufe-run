@@ -5,6 +5,7 @@ import GeoUtils from 'leaflet-geometryutil';
 import { FeatureGroup, Marker, Polyline, useMap } from 'react-leaflet';
 import { TOTAL_STEPS } from 'services';
 import PolylineJSON from './polyline.json';
+import { getPersonMark } from './mark';
 
 interface MapRouteProps {
   myStep: string;
@@ -24,12 +25,15 @@ const MapRoute: React.FC<MapRouteProps> = ({ myStep, polyline = PolylineJSON }) 
   useEffect(() => {
     const MyLength = parseInt(myStep) / TOTAL_STEPS
     const point = GeoUtils.interpolateOnLine(map, Path, MyLength)
+    map.flyTo(point?.latLng!)
     setPoints([point])
   }, [Path, map, myStep])
 
   return (
     <FeatureGroup>
-      {points.map((item, index) => <Marker key={index} position={item.latLng} />)}
+      {points.map((item, index) => (
+        <Marker icon={getPersonMark()} key={index} position={item.latLng} />
+      ))}
       <Polyline positions={Path} />
     </FeatureGroup>
   )

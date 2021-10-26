@@ -17,6 +17,7 @@ import RunToolBar from 'components/RunBar';
 import Map from 'components/Map';
 import MapRoute from 'components/Map/route';
 import { useMemo } from "react";
+import StepPoint from "components/Map/stepPoint";
 
 
 function PersonMap() {
@@ -76,7 +77,9 @@ function PersonMap() {
       </div>
 
       <Map>
-        <MapRoute myStep={mySteps.data?.allStep || "0"} />
+        <StepPoint step={mySteps.data?.allStep || "0"} />
+        <StepPoint step={mySteps.data?.allStep || "1000"} />
+        <StepPoint center step={mySteps.data?.allStep || "4000"} />
       </Map>
     </div>
   )
