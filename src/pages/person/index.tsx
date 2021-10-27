@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 
 // import { useSearchParam } from 'react-use';
 import { useQuery } from 'react-query';
-import { getCumIntegral, getMySteps, getSomeoneStep } from 'services';
+import { getCumIntegral, getMyFollowList, getMySteps, getSomeoneStep } from 'services';
 import { useHistory } from 'react-router-dom';
 import { useSearchParam } from 'react-use';
 
@@ -15,9 +15,9 @@ import FollowButton from 'components/FollowButton';
 import RunToolBar from 'components/RunBar';
 
 import Map from 'components/Map';
-import MapRoute from 'components/Map/route';
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import StepPoint from "components/Map/stepPoint";
+import UserDetailPanel from "components/Panels/UserDetailpanel";
 
 
 function PersonMap() {
@@ -26,7 +26,11 @@ function PersonMap() {
 
   const userId = useSearchParam("user")
 
+  const [selectUserId, setSelectUserId] = useState("")
+
   const mySteps = useQuery("mySteps", getMySteps, { enabled: !userId })
+
+  const follows = useQuery("follows", getMyFollowList)
 
   const points = useQuery("points", getCumIntegral, { enabled: !userId })
   const { totalPoint, hasPoint } = useMemo(() => {
@@ -77,10 +81,12 @@ function PersonMap() {
       </div>
 
       <Map>
-        <StepPoint step={mySteps.data?.allStep || "0"} />
-        <StepPoint step={mySteps.data?.allStep || "1000"} />
+        {follows.data?.map(user => <StepPoint key={user.userId} step={user.allStep} onClick={() => setSelectUserId(user.userId)} />)}
         <StepPoint center step={mySteps.data?.allStep || "4000"} />
       </Map>
+
+      <UserDetailPanel visible={!!selectUserId} userId={selectUserId} />
+
     </div>
   )
 }

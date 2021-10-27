@@ -26,16 +26,14 @@ const TeamProgressPanel: React.FC<TeamProgressPanelProps> = (props) => {
     return myTeam.data?.allKm / TotalKM
   }, [myTeam, TotalKM])
 
-  console.log(props)
-
   return (
     <DrawerPanel {...props}>
       <div className={styles.title}>酷程毅行校园游</div>
       <Spin spinning={mySteps.isLoading || myTeam.isLoading} >
-        <div className={styles.rule}>
+        {/* <div className={styles.rule}>
           <div>可获得 <span>{points} 积分, {treasureChest} 个宝箱</span></div>
           <div>同行好友越多，到达终点奖励越丰厚</div>
-        </div>
+        </div> */}
 
         <div className={styles.team}>
           <img src={TeamIcon} alt="team" />

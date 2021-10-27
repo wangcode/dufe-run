@@ -11,10 +11,11 @@ interface StepPointProps {
   step: string;
   size?: [number, number];
   center?: boolean;
-  polyline?: number[][]
+  onClick?: () => void;
+  polyline?: number[][];
 }
 
-const StepPoint: React.FC<StepPointProps> = ({ step, size, center, polyline = PolylineJSON }) => {
+const StepPoint: React.FC<StepPointProps> = ({ step, size, center, onClick, polyline = PolylineJSON }) => {
 
   const map = useMap()
 
@@ -30,7 +31,14 @@ const StepPoint: React.FC<StepPointProps> = ({ step, size, center, polyline = Po
   }, [Path, map, step, center])
 
   return (
-    point ? <Marker icon={getPersonMark(size)} position={point} /> : null
+    point ? 
+    <Marker
+      icon={getPersonMark(size)}
+      position={point}
+      eventHandlers={{
+        click: onClick
+      }}
+    /> : null
   )
 }
 
