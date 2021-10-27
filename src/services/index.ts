@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import qs from 'qs';
 import Toast from 'light-toast';
+import { message } from 'antd';
 
 export const TOTAL_STEPS = 20000; // 步
 export const TOTAL_LENGTH = 20000; // 米
@@ -21,7 +22,7 @@ axios.interceptors.response.use(
     (response) => response,
     (error: AxiosError) => {
         if (error.response?.status === 400) {
-            Toast.fail(error.response?.data?.message)
+            message.error(error.response?.data?.message)
         }
         return Promise.reject(error)
     }

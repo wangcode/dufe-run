@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Col, Divider, DrawerProps, Modal, Row } from 'antd';
+import { Col, Divider, DrawerProps, message, Modal, Row } from 'antd';
 import Toast from 'light-toast';
 import { useAsyncFn } from 'react-use';
 import { useHistory } from 'react-router';
@@ -43,7 +43,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
       onOk: () => {
         return joinTeam(teamId)
           .then(() => {
-            Toast.info("加入成功！")
+            message.success("加入成功！")
             history.replace("/team")
           })
       }

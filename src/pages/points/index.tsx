@@ -8,6 +8,7 @@ import walk from 'assets/images/foot_icon.png';
 import CoinIcon from 'assets/images/coin_point.png';
 
 import styles from './index.module.scss';
+import { message } from 'antd';
 
 const Point = () => {
 
@@ -20,7 +21,7 @@ const Point = () => {
 
   const mutation = useMutation(saveStepIntegral, {
     onSuccess: () => {
-      Toast.info("领取成功！")
+      message.success("领取成功！")
       refetch()
     }
   })

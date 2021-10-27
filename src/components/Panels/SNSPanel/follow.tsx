@@ -10,9 +10,10 @@ import styles from './index.module.scss';
 
 interface MyFollowPersonProps {
   onClick?: () => void;
+  onUserClick?: (id: string) => void;
 }
 
-const MyFollowPerson: React.FC<MyFollowPersonProps> = ({ onClick }) => {
+const MyFollowPerson: React.FC<MyFollowPersonProps> = ({ onClick, onUserClick }) => {
 
   const { data, refetch, isLoading, isFetching } = useQuery("follows", getMyFollowList)
 
@@ -27,6 +28,8 @@ const MyFollowPerson: React.FC<MyFollowPersonProps> = ({ onClick }) => {
               pic={item.pic}
               length={transStep2Kilometer(item.allStep)}
               userId={item.userId}
+              userPanel={false}
+              onUserClick={() => onUserClick?.(item.userId)}
               follow={{
                 followId: item.followId,
                 isFollow: true,

@@ -62,7 +62,7 @@ const SNSPanel: React.FC<SNSPanelProps> = (props) => {
         </Tabs>
       }
     >
-      {active === "follow" && <MyFollowPerson onClick={() => setActive("search")} />}
+      {active === "follow" && <MyFollowPerson onClick={() => setActive("search")} onUserClick={props.onUserClick} />}
       {active === "search" && <Search reSearch={refetch} loading={isLoading || isFetching} searchKey={searchKey} users={data || []} />}
       {active === "rank" && <RankList box={false} />}
     </DrawerPanel>

@@ -11,6 +11,8 @@ import logo from 'assets/images/logo_btn.png';
 import styles from './index.module.scss';
 import ProgressPanel from 'components/Panels/ProgressPanel';
 import PropsPanel from 'components/Panels/PropsPanel';
+import { TOTAL_LENGTH } from 'services';
+import { useHistory } from 'react-router';
 
 interface RunBarProps {
   mode?: "person" | "team";
@@ -19,6 +21,8 @@ interface RunBarProps {
 }
 
 const RunToolBar: React.FC<RunBarProps> = ({ mode = "person", onUserClick, hideDrawer }) => {
+
+  const history = useHistory()
 
   const [visible, setVisible] = useState(false)
 
@@ -31,10 +35,10 @@ const RunToolBar: React.FC<RunBarProps> = ({ mode = "person", onUserClick, hideD
   return (
     <div className={styles.toolbar}>
       {mode === "person" && <div className={styles.line}>
-        <div className={styles.detail}>
-          <img src={logo} alt="logo" onClick={() => setVisible(true)} />
-          {/* <div>全程 {TOTAL_LENGTH / 1000} 公里</div> */}
-          <div className={styles.followBtn} onClick={() => setFollowVisible(true)} >我的关注</div>
+        <div className={styles.detail} onClick={() => setVisible(true)} >
+          <img src={logo} alt="logo" />
+          <div>全程 {TOTAL_LENGTH / 1000} 公里</div>
+          {/* <div className={styles.followBtn} onClick={() => setFollowVisible(true)} >我的关注</div> */}
         </div>
         <div>
           {toastVisible && <div className={styles.toast}>
@@ -44,8 +48,8 @@ const RunToolBar: React.FC<RunBarProps> = ({ mode = "person", onUserClick, hideD
           <div className={styles.startBtn} onClick={() => setToastVisible(true)}>GO</div>
         </div>
         <div className={styles.right}>
-          <div>比赛规则 {'>'}</div>
-          <div className={styles.followBtn} onClick={() => setFollowVisible(true)} >道具记录</div>
+          <div onClick={() => history.push("/introduction/person")}>比赛规则 {'>'}</div>
+          <div className={styles.followBtn} onClick={() => setFollowVisible(true)} >我的关注</div>
         </div>
       </div>}
       {mode === "team" && <div className={styles.line}>
@@ -61,7 +65,7 @@ const RunToolBar: React.FC<RunBarProps> = ({ mode = "person", onUserClick, hideD
           <div className={styles.startBtn} onClick={() => setToastVisible(true)}>GO</div>
         </div>
         <div className={styles.right}>
-          <div>比赛规则 {'>'}</div>
+          <div onClick={() => history.push("/introduction/team")}>比赛规则 {'>'}</div>
           <div className={styles.followBtn} onClick={() => setPropsVisible(true)} >道具记录</div>
         </div>
       </div>}

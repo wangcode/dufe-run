@@ -6,6 +6,8 @@ import Home from 'pages/home';
 import Point from 'pages/points';
 import Rank from 'pages/rank';
 import Introduction from 'pages/introduction';
+import IntroductionPerson from 'pages/introduction/person';
+import IntroductionTeam from 'pages/introduction/team';
 import Login from 'pages/login';
 import Team from 'pages/team';
 import TeamSelect from 'pages/teamselect';
@@ -36,6 +38,8 @@ ReactDOM.render(
       <Route exact path="/points"><Point /></Route>
       <Route exact path="/login"><Login /></Route>
       <Route exact path="/introduction"><Introduction /></Route>
+      <Route exact path="/introduction/person"><IntroductionPerson /></Route>
+      <Route exact path="/introduction/team"><IntroductionTeam /></Route>
     </BrowserRouter>
   </QueryClientProvider>,
   document.getElementById('root')

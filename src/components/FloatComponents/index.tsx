@@ -53,12 +53,13 @@ export const AvatarBox: React.FC<AvatarBoxProps> = (props) => {
         { [styles.shadow]: props.shadow }
       )}
     >
-      <div className={styles.avatar} onClick={() => setVisible(true)}><Avatar src={props.avatar} >{props.name}</Avatar></div>
-      {props.score && <div className={styles.text}>{props.score}</div>}
+      <div className={styles.avatar} onClick={() => setVisible(true)}><Avatar src={props.avatar}>{props.name}</Avatar></div>
+      <div className={styles.text}>{props.score}</div>
+      {/* {props.score && <div className={styles.text}>{props.score}</div>}
       {(props.name || props.number) && <Space>
         {props.name && <div className={styles.text}>{props.name}</div>}
         {props.number && <div className={styles.ext}>当前 <span>{props.number}</span></div>}
-      </Space>}
+      </Space>} */}
       <SelfDetailPanel height="230px" visible={visible} onClose={() => setVisible(false)} />
     </div>
   )

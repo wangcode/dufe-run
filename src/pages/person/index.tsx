@@ -1,17 +1,12 @@
 
-import "leaflet/dist/leaflet.css";
-
-
-// import { useSearchParam } from 'react-use';
 import { useQuery } from 'react-query';
-import { getCumIntegral, getMyFollowList, getMySteps, getSomeoneStep } from 'services';
+import { getCumIntegral, getMyFollowList, getMySteps } from 'services';
 import { useHistory } from 'react-router-dom';
-import { useSearchParam } from 'react-use';
+// import { useSearchParam } from 'react-use';
 
-import styles from './index.module.scss';
 import { AvatarBox, GetPointButton, ToggleButton } from 'components/FloatComponents';
 import { Col, Row, Space } from 'antd';
-import FollowButton from 'components/FollowButton';
+// import FollowButton from 'components/FollowButton';
 import RunToolBar from 'components/RunBar';
 
 import Map from 'components/Map';
@@ -20,22 +15,20 @@ import StepPoint from "components/Map/stepPoint";
 import UserDetailPanel from "components/Panels/UserDetailPanelV2";
 import PersonPopup from "components/Popups/PersonPopup";
 
+import styles from './index.module.scss';
 
 function PersonMap() {
 
   const history = useHistory()
 
-  const userId = useSearchParam("user")
-
+  // const userId = useSearchParam("user")
   const [popup, setPopup] = useState(true)
-
-  const [selectUserId, setSelectUserId] = useState("")
-
-  const mySteps = useQuery("mySteps", getMySteps, { enabled: !userId })
+  const [userId, setUserId] = useState("")
 
   const follows = useQuery("follows", getMyFollowList)
-
+  const mySteps = useQuery("mySteps", getMySteps, { enabled: !userId })
   const points = useQuery("points", getCumIntegral, { enabled: !userId })
+
   const { totalPoint, hasPoint } = useMemo(() => {
     return {
       totalPoint: points.data?.filter(item => item.flag === "2").reduce((prev, curr) => prev + parseInt(curr.point), 0).toString() || "0",
@@ -43,19 +36,16 @@ function PersonMap() {
     }
   }, [points.data])
 
-
-  const userDetail = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId!), { enabled: !!userId })
-
   return (
     <div className={styles.main}>
 
       {/* 自己的顶栏 */}
       {/* todo */}
-      {!userId && <div className={styles.topBar}>
+      {/* {!userId && <div className={styles.topBar}>
         <Row justify="space-between">
           <Col>
             <Space>
-              <AvatarBox score={`${totalPoint} 分`} avatar={mySteps.data?.pic} />
+              <AvatarBox name={mySteps.data?.name} score={`${totalPoint} 分`} avatar={mySteps.data?.pic} />
               <GetPointButton dot={hasPoint} />
             </Space>
           </Col>
@@ -77,10 +67,21 @@ function PersonMap() {
             </Space>
           </Col>
         </Row>
-      </div>}
+      </div>} */}
+      <div className={styles.topBar}>
+        <Row justify="space-between">
+          <Col>
+            <Space>
+              <AvatarBox name={mySteps.data?.name} score={`${totalPoint} 分`} avatar={mySteps.data?.pic} />
+              <GetPointButton dot={hasPoint} />
+            </Space>
+          </Col>
+          <Col><ToggleButton value="person" onChange={() => history.push("/team")} /></Col>
+        </Row>
+      </div>
 
       <div className={styles.bottomBar}>
-        <RunToolBar />
+        <RunToolBar hideDrawer={!!userId} onUserClick={setUserId} />
       </div>
 
       <Map>
@@ -88,14 +89,14 @@ function PersonMap() {
           <StepPoint
             key={user.userId}
             step={user.allStep}
-            center={selectUserId === user.userId}
-            onClick={() => setSelectUserId(user.userId)}
+            center={userId === user.userId}
+            onClick={() => setUserId(user.userId)}
           />
         ))}
-        <StepPoint center step={mySteps.data?.allStep || "4000"} />
+        <StepPoint center={!userId} step={mySteps.data?.allStep || "0"} />
       </Map>
 
-      <UserDetailPanel haveProp={false} visible={!!selectUserId} userId={selectUserId} onClose={() => setSelectUserId("")} />
+      <UserDetailPanel haveProp={false} visible={!!userId} userId={userId} onClose={() => setUserId("")} />
       <PersonPopup visible={popup} onClose={() => setPopup(false)} />
     </div>
   )

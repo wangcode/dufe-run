@@ -7,6 +7,7 @@ import FavIcon from 'assets/images/fav_map_circle_icon.png';
 import Button, { ButtonSizeType } from 'components/Base/Button';
 
 import Toast from 'light-toast';
+import { message } from 'antd';
 
 interface FollowButtonProps {
   userId: string;
@@ -22,13 +23,13 @@ const FollowButton: React.FC<FollowButtonProps> = ({ follow, followId, userId, s
 
   const followMutation = useMutation(followSomeone, {
     onSuccess: () => {
-      Toast.info("关注成功！")
+      message.success("关注成功！")
       onChange?.()
     }
   })
   const unFollowMutation = useMutation(removeFollow, {
     onSuccess: () => {
-      Toast.info("取消关注成功！")
+      message.success("取消关注成功！")
       onChange?.()
     }
   })
@@ -71,13 +72,13 @@ export const FollowTeamButton: React.FC<FollowTeamButtonProps> = ({ follow, foll
 
   const followMutation = useMutation(followStepTeam, {
     onSuccess: () => {
-      Toast.info("关注成功！")
+      message.success("关注成功！")
       onChange?.()
     }
   })
   const unFollowMutation = useMutation(removeFollowStepTeam, {
     onSuccess: () => {
-      Toast.info("取消关注成功！")
+      message.success("取消关注成功！")
       onChange?.()
     }
   })
@@ -118,13 +119,13 @@ export const FollowTeamUserButton: React.FC<FollowTeamUserButtonProps> = ({ mapB
 
   const followMutation = useMutation(followStepTeamPerson, {
     onSuccess: () => {
-      Toast.info("关注成功！")
+      message.success("关注成功！")
       onChange?.()
     }
   })
   const unFollowMutation = useMutation(removeFollowStepTeam, {
     onSuccess: () => {
-      Toast.info("取消关注成功！")
+      message.success("取消关注成功！")
       onChange?.()
     }
   })
