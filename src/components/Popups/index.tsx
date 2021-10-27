@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 interface PopupProps {
   visible: boolean;
   onClose: () => void;
-  closePostion?: "top-right" | "bottom"
+  closePostion?: "top-right" | "bottom" | "disabled";
 }
 
 const Popup: React.FC<PopupProps> = ({ visible, children, onClose, closePostion = "top-right" }) => {

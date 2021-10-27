@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
-import { Divider, DrawerProps, Spin } from "antd";
+import { Col, Divider, DrawerProps, Row, Spin } from "antd";
 
 import Avatar from 'components/Base/Avatar';
 import FollowButton, { FollowTeamUserButton } from "components/FollowButton";
-import { FollowFlag, getSomeoneStep } from "services";
+import { FollowFlag, getSomeoneStep, getStepProp } from "services";
 
 import DrawerPanel from "components/Base/DrawerPanel";
 
 import TeamOutloneIcon from 'assets/images/group_outline_icon.png';
 
 import styles from './index.module.scss';
+import { PropCard } from "components/PropCard";
+import PropPopup from "components/Popups/PropPopup";
 
 interface UserDetailPanelProps extends DrawerProps {
   userId: string;
@@ -19,7 +21,18 @@ interface UserDetailPanelProps extends DrawerProps {
 
 const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp, ...props }) => {
 
-  const { data, refetch, isLoading } = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId), { enabled: props.visible })
+  const { data, refetch, isLoading } = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId), {
+    enabled: props.visible,
+    onSuccess: () => setPropId(undefined)
+  })
+
+  const propData = useQuery(["props"], getStepProp, { enabled: !!userId })
+
+  const [propId, setPropId] = useState<number | undefined>(undefined)
+
+  const handleOnPropUse = (id: number) => {
+    setPropId(id)
+  }
 
   return (
     <DrawerPanel
@@ -88,10 +101,13 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp, ...
 
         <div>
           <div>道具</div>
-          <div>
-
-          </div>
+          <Row>
+            {propData.data?.map(prop => <Col key={prop.id}>
+              <PropCard {...prop} onClick={() => handleOnPropUse(prop.id)} />
+            </Col>)}
+          </Row>
         </div>
+        <PropPopup id={propId} onCancel={() => setPropId(undefined)} userId={parseInt(userId)} onUse={refetch} />
 
       </Spin>}
     </DrawerPanel>

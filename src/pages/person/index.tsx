@@ -16,6 +16,7 @@ import UserDetailPanel from "components/Panels/UserDetailPanelV2";
 import PersonPopup from "components/Popups/PersonPopup";
 
 import styles from './index.module.scss';
+import Treasures from 'components/Map/treasures';
 
 function PersonMap() {
 
@@ -85,6 +86,7 @@ function PersonMap() {
       </div>
 
       <Map>
+        <Treasures />
         {follows.data?.map(user => (
           <StepPoint
             key={user.userId}

@@ -60,11 +60,11 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
           <div className={styles.head}>
             <div className={styles.left}>
               <img src={TeamIcon} alt="" />
-              <div>{data?.name}</div>
+              <div>{data?.name || "--"}</div>
             </div>
             {type === "select" && <div className={styles.right}>
               <img src={CrownIcon} alt="" />
-              <div>第 {data?.allRank} 名</div>
+              <div>第 {data?.allRank || 0} 名</div>
             </div>}
             {/* todo flagId */}
             {type === "show" && data && <FollowTeamButton teamId={data?.id.toString()} followId={data?.followId} follow={data?.flag === "1"} onChange={refetch} />}
@@ -73,17 +73,17 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
           <Row justify="space-between" align="top" className={styles.teamDetail}>
             <Col flex={0}>
               <div className={styles.text}>战队人数</div>
-              <span className={styles.number}>{data?.personNum} 人</span>
+              <span className={styles.number}>{data?.personNum || 0} 人</span>
             </Col>
             <Divider style={{ paddingTop: 20 }} type="vertical" />
             <Col flex={0}>
               <div className={styles.text}>战队总路程</div>
-              <span className={styles.number}>{data?.allKm} km</span>
+              <span className={styles.number}>{data?.allKm || 0} km</span>
             </Col>
             <Divider style={{ paddingTop: 20 }} type="vertical" />
             <Col flex={0}>
               <div className={styles.text}>战队人均路程</div>
-              <span className={styles.number}>{data?.aveKm} km</span>
+              <span className={styles.number}>{data?.aveKm || 0} km</span>
             </Col>
           </Row>
 
@@ -105,13 +105,14 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
             <TeamUserLine
               rank={index + 1}
               id={user.userId}
-              name={user.name}
+              name={user.name || "--"}
               avatar={user.pic}
-              number={`${user.allKm}KM`}
+              number={`${user.allKm || 0}KM`}
               follow={{
                 follow: user.flag === "1",
                 followId: user.followId
               }}
+              hidden={type === "select"}
               onAvatarClick={() => onUserClick?.(user.userId)}
               onMapClick={() => onUserClick?.(user.userId)}
               onFav={users.refetch}

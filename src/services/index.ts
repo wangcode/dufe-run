@@ -359,7 +359,7 @@ export const getStepProp = () => {
  * @param id
  * @url http://yapi.dufe.tech/project/73/interface/api/9217
  */
-export const getStepPropInfo = (id: string) => {
+export const getStepPropInfo = (id: number) => {
     return axios.post<SuccessData<PropDetailType>>(`${apiurl}/alumni/getStepPropInfo`, qs.stringify({ id })).then(res => res.data.data)
 }
 
@@ -369,7 +369,7 @@ export const getStepPropInfo = (id: string) => {
  * @param userId
  * @url http://yapi.dufe.tech/project/73/interface/api/9223
  */
-export const useStepProp = (id: string, userId: string) => {
+export const useStepProp = ({id, userId}: {id: string, userId: string}) => {
     return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/useStepProp`, qs.stringify({ id, userId })).then(res => res.data.data)
 }
 

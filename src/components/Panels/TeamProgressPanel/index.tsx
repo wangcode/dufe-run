@@ -17,10 +17,6 @@ const TeamProgressPanel: React.FC<TeamProgressPanelProps> = (props) => {
 
   const TotalKM = TOTAL_LENGTH / 1000
 
-  // todo
-  const points = 50
-  const treasureChest = 5
-
   const percent = useMemo(() => {
     if (!myTeam.data?.allKm) return 0
     return myTeam.data?.allKm / TotalKM
@@ -30,43 +26,39 @@ const TeamProgressPanel: React.FC<TeamProgressPanelProps> = (props) => {
     <DrawerPanel {...props}>
       <div className={styles.title}>酷程毅行校园游</div>
       <Spin spinning={mySteps.isLoading || myTeam.isLoading} >
-        {/* <div className={styles.rule}>
-          <div>可获得 <span>{points} 积分, {treasureChest} 个宝箱</span></div>
-          <div>同行好友越多，到达终点奖励越丰厚</div>
-        </div> */}
 
         <div className={styles.team}>
           <img src={TeamIcon} alt="team" />
           <span>您的战队：</span>
-          <div className={styles.name}>{myTeam.data?.name}</div>
+          <div className={styles.name}>{myTeam.data?.name || "--"}</div>
         </div>
 
         <div className={styles.statistic}>
           <div className={styles.count}>
             <div>个人步数</div>
-            <div className={styles.number}>{mySteps.data?.allStep}</div>
+            <div className={styles.number}>{mySteps.data?.allStep || 0}</div>
           </div>
           <Divider type="vertical" />
           <div className={styles.count}>
             <div>个人路程</div>
-            <div className={styles.number}>{mySteps.data?.allKm}KM</div>
+            <div className={styles.number}>{mySteps.data?.allKm || 0}KM</div>
           </div>
           <Divider type="vertical" />
           <div className={styles.count}>
             <div>战队人均步数</div>
-            <div className={styles.number}>{myTeam.data?.aveStep}</div>
+            <div className={styles.number}>{myTeam.data?.aveStep || 0}</div>
           </div>
           <Divider type="vertical" />
           <div className={styles.count}>
             <div>战队人均路程</div>
-            <div className={styles.number}>{myTeam.data?.aveKm}KM</div>
+            <div className={styles.number}>{myTeam.data?.aveKm || 0}KM</div>
           </div>
         </div>
 
         <Divider />
         <div className={styles.progress}>
           <div className={styles.total}>全程：<strong>{TotalKM}<em>KM</em></strong></div>
-          {myTeam.data?.allKm && <div className={styles.surplus}>还差 {TotalKM - myTeam.data.allKm}km 到达终点</div>}
+          {myTeam.data?.allKm && <div className={styles.surplus}>还差 {(TotalKM - myTeam.data.allKm) || TotalKM}km 到达终点</div>}
         </div>
         <Progress strokeColor={{ from: "#c216fb", to: "#1244A8" }} percent={percent * 100} showInfo={false} />
       </Spin>
