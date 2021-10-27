@@ -5,68 +5,68 @@ import { getPeopleInStep } from 'services';
 
 import DrawerPanel from 'components/Base/DrawerPanel';
 import Button from 'components/Base/Button';
-import Rank from './rank';
 import Search from './search';
+import { RankList } from 'pages/rank';
+import MyFollowPerson from './follow';
 
 import styles from './index.module.scss';
 
 const bodyStyle = {
-    paddingTop: 0,
-    paddingBottom: 0
+  paddingTop: 0,
+  paddingBottom: 0
 }
 
 interface SNSPanelProps extends DrawerProps {
+  onUserClick?: (id: string) => void;
 }
 
 const SNSPanel: React.FC<SNSPanelProps> = (props) => {
 
-    const [active, setActive] = useState<string>("follow")
+  const [active, setActive] = useState<string>("follow")
 
-    const [searchValue, setSearchValue] = useState("")
-    const [searchKey, setSearchKey] = useState("")
+  const [searchValue, setSearchValue] = useState("")
+  const [searchKey, setSearchKey] = useState("")
 
-    const [search, setSearch] = useState(false)
+  const [search, setSearch] = useState(false)
 
-    console.log(searchKey)
+  const { data, isLoading, isFetching, refetch } = useQuery(["search", searchKey], () => getPeopleInStep(searchKey), {
+    enabled: searchKey !== "",
+    onSuccess: () => setSearch(false)
+  })
 
-    const { data, isLoading, isFetching, refetch } = useQuery(["search", searchKey], () => getPeopleInStep(searchKey), {
-        enabled: searchKey !== "",
-        onSuccess: () => setSearch(false)
-    })
+  const reset = () => {
+    setActive("follow")
+    setSearchKey("")
+    setSearchValue("")
+  }
 
-    const reset = () => {
-        setActive("follow")
-        setSearchKey("")
-        setSearchValue("")
-    }
+  useEffect(() => {
+    return reset
+  }, [props.visible])
 
-    useEffect(() => {
-        return reset
-    }, [props.visible])
-
-    return (
-        <DrawerPanel
-            {...props}
-            bodyStyle={bodyStyle}
-            destroyOnClose
-            title={
-                <Tabs className={styles.tabs} centered activeKey={active} onChange={setActive}>
-                    <Tabs.TabPane tab="我的关注" key="follow" />
-                    <Tabs.TabPane tab="搜索校友" key="search">
-                        <Row className={styles.searchHeader} gutter={12}>
-                            <Col flex={1}><input value={searchValue} onChange={e => setSearchValue(e.target.value)} className={styles.searchInput} type="text" /></Col>
-                            <Col><Button onClick={() => setSearchKey(searchValue)} theme="hot">搜索</Button></Col>
-                        </Row>
-                    </Tabs.TabPane>
-                    <Tabs.TabPane tab="排行榜" key="rank" />
-                </Tabs>
-            }
-        >
-            {active === "follow" && <Rank onClick={() => setActive("search")} />}
-            {active === "search" && <Search reSearch={refetch} loading={isLoading || isFetching} searchKey={searchKey} users={data || []} />}
-            {active === "rank" && <Rank onClick={() => setActive("search")} />}
-        </DrawerPanel>
-    )
+  return (
+    <DrawerPanel
+      {...props}
+      bodyStyle={bodyStyle}
+      destroyOnClose
+      title={
+        <Tabs className={styles.tabs} centered activeKey={active} onChange={setActive}>
+          <Tabs.TabPane tab="我的关注" key="follow" />
+          <Tabs.TabPane tab="搜索校友" key="search">
+            <Row className={styles.searchHeader} gutter={12}>
+              <Col flex={1}><input value={searchValue} onChange={e => setSearchValue(e.target.value)} className={styles.searchInput} type="text" /></Col>
+              <Col><Button onClick={() => setSearchKey(searchValue)} theme="hot">搜索</Button></Col>
+            </Row>
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="排行榜" key="rank" />
+        </Tabs>
+      }
+    >
+      {active === "follow" && <MyFollowPerson onClick={() => setActive("search")} />}
+      {active === "search" && <Search reSearch={refetch} loading={isLoading || isFetching} searchKey={searchKey} users={data || []} />}
+      {active === "rank" && <RankList box={false} />}
+    </DrawerPanel>
+  )
 
 }
 

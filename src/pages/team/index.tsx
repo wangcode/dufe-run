@@ -11,12 +11,13 @@ import { TeamRankItem } from 'components/TeamRank';
 import TeamDetailPanel from 'components/Panels/TeamDetailPanel';
 import UserDetailPanel from 'components/Panels/UserDetailPanelV2';
 import { AvatarBox, GetPointButton, ToggleButton } from 'components/FloatComponents';
-import MapRoute from 'components/Map/route';
 import Map from 'components/Map';
+import StepPoint from 'components/Map/stepPoint';
 
-import { getAllStepTeam, getCumIntegral, getMySteps, getMyStepTeam } from 'services';
+import { getAllStepTeam, getCumIntegral, getMySteps, getMyStepTeam, getSomeoneStep, getStepTeamPerson } from 'services';
 
 import styles from './index.module.scss';
+import TeamPopup from 'components/Popups/TeamPopup';
 
 const Team = () => {
 
@@ -25,12 +26,14 @@ const Team = () => {
   const [userId, setUserId] = useState("")
   const [teamId, setTeamId] = useState("")
 
+  const [popup, setPopup] = useState(true)
+
   const mySteps = useQuery(["mySteps"], getMySteps)
   const teams = useQuery(["teams"], getAllStepTeam)
 
   const myTeam = useQuery(["teams", mySteps.data?.teamId], () => getMyStepTeam(mySteps.data?.teamId!), { enabled: !!mySteps.data?.teamId })
 
-  // const user = useQuery(["teams", "users", userId], () => getStepTeamPerson(userId), { enabled: !!userId })
+  const selectUser = useQuery(["teams", "users", userId], () => getSomeoneStep(userId), { enabled: !!userId })
 
   const points = useQuery("points", getCumIntegral, { enabled: !userId })
   const { totalPoint, hasPoint } = useMemo(() => {
@@ -75,11 +78,11 @@ const Team = () => {
         </div>
       </div>
 
-      <div style={{ display: !!userId ? "block" : "none" }}>
+      {!!userId && <div>
         <Map>
-          <MapRoute myStep={"222"} />
+          {selectUser.data && <StepPoint step={selectUser.data.allStep} center />}
         </Map>
-      </div>
+      </div>}
 
       <UserDetailPanel
         visible={!!userId}
@@ -87,6 +90,7 @@ const Team = () => {
         height="50vh"
         onClose={() => setUserId("")}
         destroyOnClose
+        haveProp
       />
       <TeamDetailPanel
         type="show"
@@ -99,8 +103,10 @@ const Team = () => {
       />
 
       <div className={styles.runToolBar}>
-        <RunToolBar mode="team" onTeamUserClick={setUserId} hideDrawer={!!userId} />
+        <RunToolBar mode="team" onUserClick={setUserId} hideDrawer={!!userId} />
       </div>
+
+      <TeamPopup visible={popup} onClose={() => setPopup(false)} />
 
     </div>
   )

@@ -14,11 +14,11 @@ import PropsPanel from 'components/Panels/PropsPanel';
 
 interface RunBarProps {
   mode?: "person" | "team";
-  onTeamUserClick?: (id: string) => void;
+  onUserClick?: (id: string) => void;
   hideDrawer?: boolean;
 }
 
-const RunToolBar: React.FC<RunBarProps> = ({ mode = "person", onTeamUserClick, hideDrawer }) => {
+const RunToolBar: React.FC<RunBarProps> = ({ mode = "person", onUserClick, hideDrawer }) => {
 
   const [visible, setVisible] = useState(false)
 
@@ -67,9 +67,9 @@ const RunToolBar: React.FC<RunBarProps> = ({ mode = "person", onTeamUserClick, h
       </div>}
       <ProgressPanel destroyOnClose visible={!hideDrawer && visible} onClose={() => setVisible(false)} />
       <TeamProgressPanel destroyOnClose height="50vh" visible={!hideDrawer && teamProgressVisible} onClose={() => setTeamProgressVisible(false)} />
-      <SNSPanel destroyOnClose height="55vh" visible={!hideDrawer && followVisible} onClose={() => setFollowVisible(false)} />
-      <MyTeamPanel destroyOnClose height="85vh" visible={!hideDrawer && myTeamVisible} onClose={() => setMyTeamVisible(false)} onTeamUserClick={onTeamUserClick} />
-      <PropsPanel destroyOnClose height="60vh" visible={!hideDrawer && propsVisible} onClose={() => setPropsVisible(false)} onUserClick={onTeamUserClick} />
+      <SNSPanel destroyOnClose height="55vh" visible={!hideDrawer && followVisible} onClose={() => setFollowVisible(false)} onUserClick={onUserClick} />
+      <MyTeamPanel destroyOnClose height="85vh" visible={!hideDrawer && myTeamVisible} onClose={() => setMyTeamVisible(false)} onUserClick={onUserClick} />
+      <PropsPanel destroyOnClose height="60vh" visible={!hideDrawer && propsVisible} onClose={() => setPropsVisible(false)} onUserClick={onUserClick} />
     </div>
   )
 

@@ -14,9 +14,10 @@ import styles from './index.module.scss';
 
 interface UserDetailPanelProps extends DrawerProps {
   userId: string;
+  haveProp: boolean;
 }
 
-const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, ...props }) => {
+const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp, ...props }) => {
 
   const { data, refetch, isLoading } = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId), { enabled: props.visible })
 
@@ -77,8 +78,7 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, ...props }) =
       }
     >
 
-      <Spin spinning={isLoading}>
-
+      {haveProp && <Spin spinning={isLoading}>
 
         <div>
           <div>道具</div>
@@ -87,7 +87,7 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, ...props }) =
           </div>
         </div>
 
-      </Spin>
+      </Spin>}
     </DrawerPanel>
   )
 

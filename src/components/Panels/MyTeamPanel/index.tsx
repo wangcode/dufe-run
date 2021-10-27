@@ -15,7 +15,7 @@ import styles from './index.module.scss';
 import TeamDetailPanel from '../TeamDetailPanel';
 
 interface MyTeamPanelProps extends DrawerProps {
-  onTeamUserClick?: (id: string) => void;
+  onUserClick?: (id: string) => void;
 }
 
 type MyTeamActiveKeys = "MyTeammates" | "allTeam" | "follow"
@@ -50,13 +50,13 @@ const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
         </Tabs>
       }
     >
-      {active === "MyTeammates" && <Teammates onUserClick={props.onTeamUserClick} teamId={mySteps.data?.teamId || "1"} />}
+      {active === "MyTeammates" && <Teammates onUserClick={props.onUserClick} teamId={mySteps.data?.teamId || "1"} />}
       {active === "allTeam" && <Teams onTeamClick={setTeamId} teamId={mySteps.data?.teamId || "1"} />}
-      {active === "follow" && <Follows onTeamClick={setTeamId} onUserClick={props.onTeamUserClick} teamId={mySteps.data?.teamId || '1'} />}
+      {active === "follow" && <Follows onTeamClick={setTeamId} onUserClick={props.onUserClick} teamId={mySteps.data?.teamId || '1'} />}
 
       <TeamDetailPanel
         type="show"
-        onUserClick={props.onTeamUserClick}
+        onUserClick={props.onUserClick}
         height="60vh"
         destroyOnClose
         visible={!!teamId}

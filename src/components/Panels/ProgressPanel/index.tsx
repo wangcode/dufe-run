@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Divider, DrawerProps, Progress, Spin } from 'antd';
 import styles from './index.module.scss';
-import { getMySteps, TOTAL_LENGTH } from 'services';
+import { getMySteps, getStepMapIntegral, TOTAL_LENGTH } from 'services';
 import { useQuery } from 'react-query';
 import { transStep2Kilometer } from 'utils';
 import DrawerPanel from 'components/Base/DrawerPanel';
@@ -11,14 +11,20 @@ interface ProgressPanelProps extends DrawerProps { }
 const ProgressPanel: React.FC<ProgressPanelProps> = (props) => {
 
   const { data, isLoading } = useQuery("mySteps", getMySteps, { enabled: props.visible })
+  const mapIntegral = useQuery(["map", "integral"], getStepMapIntegral, { enabled: props.visible })
 
   const TotalKM = TOTAL_LENGTH / 1000
 
   const LengthKM = transStep2Kilometer(data?.allStep)
 
-  const points = 50
+  const { points, treasureChest } = useMemo(() => {
+    const list = mapIntegral.data?.filter(item => item.surplusAmount > 0)
+    return {
+      points: list?.reduce((prev, curr) => prev + parseInt(curr.point), 0) || 0,
+      treasureChest: list?.length
+    }
+  }, [mapIntegral.data])
 
-  const treasureChest = 5
 
   const percent = useMemo(() => {
     return LengthKM / TotalKM

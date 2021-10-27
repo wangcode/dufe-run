@@ -8,7 +8,8 @@ import { RankList } from '../rank';
 
 import PersonPNG from 'assets/images/person.png';
 import GroupPNG from 'assets/images/group.png';
-import StartModal from 'components/StartModal';
+
+import HomePopup from 'components/Popups/HomePopup';
 
 import styles from './index.module.scss';
 
@@ -37,7 +38,6 @@ const Home = () => {
 
       <div className={styles.buttons}>
         <div className={styles.rank} onClick={() => history.push("/rank")}>我的排名</div>
-        {/* <div className={styles.info}>攻略</div> */}
       </div>
 
       <div className={styles.progress}>
@@ -58,14 +58,6 @@ const Home = () => {
         <div className={styles.value}>{mySteps?.nowStep || "0"}</div>
       </div>
 
-      {/* <div className={styles.entry}>
-                <div className={styles.position}>
-                    <div className={styles.total}>共 {data?.num} 校友参与</div>
-                    <div className={styles.startBtn} onClick={() => history.push("/map")}>走路线</div>
-                </div>
-                <img src={EntryPNG} alt="entry" />
-            </div> */}
-
       <div className={styles.entry2} onClick={() => history.push("/person")}>
         <div className={styles.position}>共 <span>{personData?.num}</span> 校友参与</div>
         <img src={PersonPNG} alt="entry" />
@@ -78,7 +70,7 @@ const Home = () => {
 
       <RankList title />
 
-      {visible && <StartModal onClose={() => setVisible(false)} />}
+      <HomePopup visible={visible} onClose={() => setVisible(false)} />
 
     </div>
   )

@@ -25,9 +25,9 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, ...props }) =
 
   return (
     <DrawerPanel {...props}>
-      <div className={styles.avatar}>
-        <Avatar src={data?.pic} text={data?.name} />
-      </div>
+      {props.visible && <div className={styles.avatar}>
+        <Avatar size="large" src={data?.pic} text={data?.name} />
+      </div>}
       <Spin spinning={isLoading}>
         <div className={styles.user}>
           <div className={styles.total}>{data?.name}</div>

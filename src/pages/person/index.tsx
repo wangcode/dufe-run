@@ -17,7 +17,8 @@ import RunToolBar from 'components/RunBar';
 import Map from 'components/Map';
 import { useMemo, useState } from "react";
 import StepPoint from "components/Map/stepPoint";
-import UserDetailPanel from "components/Panels/UserDetailpanel";
+import UserDetailPanel from "components/Panels/UserDetailPanelV2";
+import PersonPopup from "components/Popups/PersonPopup";
 
 
 function PersonMap() {
@@ -25,6 +26,8 @@ function PersonMap() {
   const history = useHistory()
 
   const userId = useSearchParam("user")
+
+  const [popup, setPopup] = useState(true)
 
   const [selectUserId, setSelectUserId] = useState("")
 
@@ -81,12 +84,19 @@ function PersonMap() {
       </div>
 
       <Map>
-        {follows.data?.map(user => <StepPoint key={user.userId} step={user.allStep} onClick={() => setSelectUserId(user.userId)} />)}
+        {follows.data?.map(user => (
+          <StepPoint
+            key={user.userId}
+            step={user.allStep}
+            center={selectUserId === user.userId}
+            onClick={() => setSelectUserId(user.userId)}
+          />
+        ))}
         <StepPoint center step={mySteps.data?.allStep || "4000"} />
       </Map>
 
-      <UserDetailPanel visible={!!selectUserId} userId={selectUserId} />
-
+      <UserDetailPanel haveProp={false} visible={!!selectUserId} userId={selectUserId} onClose={() => setSelectUserId("")} />
+      <PersonPopup visible={popup} onClose={() => setPopup(false)} />
     </div>
   )
 }

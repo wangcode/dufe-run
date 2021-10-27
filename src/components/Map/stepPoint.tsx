@@ -31,14 +31,14 @@ const StepPoint: React.FC<StepPointProps> = ({ step, size, center, onClick, poly
   }, [Path, map, step, center])
 
   return (
-    point ? 
-    <Marker
-      icon={getPersonMark(size)}
-      position={point}
-      eventHandlers={{
-        click: onClick
-      }}
-    /> : null
+    point ?
+      <Marker
+        icon={getPersonMark(size)}
+        position={point}
+        eventHandlers={{
+          click: () => onClick?.()
+        }}
+      /> : null
   )
 }
 

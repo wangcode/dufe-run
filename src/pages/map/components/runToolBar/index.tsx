@@ -65,7 +65,7 @@ const RunToolBar: React.FC<RunToolBarProps> = ({ mode = "person", onTeamUserClic
       <ProgressPanel destroyOnClose visible={!hideDrawer && visible} onClose={() => setVisible(false)} />
       <TeamProgressPanel destroyOnClose visible={!hideDrawer && teamProgressVisible} onClose={() => setTeamProgressVisible(false)} />
       <SNSPanel destroyOnClose height="55vh" visible={!hideDrawer && followVisible} onClose={() => setFollowVisible(false)} />
-      <MyTeamPanel destroyOnClose height="85vh" visible={!hideDrawer && myTeamVisible} onClose={() => setMyTeamVisible(false)} onTeamUserClick={onTeamUserClick} />
+      <MyTeamPanel destroyOnClose height="85vh" visible={!hideDrawer && myTeamVisible} onClose={() => setMyTeamVisible(false)} onUserClick={onTeamUserClick} />
     </div>
   )
 
