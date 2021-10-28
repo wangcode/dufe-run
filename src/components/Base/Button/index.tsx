@@ -22,13 +22,11 @@ export const ButtonSize: ButtonSizeType = {
   middle: {
     height: "30px",
     borderRadius: "15px",
-    // padding: "0px 35px",
     minWidth: "100px"
   },
   xm: {
     height: "40px",
     borderRadius: "25px",
-    // padding: "0px 35px",
     minWidth: "115px"
   },
   large: {

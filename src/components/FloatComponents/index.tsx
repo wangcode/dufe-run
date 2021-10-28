@@ -4,7 +4,7 @@ import GroupToggleIcon from 'assets/images/group_toggle.png';
 import CoinIcon from 'assets/images/coin.png';
 
 import Avatar from 'components/Base/Avatar';
-import { Badge, Space } from 'antd';
+import { Badge } from 'antd';
 
 import styles from './index.module.scss';
 import classNames from 'classnames';

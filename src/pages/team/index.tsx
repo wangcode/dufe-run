@@ -3,21 +3,20 @@ import { Col, Row } from 'antd';
 import { useHistory } from 'react-router';
 import { useQuery } from 'react-query';
 
-import RunToolBar from 'components/RunBar';
-
+import Map from 'components/Map';
 import Card from 'components/Base/Card';
+import RunToolBar from 'components/RunBar';
 import GraphRank from 'components/GraphRank';
-import { TeamRankItem } from 'components/TeamRank';
+import StepPoint from 'components/Map/stepPoint';
+import { TeamRankItem } from 'components/LineItem/TeamRank';
+import TeamPopup from 'components/Popups/TeamPopup';
 import TeamDetailPanel from 'components/Panels/TeamDetailPanel';
 import UserDetailPanel from 'components/Panels/UserDetailPanelV2';
 import { AvatarBox, GetPointButton, ToggleButton } from 'components/FloatComponents';
-import Map from 'components/Map';
-import StepPoint from 'components/Map/stepPoint';
 
-import { getAllStepTeam, getCumIntegral, getMySteps, getMyStepTeam, getSomeoneStep, getStepTeamPerson } from 'services';
+import { getAllStepTeam, getCumIntegral, getMySteps, getMyStepTeam, getSomeoneStep } from 'services';
 
 import styles from './index.module.scss';
-import TeamPopup from 'components/Popups/TeamPopup';
 
 const Team = () => {
 
@@ -30,17 +29,12 @@ const Team = () => {
 
   const mySteps = useQuery(["mySteps"], getMySteps)
   const teams = useQuery(["teams"], getAllStepTeam)
-
   const myTeam = useQuery(["teams", mySteps.data?.teamId], () => getMyStepTeam(mySteps.data?.teamId!), { enabled: !!mySteps.data?.teamId })
-
   const selectUser = useQuery(["teams", "users", userId], () => getSomeoneStep(userId), { enabled: !!userId })
-
   const points = useQuery("points", getCumIntegral, { enabled: !userId })
-  const { totalPoint, hasPoint } = useMemo(() => {
-    return {
-      totalPoint: points.data?.filter(item => item.flag === "2").reduce((prev, curr) => prev + parseInt(curr.point), 0).toString() || "0",
-      hasPoint: points.data?.some(item => item.flag === "1") || false
-    }
+  
+  const hasPoint = useMemo(() => {
+    return points.data?.some(item => item.flag === "1") || false
   }, [points.data])
 
   return (
@@ -50,7 +44,7 @@ const Team = () => {
         <Row justify='space-between' align="middle">
           <Col>
             <Row align="middle" gutter={10}>
-              <Col><AvatarBox shadow avatar={mySteps.data?.pic} score={`${totalPoint} 分`} /></Col>
+              <Col><AvatarBox shadow avatar={mySteps.data?.pic} score={`${mySteps.data?.allPoint||0} 分`} /></Col>
               <Col><GetPointButton shadow dot={hasPoint} /></Col>
             </Row>
           </Col>

@@ -1,4 +1,4 @@
-import TeamUserLine from "components/User/TeamUserLine";
+import TeamUserLine from "components/LineItem/TeamUserLine";
 import { useQuery } from "react-query";
 import { getAllStepTeam, getStepTeamFollow, getStepTeamPerson } from "services";
 

@@ -1,6 +1,4 @@
-import { Spin, Typography } from 'antd';
-import PersonPropup from 'components/Popups/PersonPopup';
-import TeamPopup from 'components/Popups/TeamPopup';
+import { Typography } from 'antd';
 import styles from './index.module.scss';
 
 const { Title, Paragraph, Text, Link } = Typography;
@@ -33,6 +31,7 @@ const Introduction = () => {
           <Paragraph>2.步数不足100步，可收起手机，养成走路习惯。</Paragraph>
         </div>
       </div>
+
     </div>
   )
 

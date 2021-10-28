@@ -1,9 +1,32 @@
 .card {
-  width: 75px;
-  height: 97px;
+  width: 85px;
+  height: 122px;
+  position: relative;
 }
 
-.title {
+.image{
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
-.button {
+.content{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  color: #ffffff;
+}
+.top {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  top: 22px;
+  font-size: 6px;
+}
+.bottom {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  bottom: 11px;
+  font-size: 10px;
 }

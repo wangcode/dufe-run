@@ -7,7 +7,7 @@ import { useHistory } from 'react-router';
 import { FollowTeamButton } from 'components/FollowButton';
 import DrawerPanel from 'components/Base/DrawerPanel';
 import Button from 'components/Base/Button';
-import TeamUserLine from 'components/User/TeamUserLine';
+import TeamUserLine from 'components/LineItem/TeamUserLine';
 
 import { getMyStepTeam, getStepTeamPerson, joinStepTeam } from 'services';
 

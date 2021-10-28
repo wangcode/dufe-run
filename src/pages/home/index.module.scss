@@ -96,6 +96,9 @@
   .progressbar {
     position: absolute;
     bottom: 0;
+    svg{
+      transform: scaleX(-1);
+    }
   }
   .title {
     font-size: 12px;

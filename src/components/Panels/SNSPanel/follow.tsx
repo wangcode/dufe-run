@@ -3,7 +3,7 @@ import { Empty, Spin } from 'antd';
 import { useQuery } from 'react-query';
 import { getMyFollowList } from 'services';
 
-import UserLine from 'components/UserLine';
+import UserLine from 'components/LineItem/UserLine';
 import Button from 'components/Base/Button';
 import { transStep2Kilometer } from 'utils';
 import styles from './index.module.scss';

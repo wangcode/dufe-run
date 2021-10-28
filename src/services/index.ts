@@ -1,13 +1,13 @@
 import axios, { AxiosError } from 'axios';
-import qs from 'qs';
-import Toast from 'light-toast';
 import { message } from 'antd';
+import qs from 'qs';
 
-export const TOTAL_STEPS = 20000; // 步
+// steps === length * 0.5 
+
+export const TOTAL_STEPS = 100000; // 步
 export const TOTAL_LENGTH = 20000; // 米
 
 // const token = localStorage.getItem("token")
-// const token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3RfdG9rZW4iLCJpYXQiOjE2MzEyNDA0ODIsInN1YiI6IntcIm9wZW5JZFwiOlwiMjkzXCIsXCJsb2dpbkRhdGVcIjpcIjIwMjEtMDktMTAgMTA6MjE6MjJcIixcIm9yZ0lkXCI6XCIxZDdkOThkMmE2N2Q0Zjc0YWE0OWE3OTdmNjMwYjI3YlwiLFwib3JnQ29kZVwiOlwiZHVmZVwiLFwidXNlck1vYmlsZVwiOlwiMTU2MTQ0NzIxMDZcIixcInVzZXJOYW1lXCI6XCIxNTYxNDQ3MjEwNlwiLFwidXNlcklkXCI6XCIxYzdkNmYxYjk5ZmM0MjJkOTk5NWM0ZWU2NjI0ZjNlMlwiLFwibmFtZVwiOlwi6bqm5Y-vXCIsXCJ1c2VyTWFjXCI6XCIyMTE0MDMxOTk2MTAyMjgyMTZcIn0iLCJleHAiOjE2MzM4MzI0ODJ9.B5736jMvlp1Nal-tcAFc7Yq8o7sRWB6eVtFgXF9bSjI"
 
 axios.interceptors.request.use(config => {
     config.headers = {
@@ -29,7 +29,6 @@ axios.interceptors.response.use(
 )
 
 const apiurl = "http://172.16.1.19:9091"
-
 
 export enum FollowFlag {
     follow = "1",
@@ -65,7 +64,8 @@ interface StepsType {
     teamName: string;
     aveTeamKm: number;
     aveStep: number;
-    allKm: number
+    allKm: number;
+    allPoint: number;
 }
 
 interface RankType {
@@ -146,6 +146,8 @@ interface PropType {
     id: number;
     pic: string;
     point: string;
+    backPic: string;
+    useNum: string;
 }
 
 interface PropDetailType extends PropType {

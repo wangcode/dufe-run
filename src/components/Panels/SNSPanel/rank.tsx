@@ -3,7 +3,7 @@ import { Empty, Spin } from 'antd';
 import { useQuery } from 'react-query';
 import { getNowRank } from 'services';
 
-import UserLine from 'components/UserLine';
+import UserLine from 'components/LineItem/UserLine';
 import styles from './index.module.scss';
 
 interface RankListProps {

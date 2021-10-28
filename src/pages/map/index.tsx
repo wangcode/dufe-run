@@ -14,13 +14,6 @@ import "leaflet/dist/leaflet.css";
 
 import styles from './index.module.scss';
 
-// import PolylineJSON from './polyline.json';
-// import UserToolBar, { OtherToolBar } from './components/userToolBar';
-import RunToolBar from './components/runToolBar';
-// import UserMark from './components/userMark';
-import RunLine from './components/runLine';
-// import { useSearchParam } from 'react-use';
-import { useQuery } from 'react-query';
 import { getMySteps, getSomeoneStep } from 'services';
 // import { useLocation } from 'react-router-dom';
 import { useSearchParam } from 'react-use';
@@ -40,11 +33,6 @@ function Map() {
   // const type = useSearchParam("type") || "person"
 
   // const [myStep, setMyStep] = useState(0)
-
-
-  const userDetail = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId!), { enabled: !!userId })
-  const mySteps = useQuery("mySteps", getMySteps, { enabled: !userId })
-
   // useEffect(() => {
   //   if(myStep===100000) setMyStep(0)
   //   setTimeout(() => {
@@ -90,14 +78,6 @@ function Map() {
 
   return (
     <div className={styles.main}>
-      <div className={styles.userToolBar}>
-        {/* {!userId && <UserToolBar self={true} />}
-        {userId && <OtherToolBar userId={userId} />} */}
-      </div>
-
-      {!userId && <div className={styles.runToolBar}>
-        <RunToolBar />
-      </div>}
       <MapContainer
         crs={CRS.Simple}
         style={{ width: "100vw", height: "100vh" }}
@@ -112,7 +92,6 @@ function Map() {
         // 超出拖动弹性值
         maxBoundsViscosity={1}
       >
-        <RunLine myStep={mySteps?.data?.allStep || userDetail?.data?.allStep || "0"} />
         <ImageOverlay url={MapPNG} bounds={[[0, 0], [3361, 3839]]} />
       </MapContainer>
     </div>

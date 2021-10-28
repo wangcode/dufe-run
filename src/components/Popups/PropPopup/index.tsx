@@ -1,8 +1,11 @@
 import { message } from "antd";
-import Button from "components/Base/Button";
+import { useMemo } from "react";
 import { useMutation, useQuery } from "react-query";
-import { getStepPropInfo, useStepProp } from "services";
+import { getMySteps, getStepPropInfo, useStepProp } from "services";
+
+import Button from "components/Base/Button";
 import Popup from "..";
+
 import styles from './index.module.scss';
 
 interface PropPopupProps {
@@ -14,11 +17,18 @@ interface PropPopupProps {
 
 const PropPopup: React.FC<PropPopupProps> = (props) => {
 
+  const myStep = useQuery("mySteps", getMySteps)
+
   const { data } = useQuery(
     ["props", props.id],
     () => getStepPropInfo(props.id!),
     { enabled: !!props.id }
   )
+
+  const canUse = useMemo(() => {
+    if(!data?.point || !myStep.data) return false
+    return myStep.data.allPoint > parseInt(data.point)
+  }, [data, myStep])
 
   const mutation = useMutation(useStepProp, {
     onSuccess: () => {
@@ -42,11 +52,11 @@ const PropPopup: React.FC<PropPopupProps> = (props) => {
           <div className={styles.desc}>
             {data?.name}：让指定对象 <strong>{data?.info}</strong> ，每天可以使用 <strong>{data?.useNum}</strong> 次，您今天还可以使用 <strong>{data?.surUseNum}</strong> 次。
           </div>
-          {/* <div classname={styles.error}>抱歉，您的积分不够，请先赚取积分</div> */}
+          {!canUse && <div className={styles.error}>抱歉，您的积分不够，请先赚取积分</div>}
           <div className={styles.buttons}>
             <Button size="xm" theme="cheese" onClick={props.onCancel}>取消</Button>
-            <Button loading={mutation.isLoading} size="xm" theme="hot" onClick={handleOnUse}>确定使用</Button>
-            {/* <Button theme="hot">去赚积分</Button> */}
+            {canUse && <Button loading={mutation.isLoading} size="xm" theme="hot" onClick={handleOnUse}>确定使用</Button>}
+            {!canUse && <Button theme="hot">去赚积分</Button>}
           </div>
         </div>
       </div>

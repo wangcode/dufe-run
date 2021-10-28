@@ -98,17 +98,21 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp, ...
     >
 
       {haveProp && <Spin spinning={isLoading}>
-
         <div>
           <div>道具</div>
           <Row>
             {propData.data?.map(prop => <Col key={prop.id}>
-              <PropCard {...prop} onClick={() => handleOnPropUse(prop.id)} />
+              <PropCard
+                point={prop.point}
+                useNum={parseInt(prop.useNum)}
+                surUseNum={prop.surUseNum}
+                pic={prop.backPic}
+                onClick={() => handleOnPropUse(prop.id)}
+              />
             </Col>)}
           </Row>
         </div>
         <PropPopup id={propId} onCancel={() => setPropId(undefined)} userId={parseInt(userId)} onUse={refetch} />
-
       </Spin>}
     </DrawerPanel>
   )

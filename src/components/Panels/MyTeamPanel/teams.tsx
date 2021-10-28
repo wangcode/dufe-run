@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { getAllStepTeam, getMyStepTeam } from "services";
 
-import TeamUserLine from "components/User/TeamUserLine";
+import TeamUserLine from "components/LineItem/TeamUserLine";
 
 import FlagIcon from 'assets/images/flag_icon.png';
 

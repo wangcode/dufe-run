@@ -3,7 +3,7 @@ import { Empty, Spin } from 'antd';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import UserLine from 'components/UserLine';
+import UserLine from 'components/LineItem/UserLine';
 import { getMySteps, getNowRank, GoodFlag } from 'services';
 
 import styles from './index.module.scss';
