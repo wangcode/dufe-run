@@ -1,43 +1,42 @@
-.root{
-    position: relative;
-    height: 100vh;
+.root {
+  position: relative;
+  height: 100vh;
 }
 
-.main{
-    padding: 0px 9px;
-    padding-top: 100px;
+.main {
+  padding: 0px 9px;
+  padding-top: 100px;
 }
-.runToolBar{
-    position: absolute;
-    z-index: 401;
-    bottom: 0;
-    width: 100%;
+.runToolBar {
+  position: fixed;
+  z-index: 401;
+  bottom: 0;
+  width: 100%;
 }
-.topToolbar{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 30px 15px;
-    z-index: 401;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-.myTeam{
-    background-image: linear-gradient(to left, #b0d3fb, #f5fafe);
-    // height: 78px;
-    border-radius: 10px;
-    padding: 25px 40px;
-    margin-bottom: 18px;
+.topToolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 15px;
+  z-index: 401;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.teamListItem{
-    padding: 25px 20px;
-    border-bottom: 1px solid #eeeeee;
-    &:last-child{
-        border-bottom: 0;
-    }
+.myTeam {
+  background-image: linear-gradient(to left, #b0d3fb, #f5fafe);
+  // height: 78px;
+  border-radius: 10px;
+  padding: 25px 40px;
+  margin-bottom: 18px;
+}
+
+.teamListItem {
+  padding: 25px 20px;
+  border-bottom: 1px solid #eeeeee;
+  &:last-child {
+    border-bottom: 0;
+  }
 }
