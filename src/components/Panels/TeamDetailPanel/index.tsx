@@ -91,6 +91,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
             <div className={styles.content}>{data?.info}</div>
           </div>}
 
+          {/* todo */}
           <div className={styles.headline}>
             <div className={styles.left}><img src={UserIcon} alt="user" /><span>队员</span></div>
             <div>全部 {'>'}</div>
@@ -100,7 +101,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
     >
       <div className={styles.userList}>
         {users.data?.map((user, index) => (
-          <div key={user.userId} className={styles.user}>
+          <div key={`TeamDetailUser-${user.userId}`} className={styles.user}>
             <TeamUserLine
               id={user.userId}
               type="person"

@@ -29,7 +29,7 @@ const Follows: React.FC<FollowsProps> = ({ teamId, onUserClick, onTeamClick }) =
 
           <div className={styles.lineList}>
             {data?.teamList.map((team, index) => (
-              <div key={team.teamId} className={styles.lineItem}>
+              <div key={`FollowTeam-${team.teamId}`} className={styles.lineItem}>
                 <TeamUserLine
                   type="team"
                   rank={index + 1}
@@ -56,7 +56,7 @@ const Follows: React.FC<FollowsProps> = ({ teamId, onUserClick, onTeamClick }) =
           </div>
           <div className={styles.lineList}>
             {data?.personList.map((person, index) => (
-              <div className={styles.lineItem} key={person.userId}>
+              <div className={styles.lineItem} key={`FollowTeamUser-${person.userId}`}>
                 <TeamUserLine
                   type="person"
                   rank={index + 1}

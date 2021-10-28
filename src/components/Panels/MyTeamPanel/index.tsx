@@ -16,6 +16,7 @@ import TeamDetailPanel from '../TeamDetailPanel';
 
 interface MyTeamPanelProps extends DrawerProps {
   onUserClick?: (id: string) => void;
+  onTeamClick?: (id: string) => void;
 }
 
 type MyTeamActiveKeys = "MyTeammates" | "allTeam" | "follow"
@@ -51,8 +52,8 @@ const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
       }
     >
       {active === "MyTeammates" && <Teammates onUserClick={props.onUserClick} teamId={mySteps.data?.teamId || "1"} />}
-      {active === "allTeam" && <Teams onTeamClick={setTeamId} teamId={mySteps.data?.teamId || "1"} />}
-      {active === "follow" && <Follows onTeamClick={setTeamId} onUserClick={props.onUserClick} teamId={mySteps.data?.teamId || '1'} />}
+      {active === "allTeam" && <Teams onTeamClick={props.onTeamClick} teamId={mySteps.data?.teamId || "1"} />}
+      {active === "follow" && <Follows onTeamClick={props.onTeamClick} onUserClick={props.onUserClick} teamId={mySteps.data?.teamId || '1'} />}
 
       <TeamDetailPanel
         type="show"

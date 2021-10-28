@@ -87,7 +87,7 @@ const Team = () => {
       />
 
       <div className={styles.runToolBar}>
-        <TeamRunBar onUserClick={setUserId} hideDrawer={!!userId} />
+        <TeamRunBar onUserClick={setUserId} onTeamClick={setTeamId} hideDrawer={!!userId || !!teamId} />
       </div>
 
       <TeamPopup visible={popup} onClose={() => setPopup(false)} />

@@ -13,9 +13,10 @@ import styles from '../index.module.scss';
 interface TeamRunBarProps {
   hideDrawer?: boolean;
   onUserClick?: (id: string) => void;
+  onTeamClick?: (id: string) => void;
 }
 
-const TeamRunBar: React.FC<TeamRunBarProps> = ({ onUserClick, hideDrawer }) => {
+const TeamRunBar: React.FC<TeamRunBarProps> = ({ onUserClick, onTeamClick, hideDrawer }) => {
 
   const history = useHistory()
 
@@ -36,7 +37,7 @@ const TeamRunBar: React.FC<TeamRunBarProps> = ({ onUserClick, hideDrawer }) => {
             <img className={styles.foot} src={foot} alt="" />
             <span className={styles.text}>收起手机，走一走</span>
           </div>}
-          <div className={styles.startBtn} onClick={() => setToastVisible(!propsVisible)}>GO</div>
+          <div className={styles.startBtn} onClick={() => setToastVisible(!toastVisible)}>GO</div>
         </div>
         <div className={styles.right}>
           <div onClick={() => history.push("/introduction/team")}>比赛规则 {'>'}</div>
@@ -44,8 +45,8 @@ const TeamRunBar: React.FC<TeamRunBarProps> = ({ onUserClick, hideDrawer }) => {
         </div>
       </div>
 
-      <TeamProgressPanel destroyOnClose height="50vh" visible={!hideDrawer && teamProgressVisible} onClose={() => setTeamProgressVisible(false)} />
-      <MyTeamPanel destroyOnClose height="85vh" visible={!hideDrawer && myTeamVisible} onClose={() => setMyTeamVisible(false)} onUserClick={onUserClick} />
+      <TeamProgressPanel destroyOnClose height="330px" visible={!hideDrawer && teamProgressVisible} onClose={() => setTeamProgressVisible(false)} />
+      <MyTeamPanel destroyOnClose height="85vh" visible={!hideDrawer && myTeamVisible} onClose={() => setMyTeamVisible(false)} onTeamClick={onTeamClick} onUserClick={onUserClick} />
 
       <PropsPanel destroyOnClose height="60vh" visible={!hideDrawer && propsVisible} onClose={() => setPropsVisible(false)} onUserClick={onUserClick} />
 
