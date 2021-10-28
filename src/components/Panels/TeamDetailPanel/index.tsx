@@ -66,7 +66,6 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
               <img src={CrownIcon} alt="" />
               <div>第 {data?.allRank || 0} 名</div>
             </div>}
-            {/* todo flagId */}
             {type === "show" && data && <FollowTeamButton teamId={data?.id.toString()} followId={data?.followId} follow={data?.flag === "1"} onChange={refetch} />}
           </div>
 

@@ -3,36 +3,32 @@ import { useQuery } from "react-query";
 import { Col, Divider, DrawerProps, Row, Spin } from "antd";
 
 import Avatar from 'components/Base/Avatar';
-import FollowButton, { FollowTeamUserButton } from "components/FollowButton";
-import { FollowFlag, getSomeoneStep, getStepProp } from "services";
-
+import { PropCard } from "components/PropCard";
+import PropPopup from "components/Popups/PropPopup";
 import DrawerPanel from "components/Base/DrawerPanel";
+import FollowButton, { FollowTeamUserButton } from "components/FollowButton";
+
+import { FollowFlag, getSomeoneStep, getStepProp } from "services";
 
 import TeamOutloneIcon from 'assets/images/group_outline_icon.png';
 
 import styles from './index.module.scss';
-import { PropCard } from "components/PropCard";
-import PropPopup from "components/Popups/PropPopup";
 
 interface UserDetailPanelProps extends DrawerProps {
   userId: string;
-  haveProp: boolean;
+  haveProp?: boolean;
 }
 
-const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp, ...props }) => {
-
-  const { data, refetch, isLoading } = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId), {
-    enabled: props.visible,
-    onSuccess: () => setPropId(undefined)
-  })
-
-  const propData = useQuery(["props"], getStepProp, { enabled: !!userId })
+const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = false, ...props }) => {
 
   const [propId, setPropId] = useState<number | undefined>(undefined)
 
-  const handleOnPropUse = (id: number) => {
-    setPropId(id)
-  }
+  const user = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId), {
+    enabled: !!props.visible,
+    onSuccess: () => setPropId(undefined)
+  })
+
+  const propData = useQuery(["props"], getStepProp, { enabled: !!props.visible })
 
   return (
     <DrawerPanel
@@ -40,27 +36,27 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp, ...
       title={
         <div className={styles.panelHead}>
           {props.visible && <div className={styles.avatar}>
-            <Avatar size="large" src={data?.pic} text={data?.name} />
+            <Avatar size="large" src={user.data?.pic} text={user.data?.name} />
           </div>}
           <div className={styles.user}>
-            <div className={styles.total}>{data?.name || "--"}</div>
-            {data?.teamName && <div className={styles.team}>
+            <div className={styles.total}>{user.data?.name || "--"}</div>
+            {user.data?.teamName && <div className={styles.team}>
               <img src={TeamOutloneIcon} alt="" />
-              <div>{data?.teamName}</div>
+              <div>{user.data?.teamName}</div>
             </div>}
             <div className={styles.extra}>
               {haveProp && <FollowTeamUserButton
                 mapBtn={false}
-                onChange={refetch}
+                onChange={user.refetch}
                 userId={userId}
-                followId={parseInt(data?.followId || "0")}
-                follow={data?.followFlag === FollowFlag.follow}
+                followId={parseInt(user.data?.followId || "0")}
+                follow={user.data?.followFlag === FollowFlag.follow}
               />}
               {!haveProp && <FollowButton
-                onChange={refetch}
+                onChange={user.refetch}
                 userId={userId}
-                followId={data?.followId}
-                follow={data?.followFlag === FollowFlag.follow}
+                followId={user.data?.followId}
+                follow={user.data?.followFlag === FollowFlag.follow}
               />}
             </div>
           </div>
@@ -69,12 +65,12 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp, ...
 
             <div className={styles.statistic}>
               <div>个人步数</div>
-              <div className={styles.badge}>{data?.allStep || 0}</div>
+              <div className={styles.badge}>{user.data?.allStep || 0}</div>
             </div>
             <Divider type="vertical" />
             <div className={styles.statistic}>
               <div>个人路程</div>
-              <div className={styles.badge}>{data?.allKm || 0}KM</div>
+              <div className={styles.badge}>{user.data?.allKm || 0}KM</div>
             </div>
 
           </div>
@@ -82,12 +78,12 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp, ...
 
             <div className={styles.statistic}>
               <div>战队人均步数</div>
-              <div className={styles.badge}>{data?.aveStep || 0}</div>
+              <div className={styles.badge}>{user.data?.aveStep || 0}</div>
             </div>
             <Divider type="vertical" />
             <div className={styles.statistic}>
               <div>战队人均路程</div>
-              <div className={styles.badge}>{data?.aveTeamKm || 0}KM</div>
+              <div className={styles.badge}>{user.data?.aveTeamKm || 0}KM</div>
             </div>
 
           </div>
@@ -97,7 +93,7 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp, ...
       }
     >
 
-      {haveProp && <Spin spinning={isLoading}>
+      {haveProp && <Spin spinning={propData.isLoading}>
         <div>
           <div>道具</div>
           <Row>
@@ -107,12 +103,12 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp, ...
                 useNum={parseInt(prop.useNum)}
                 surUseNum={prop.surUseNum}
                 pic={prop.backPic}
-                onClick={() => handleOnPropUse(prop.id)}
+                onClick={() => setPropId(prop.id)}
               />
             </Col>)}
           </Row>
         </div>
-        <PropPopup id={propId} onCancel={() => setPropId(undefined)} userId={parseInt(userId)} onUse={refetch} />
+        <PropPopup id={propId} onCancel={() => setPropId(undefined)} userId={parseInt(userId)} onUse={user.refetch} />
       </Spin>}
     </DrawerPanel>
   )

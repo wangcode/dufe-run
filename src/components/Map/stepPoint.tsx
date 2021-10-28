@@ -5,7 +5,7 @@ import GeoUtils from 'leaflet-geometryutil';
 import { Marker, useMap } from 'react-leaflet';
 import { TOTAL_STEPS } from 'services';
 import PolylineJSON from './polyline.json';
-import { getPersonMark } from './mark';
+import { getPersonMark } from './marks';
 
 interface StepPointProps {
   step: string;

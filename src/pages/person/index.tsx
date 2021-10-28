@@ -35,14 +35,10 @@ function PersonMap() {
 
       <div className={styles.topBar}>
         <Space>
-          <AvatarBox name={mySteps.data?.name} score={`${mySteps.data?.allPoint||0} 分`} avatar={mySteps.data?.pic} />
+          <AvatarBox name={mySteps.data?.name} score={`${mySteps.data?.allPoint || 0} 分`} avatar={mySteps.data?.pic} />
           <GetPointButton dot={hasPoint} />
         </Space>
-        <ToggleButton value="person" onChange={() => history.push("/team")} />
-      </div>
-
-      <div className={styles.bottomBar}>
-        <PersonRunBar hideDrawer={!!userId} onUserClick={setUserId} />
+        <ToggleButton value="person" onChange={() => history.replace("/team")} />
       </div>
 
       <Map>
@@ -58,8 +54,12 @@ function PersonMap() {
         <StepPoint center={!userId} step={mySteps.data?.allStep || "0"} />
       </Map>
 
+      <div className={styles.bottomBar}>
+        <PersonRunBar hideDrawer={!!userId} onUserClick={setUserId} />
+      </div>
+
       <UserDetailPanel haveProp={false} visible={!!userId} userId={userId} onClose={() => setUserId("")} />
-      
+
       <PersonPopup visible={popup} onClose={() => setPopup(false)} />
 
     </div>

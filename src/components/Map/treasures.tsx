@@ -1,7 +1,7 @@
 import { FeatureGroup, Marker } from "react-leaflet";
 // import { useQuery } from "react-query";
 // import { getStepMapIntegral } from "services";
-import { getTreasureMark } from "./mark";
+import { getTreasureMark } from "./marks";
 
 interface TreasuresProps {
 
