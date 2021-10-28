@@ -5,11 +5,11 @@ import { useQuery } from 'react-query';
 
 import Map from 'components/Map';
 import Card from 'components/Base/Card';
-import RunToolBar from 'components/RunBar';
 import GraphRank from 'components/GraphRank';
 import StepPoint from 'components/Map/stepPoint';
-import { TeamRankItem } from 'components/LineItem/TeamRank';
 import TeamPopup from 'components/Popups/TeamPopup';
+import TeamRunBar from 'components/RunBar/TeamRunBar';
+import { TeamRankItem } from 'components/LineItem/TeamRank';
 import TeamDetailPanel from 'components/Panels/TeamDetailPanel';
 import UserDetailPanel from 'components/Panels/UserDetailPanelV2';
 import { AvatarBox, GetPointButton, ToggleButton } from 'components/FloatComponents';
@@ -97,7 +97,7 @@ const Team = () => {
       />
 
       <div className={styles.runToolBar}>
-        <RunToolBar mode="team" onUserClick={setUserId} hideDrawer={!!userId} />
+        <TeamRunBar onUserClick={setUserId} hideDrawer={!!userId} />
       </div>
 
       <TeamPopup visible={popup} onClose={() => setPopup(false)} />

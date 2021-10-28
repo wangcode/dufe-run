@@ -1,9 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Col, Divider, DrawerProps, message, Modal, Row } from 'antd';
-import Toast from 'light-toast';
 import { useAsyncFn } from 'react-use';
 import { useHistory } from 'react-router';
+
 import { FollowTeamButton } from 'components/FollowButton';
 import DrawerPanel from 'components/Base/DrawerPanel';
 import Button from 'components/Base/Button';

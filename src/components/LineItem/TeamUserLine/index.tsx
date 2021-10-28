@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useMutation } from 'react-query';
+import React from 'react';
+// import { useMutation } from 'react-query';
 
-import { removeStepUp, StepUpSomeOne } from 'services';
+// import { removeStepUp, StepUpSomeOne } from 'services';
 import { Col, Row } from 'antd';
 
 import Avatar from 'components/Base/Avatar';
+import { FollowTeamUserButton } from 'components/FollowButton';
 
 import MapIcon from 'assets/images/map_circle_icon.png';
-import FavIcon from 'assets/images/fav_map_circle_icon.png';
+// import FavIcon from 'assets/images/fav_map_circle_icon.png';
 
 
 import styles from './index.module.scss';
-import { FollowTeamUserButton } from 'components/FollowButton';
 
 interface TeamUserLineProps {
   id: string;

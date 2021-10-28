@@ -1,16 +1,18 @@
-import TeamUserLine from "components/LineItem/TeamUserLine"
+import { useState } from "react";
 import { useQuery } from "react-query"
-import { getMyStepTeam, getMyStepTeamPersonRank, getStepTeamPerson } from "services"
-import { Col, Row, Space, Affix } from "antd";
-import Button from 'components/Base/Button';
+import { Col, Row } from "antd";
 
-import LikeIcon from 'assets/images/like.png'
+import { getMyStepTeamPersonRank, getStepTeamPerson } from "services"
+
+import TeamUserLine from "components/LineItem/TeamUserLine"
+import Button from 'components/Base/Button';
+import SearchInputStyle from 'components/Panels/SNSPanel/index.module.scss';
+
+// import LikeIcon from 'assets/images/like.png'
 import UserIcon from 'assets/images/user_icon.png';
 
-import SearchInputStyle from 'components/Panels/SNSPanel/index.module.scss';
-import MyRankStyle from 'pages/rank/index.module.scss';
+// import MyRankStyle from 'pages/rank/index.module.scss';
 import styles from './index.module.scss';
-import { useState } from "react";
 
 interface TeammatesProps {
   teamId?: string;
@@ -23,7 +25,7 @@ const Teammates: React.FC<TeammatesProps> = ({ teamId, onUserClick }) => {
   const [keyword, setKeyword] = useState("")
   const [searchKey, setSearchKey] = useState("")
 
-  const { data, isLoading } = useQuery(
+  const { data } = useQuery(
     ["teams", teamId, searchKey],
     () => getStepTeamPerson(teamId!, keyword),
     { enabled: !!teamId }

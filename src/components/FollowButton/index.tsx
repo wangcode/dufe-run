@@ -1,13 +1,12 @@
 import React from 'react';
+import { message } from 'antd';
 import { useMutation } from 'react-query';
 import { followSomeone, followStepTeam, followStepTeamPerson, removeFollow, removeFollowStepTeam } from 'services';
-import FavOutlineIcon from 'assets/images/fav_outline_icon.png';
-import FavIcon from 'assets/images/fav_map_circle_icon.png';
 
 import Button, { ButtonSizeType } from 'components/Base/Button';
 
-import Toast from 'light-toast';
-import { message } from 'antd';
+import FavOutlineIcon from 'assets/images/fav_outline_icon.png';
+import FavIcon from 'assets/images/fav_map_circle_icon.png';
 
 interface FollowButtonProps {
   userId: string;

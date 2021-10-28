@@ -1,14 +1,13 @@
-import Button from 'components/Base/Button';
-
-import Toast from 'light-toast';
-import { getCumIntegral, getMySteps, saveStepIntegral, TOTAL_LENGTH } from 'services';
+import { message } from 'antd';
 import { useMutation, useQuery } from 'react-query';
+
+import Button from 'components/Base/Button';
+import { getCumIntegral, getMySteps, saveStepIntegral, TOTAL_LENGTH } from 'services';
 
 import walk from 'assets/images/foot_icon.png';
 import CoinIcon from 'assets/images/coin_point.png';
 
 import styles from './index.module.scss';
-import { message } from 'antd';
 
 const Point = () => {
 

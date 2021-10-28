@@ -27,7 +27,7 @@ const SNSPanel: React.FC<SNSPanelProps> = (props) => {
   const [searchValue, setSearchValue] = useState("")
   const [searchKey, setSearchKey] = useState("")
 
-  const [search, setSearch] = useState(false)
+  const [, setSearch] = useState(false)
 
   const { data, isLoading, isFetching, refetch } = useQuery(["search", searchKey], () => getPeopleInStep(searchKey), {
     enabled: searchKey !== "",

@@ -8,7 +8,7 @@ import PropsPanel from 'components/Panels/PropsPanel';
 import foot from 'assets/images/foot_icon.png';
 import logo from 'assets/images/logo_btn.png';
 
-import styles from './index.module.scss';
+import styles from '../index.module.scss';
 
 interface TeamRunBarProps {
   hideDrawer?: boolean;

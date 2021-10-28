@@ -1,10 +1,10 @@
+import React from 'react';
 import { Col, Row } from 'antd';
 import classNames from 'classnames';
-import React, { useState } from 'react';
-import Card from 'components/Base/Card';
+// import Card from 'components/Base/Card';
 
 import styles from './index.module.scss';
-import TeamDetailPanel from 'components/Panels/TeamDetailPanel';
+// import TeamDetailPanel from 'components/Panels/TeamDetailPanel';
 
 interface TeamRankItemProps {
   rank: number;

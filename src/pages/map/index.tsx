@@ -14,9 +14,9 @@ import "leaflet/dist/leaflet.css";
 
 import styles from './index.module.scss';
 
-import { getMySteps, getSomeoneStep } from 'services';
+// import { getMySteps, getSomeoneStep } from 'services';
 // import { useLocation } from 'react-router-dom';
-import { useSearchParam } from 'react-use';
+// import { useSearchParam } from 'react-use';
 
 // const Points: { position: LatLngExpression }[] = [
 //   {
@@ -29,7 +29,7 @@ import { useSearchParam } from 'react-use';
 function Map() {
 
 
-  const userId = useSearchParam("user")
+  // const userId = useSearchParam("user")
   // const type = useSearchParam("type") || "person"
 
   // const [myStep, setMyStep] = useState(0)

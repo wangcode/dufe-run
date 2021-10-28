@@ -50,17 +50,17 @@
 
 .silver {
   @extend .medal;
-  background-image: url(../../assets/images/silver.png);
+  background-image: url(../../../assets/images/silver.png);
 }
 
 .gold {
   @extend .medal;
-  background-image: url(../../assets/images/gold.png);
+  background-image: url(../../../assets/images/gold.png);
 }
 
 .bronze {
   @extend .medal;
-  background-image: url(../../assets/images/bronze.png);
+  background-image: url(../../../assets/images/bronze.png);
 }
 
 .like,
@@ -71,8 +71,8 @@
 }
 
 .like {
-  background-image: url(../../assets/images/like.png);
+  background-image: url(../../../assets/images/like.png);
 }
 .unlike {
-  background-image: url(../../assets/images/unlike.png);
+  background-image: url(../../../assets/images/unlike.png);
 }

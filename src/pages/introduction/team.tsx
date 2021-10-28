@@ -1,9 +1,7 @@
-import { Spin, Typography } from 'antd';
-import PersonPropup from 'components/Popups/PersonPopup';
-import TeamPopup from 'components/Popups/TeamPopup';
+import { Typography } from 'antd';
 import styles from './index.module.scss';
 
-const { Title, Paragraph, Text, Link } = Typography;
+const { Paragraph } = Typography;
 
 
 const Introduction = () => {
