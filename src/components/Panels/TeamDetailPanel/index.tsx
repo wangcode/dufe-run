@@ -1,7 +1,6 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { Col, Divider, DrawerProps, message, Modal, Row } from 'antd';
-import { useAsyncFn } from 'react-use';
 import { useHistory } from 'react-router';
 
 import { FollowTeamButton } from 'components/FollowButton';
@@ -31,7 +30,12 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
 
   const users = useQuery(["teams", teamId, "users"], () => getStepTeamPerson(teamId!), { enabled: !!teamId })
 
-  const [{ loading: joinLoading }, joinTeam] = useAsyncFn(joinStepTeam)
+  const joinTeamMutation = useMutation(joinStepTeam, {
+    onSuccess: () => {
+      message.success("加入成功！")
+      history.replace("/team")
+    }
+  })
 
   const handleOnJoinTeam = () => {
     if (!teamId) return
@@ -40,13 +44,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
       content: '确定后不能修改，是否加入该战队？',
       okText: '确定',
       cancelText: '再想想',
-      onOk: () => {
-        return joinTeam(teamId)
-          .then(() => {
-            message.success("加入成功！")
-            history.replace("/team")
-          })
-      }
+      onOk: () => joinTeamMutation.mutateAsync(teamId)
     })
   }
 
@@ -123,7 +121,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
       </div>
 
       {type === "select" && <div className={styles.joinBtn}>
-        <Button loading={joinLoading} theme="success" onClick={handleOnJoinTeam}>加入战队</Button>
+        <Button loading={joinTeamMutation.isLoading} theme="success" onClick={handleOnJoinTeam}>加入战队</Button>
       </div>}
 
     </DrawerPanel>

@@ -71,7 +71,7 @@ const Team = () => {
       <UserDetailPanel
         visible={!!userId}
         userId={userId}
-        height="55vh"
+        height="450px"
         onClose={() => setUserId("")}
         destroyOnClose
         haveProp

@@ -71,7 +71,6 @@ const UserLine: React.FC<UserLineProps> = ({ userId, name, userPanel = true, pic
       <div className={styles.extra}>
         {length !== undefined && <div className={styles.length}>{length} <span>KM</span></div>}
         {steps !== undefined && <div className={styles.steps}>{steps === "-1" ? 0 : steps}</div>}
-        {/* todo loading */}
         {like && <div className={styles.fav} onClick={() => !like?.disabled && mutate()}>
           {like.likeNum !== undefined && <div>{like.likeNum}</div>}
           {like?.isLike && <div className={styles.like} />}
