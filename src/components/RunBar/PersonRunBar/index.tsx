@@ -16,7 +16,7 @@ interface PersonRunBarProps {
   onUserClick?: (id: string) => void;
 }
 
-const PersonRunBar: React.FC<PersonRunBarProps> = ({onUserClick, hideDrawer }) => {
+const PersonRunBar: React.FC<PersonRunBarProps> = ({ onUserClick, hideDrawer }) => {
 
   const history = useHistory()
 
@@ -45,7 +45,7 @@ const PersonRunBar: React.FC<PersonRunBarProps> = ({onUserClick, hideDrawer }) =
         </div>
       </div>
       <ProgressPanel destroyOnClose visible={!hideDrawer && visible} onClose={() => setVisible(false)} />
-      <SNSPanel destroyOnClose height="55vh" visible={!hideDrawer && followVisible} onClose={() => setFollowVisible(false)} onUserClick={onUserClick} />
+      <SNSPanel destroyOnClose height="60vh" visible={!hideDrawer && followVisible} onClose={() => setFollowVisible(false)} onUserClick={onUserClick} />
     </div>
   )
 

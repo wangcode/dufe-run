@@ -58,7 +58,7 @@ const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
       <TeamDetailPanel
         type="show"
         onUserClick={props.onUserClick}
-        height="60vh"
+        height="70vh"
         destroyOnClose
         visible={!!teamId}
         onClose={() => setTeamId("")}
