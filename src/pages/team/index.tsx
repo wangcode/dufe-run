@@ -64,14 +64,14 @@ const Team = () => {
         </Card>
       </div>
 
-      {!!userId && <Map>
-        {selectUser.data && <StepPoint step={selectUser.data.allStep} center />}
+      {!!userId && <Map style={{ height: "70vh", marginBottom: "30vh" }}>
+        {selectUser.data && <StepPoint step={selectUser.data.allStep || "0"} center />}
       </Map>}
 
       <UserDetailPanel
         visible={!!userId}
         userId={userId}
-        height="50vh"
+        height="55vh"
         onClose={() => setUserId("")}
         destroyOnClose
         haveProp

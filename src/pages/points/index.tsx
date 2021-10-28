@@ -11,9 +11,9 @@ import styles from './index.module.scss';
 
 const Point = () => {
 
-  const { data: myStep } = useQuery("mySteps", getMySteps)
+  const myStep = useQuery("mySteps", getMySteps)
 
-  const { data, refetch } = useQuery(
+  const points = useQuery(
     ["points"],
     getCumIntegral
   )
@@ -21,7 +21,7 @@ const Point = () => {
   const mutation = useMutation(saveStepIntegral, {
     onSuccess: () => {
       message.success("领取成功！")
-      refetch()
+      points.refetch()
     }
   })
 
@@ -29,18 +29,18 @@ const Point = () => {
     <div className={styles.main}>
       <div className={styles.points}>
         <img src={CoinIcon} alt="" />
-        当前积分：<span>{data?.reduce((prev, next) => prev + parseInt(next.point), 0)}</span> 积分
+        当前积分：<span>{myStep.data?.allPoint || 0}</span> 积分
       </div>
       <div className={styles.total}>
-        <div>今日行程：<span>{myStep?.nowStep}KM</span></div>
-        <div>累计行程：<span>{myStep?.allKm}KM</span></div>
+        <div>今日行程：<span>{myStep.data?.nowStep || 0}KM</span></div>
+        <div>累计行程：<span>{myStep.data?.allKm || 0}KM</span></div>
         <div>全程：<span> {TOTAL_LENGTH / 1000}KM</span></div>
       </div>
       <div className={styles.missionPanel}>
-        {data?.map(point => (
+        {points.data?.map(point => (
           <div key={point.id} className={styles.mission}>
             <div className={styles.detail}>
-              <img src={walk} className={styles.walk} alt="1" />
+              <img src={walk} className={styles.walk} alt="walk" />
               <div>{point.name}</div>
             </div>
             {point.flag === "0" && <Button

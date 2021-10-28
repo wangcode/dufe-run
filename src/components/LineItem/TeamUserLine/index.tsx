@@ -27,6 +27,7 @@ interface TeamUserLineProps {
     follow: boolean;
     followId?: number;
   };
+  type: "team" | "person";
   onFav?: () => void;
   onAvatarClick?: () => void;
   onMapClick?: () => void;
@@ -57,8 +58,9 @@ const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
             {!props.hiddenMap && <Col onClick={props.onMapClick} className={styles.mapIcon}><img src={MapIcon} alt="mapBtn" /></Col>}
             <Col className={styles.iconBtn}>
               <FollowTeamUserButton
+                type={props.type}
                 size="small"
-                userId={props.id}
+                id={props.id}
                 follow={!!props.follow?.follow}
                 followId={props.follow?.followId}
                 onChange={props.onFav}

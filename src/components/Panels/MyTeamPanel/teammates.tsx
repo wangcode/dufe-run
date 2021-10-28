@@ -25,13 +25,13 @@ const Teammates: React.FC<TeammatesProps> = ({ teamId, onUserClick }) => {
   const [keyword, setKeyword] = useState("")
   const [searchKey, setSearchKey] = useState("")
 
-  const { data } = useQuery(
+  const myTeamates = useQuery(
     ["teams", teamId, searchKey],
     () => getStepTeamPerson(teamId!, keyword),
     { enabled: !!teamId }
   )
 
-  const { data: TeamRank } = useQuery(
+  const myTeam = useQuery(
     ["myTeamSteps"],
     getMyStepTeamPersonRank,
     { enabled: !!teamId }
@@ -42,7 +42,7 @@ const Teammates: React.FC<TeammatesProps> = ({ teamId, onUserClick }) => {
       <div className={styles.head}>
         <div style={{ paddingRight: 50 }} className={styles.subTitle}>
           <img src={UserIcon} alt="flag" />
-          <div>{data?.length} 人</div>
+          <div>{myTeamates.data?.length} 人</div>
         </div>
 
         <div style={{ padding: "10px 35px 20px 35px" }}>
@@ -60,35 +60,33 @@ const Teammates: React.FC<TeammatesProps> = ({ teamId, onUserClick }) => {
         <div>
           <div className={`${styles.lineItem} ${styles.selfLine}`}>
             <TeamUserLine
-              id={TeamRank?.userId || ""}
-              rank={TeamRank?.allRank}
-              avatar={TeamRank?.pic}
-              name={TeamRank?.name}
-              number={`${TeamRank?.allKm}KM`}
+              type="person"
+              id={myTeam.data?.userId || ""}
+              rank={myTeam.data?.allRank}
+              avatar={myTeam.data?.pic}
+              name={myTeam.data?.name || "--"}
+              number={`${myTeam.data?.allKm || "0"}KM`}
               hidden
-            // customRight={
-            //   <Space align="center">
-            //     <div>16888</div>
-            //     <div>
-            //       <div>29</div>
-            //       <img width="13px" height="12px" src={LikeIcon} alt="" />
-            //     </div>
-            //   </Space>
-            // }
             />
           </div>
         </div>
       </div>
 
       <div className={styles.teammatesContent}>
-        {data?.map((user, index) => (
+        {myTeamates.data?.map((user, index) => (
           <div key={user.userId} className={styles.lineItem}>
             <TeamUserLine
+              type="person"
               rank={index + 1}
               id={user.userId}
               avatar={user.pic}
               name={user.name}
               number={`${user.allKm}KM`}
+              follow={{
+                follow: user.flag === "1",
+                followId: user.followId
+              }}
+              onFav={myTeamates.refetch}
               onAvatarClick={() => onUserClick?.(user.userId)}
               onMapClick={() => onUserClick?.(user.userId)}
             />

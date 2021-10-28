@@ -104,24 +104,33 @@ export const FollowTeamButton: React.FC<FollowTeamButtonProps> = ({ follow, foll
 
 
 interface FollowTeamUserButtonProps {
-  userId: string;
+  id: string;
   followId?: number;
   follow: boolean;
   size?: keyof ButtonSizeType;
   border?: boolean;
   mapBtn?: boolean;
+  type: "team" | "person";
   onChange?: () => void;
 }
 
-// 关注战队用户
-export const FollowTeamUserButton: React.FC<FollowTeamUserButtonProps> = ({ mapBtn = true, follow, followId, userId, size, border, onChange }) => {
+// 关注战队/战队用户
+export const FollowTeamUserButton: React.FC<FollowTeamUserButtonProps> = ({ mapBtn = true, follow, followId, id, size, border, type = "person", onChange }) => {
 
-  const followMutation = useMutation(followStepTeamPerson, {
+  const teamFollowMutation = useMutation(followStepTeam, {
     onSuccess: () => {
       message.success("关注成功！")
       onChange?.()
     }
   })
+
+  const userFollowMutation = useMutation(followStepTeamPerson, {
+    onSuccess: () => {
+      message.success("关注成功！")
+      onChange?.()
+    }
+  })
+
   const unFollowMutation = useMutation(removeFollowStepTeam, {
     onSuccess: () => {
       message.success("取消关注成功！")
@@ -133,7 +142,9 @@ export const FollowTeamUserButton: React.FC<FollowTeamUserButtonProps> = ({ mapB
     if (follow) {
       followId && unFollowMutation.mutateAsync(followId.toString())
     } else {
-      userId && followMutation.mutateAsync(userId)
+      if (!id) return;
+      type === "person" && userFollowMutation.mutateAsync(id)
+      type === "team" && teamFollowMutation.mutateAsync(id)
     }
   }
 
@@ -141,7 +152,7 @@ export const FollowTeamUserButton: React.FC<FollowTeamUserButtonProps> = ({ mapB
 
   return (
     <Button
-      loading={followMutation.isLoading || unFollowMutation.isLoading}
+      loading={userFollowMutation.isLoading || teamFollowMutation.isLoading || unFollowMutation.isLoading}
       icon={!follow ? <img src={FavOutlineIcon} alt='fav' width="13px" height="11px" /> : null}
       size={size}
       border={border}

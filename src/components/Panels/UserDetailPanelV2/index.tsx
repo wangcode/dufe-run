@@ -33,6 +33,7 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
   return (
     <DrawerPanel
       {...props}
+      bodyStyle={{ paddingTop: 0 }}
       title={
         <div className={styles.panelHead}>
           {props.visible && <div className={styles.avatar}>
@@ -46,9 +47,10 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
             </div>}
             <div className={styles.extra}>
               {haveProp && <FollowTeamUserButton
+                type="person"
                 mapBtn={false}
                 onChange={user.refetch}
-                userId={userId}
+                id={userId}
                 followId={parseInt(user.data?.followId || "0")}
                 follow={user.data?.followFlag === FollowFlag.follow}
               />}
@@ -95,9 +97,9 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
 
       {haveProp && <Spin spinning={propData.isLoading}>
         <div>
-          <div>道具</div>
-          <Row>
-            {propData.data?.map(prop => <Col key={prop.id}>
+          <div className={styles.propTitle}>道具</div>
+          <div className={styles.propsList}>
+            {propData.data?.map(prop => <div key={prop.id} className={styles.propItem}>
               <PropCard
                 point={prop.point}
                 useNum={parseInt(prop.useNum)}
@@ -105,8 +107,8 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
                 pic={prop.backPic}
                 onClick={() => setPropId(prop.id)}
               />
-            </Col>)}
-          </Row>
+            </div>)}
+          </div>
         </div>
         <PropPopup id={propId} onCancel={() => setPropId(undefined)} userId={parseInt(userId)} onUse={user.refetch} />
       </Spin>}

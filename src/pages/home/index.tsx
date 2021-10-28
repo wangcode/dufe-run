@@ -56,18 +56,18 @@ const Home = () => {
           }}
           percent={parseInt(mySteps?.allStep || "0") / TOTAL_STEPS}
         />
-        <div className={styles.totalSteps}>{mySteps?.allStep}</div>
+        <div className={styles.totalSteps}>{mySteps?.allStep || 0}</div>
         <div className={styles.title}>今日步数</div>
         <div className={styles.value}>{mySteps?.nowStep || "0"}</div>
       </div>
 
       <div className={styles.entry2} onClick={() => history.push("/person")}>
-        <div className={styles.position}>共 <span>{personData?.num}</span> 校友参与</div>
+        <div className={styles.position}>共 <span>{personData?.num || 0}</span> 校友参与</div>
         <img src={PersonPNG} alt="entry" />
       </div>
 
       <div className={styles.entry2} onClick={handleOnTeamClick}>
-        <div className={styles.position}>共 <span>{teamData?.num}</span> 个战队，<span>{teamData?.perNum}</span>个校友参与</div>
+        <div className={styles.position}>共 <span>{teamData?.num || 0}</span> 个战队，<span>{teamData?.perNum || 0}</span>个校友参与</div>
         <img src={GroupPNG} alt="entry" />
       </div>
 

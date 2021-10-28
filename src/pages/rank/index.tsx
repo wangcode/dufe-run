@@ -43,7 +43,7 @@ export const RankList: React.FC<RankListProps> = ({ title, medal, box = true }) 
                   isLike: rank.goodFlag === GoodFlag.good,
                   onChange: refetch
                 }}
-                steps={rank.nowStep}
+                steps={rank.nowStep || "0"}
               />
             </div>
           ))}
@@ -73,9 +73,9 @@ const Rank = () => {
             disabled: true,
             likeId: ""
           }}
-          steps={data.allStep}
-          rank={data.allRank}
-          name={data.name}
+          steps={data.allStep || "0"}
+          rank={data.allRank || 0}
+          name={data.name || "--"}
           pic={data.pic}
         />
       </div>}

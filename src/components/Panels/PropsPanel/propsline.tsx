@@ -14,13 +14,11 @@ interface PropsLineProps {
   name: string;
   stepNum: string;
   propName: string;
-  content: string;
+  content: React.ReactNode;
   onClick?: () => void;
 }
 
 export const PropsLine: React.FC<PropsLineProps> = (props) => {
-
-  console.log(props.createTime)
 
   return (
     <div className={styles.propsItem}>
@@ -49,7 +47,7 @@ export const MePropsLogs: React.FC<MePropsLogsProps> = ({ onClick }) => {
         <div className={styles.propsLine} key={`me-${index}`}>
           <PropsLine
             {...log}
-            content={`王小二对你使用了${log.propName}，你的步数 ${log.stepNum}`}
+            content={<div><strong>{log.name}</strong> 对你使用了 <strong>{log.propName}</strong>，你的步数 <strong>{log.stepNum}</strong></div>}
             onClick={() => onClick?.(log.receivedId)}
           />
         </div>
@@ -74,7 +72,7 @@ export const OtherPropsLogs: React.FC<OtherPropsLogsProps> = ({ onClick }) => {
         <div className={styles.propsLine} key={`other-${index}`}>
           <PropsLine
             {...log}
-            content={`你对${log.name}使用了${log.propName}，你的步数 ${log.stepNum}`}
+            content={<div> 你对 <strong>{log.name}</strong> 使用了 <strong>{log.propName}</strong>， 步数 <strong>{log.stepNum}</strong></div>}
             onClick={() => onClick?.(log.receivedId)}
           />
         </div>

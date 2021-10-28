@@ -46,7 +46,7 @@ function PersonMap() {
         {follows.data?.map(user => (
           <StepPoint
             key={user.userId}
-            step={user.allStep}
+            step={user.allStep || "0"}
             center={userId === user.userId}
             onClick={() => setUserId(user.userId)}
           />

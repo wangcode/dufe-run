@@ -43,7 +43,7 @@ const TeamRunBar: React.FC<TeamRunBarProps> = ({ onUserClick, hideDrawer }) => {
           <div className={styles.followBtn} onClick={() => setPropsVisible(true)} >道具记录</div>
         </div>
       </div>
-      
+
       <TeamProgressPanel destroyOnClose height="50vh" visible={!hideDrawer && teamProgressVisible} onClose={() => setTeamProgressVisible(false)} />
       <MyTeamPanel destroyOnClose height="85vh" visible={!hideDrawer && myTeamVisible} onClose={() => setMyTeamVisible(false)} onUserClick={onUserClick} />
 

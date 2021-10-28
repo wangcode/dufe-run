@@ -34,7 +34,7 @@ const Teams: React.FC<TeamsProps> = (props) => {
       </div>
 
       <div className={`${styles.lineItem} ${styles.myTeam}`}>
-        <TeamUserLine id={"1"} hidden={true} rank={myTeam.data?.allRank} name={myTeam.data?.name} number={`${myTeam.data?.allKm}KM`} hiddenMap />
+        <TeamUserLine type="person" id={"1"} hidden={true} rank={myTeam.data?.allRank} name={myTeam.data?.name} number={`${myTeam.data?.allKm}KM`} hiddenMap />
       </div>
 
       <div>
@@ -42,6 +42,7 @@ const Teams: React.FC<TeamsProps> = (props) => {
           <div key={team.id} className={styles.lineItem}>
             <TeamUserLine
               id={team.id.toString()}
+              type="person"
               follow={{
                 followId: team.followId,
                 follow: team.flag === "1"
@@ -51,7 +52,7 @@ const Teams: React.FC<TeamsProps> = (props) => {
               hiddenMap
               rank={index + 1}
               name={team.name}
-              number={`${team.aveKm}KM`} />
+              number={`${team.aveKm || 0}KM`} />
           </div>
         ))}
       </div>

@@ -66,7 +66,7 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
               <img src={CrownIcon} alt="" />
               <div>第 {data?.allRank || 0} 名</div>
             </div>}
-            {type === "show" && data && <FollowTeamButton teamId={data?.id.toString()} followId={data?.followId} follow={data?.flag === "1"} onChange={refetch} />}
+            {type === "show" && data?.id && <FollowTeamButton teamId={data?.id.toString()} followId={data?.followId} follow={data?.flag === "1"} onChange={refetch} />}
           </div>
 
           <Row justify="space-between" align="top" className={styles.teamDetail}>
@@ -102,8 +102,9 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
         {users.data?.map((user, index) => (
           <div key={user.userId} className={styles.user}>
             <TeamUserLine
-              rank={index + 1}
               id={user.userId}
+              type="person"
+              rank={index + 1}
               name={user.name || "--"}
               avatar={user.pic}
               number={`${user.allKm || 0}KM`}

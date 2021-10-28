@@ -7,6 +7,7 @@ import Button from "components/Base/Button";
 import Popup from "..";
 
 import styles from './index.module.scss';
+import { useHistory } from "react-router";
 
 interface PropPopupProps {
   id?: number;
@@ -17,6 +18,8 @@ interface PropPopupProps {
 
 const PropPopup: React.FC<PropPopupProps> = (props) => {
 
+  const history = useHistory()
+
   const myStep = useQuery("mySteps", getMySteps)
 
   const { data } = useQuery(
@@ -26,7 +29,7 @@ const PropPopup: React.FC<PropPopupProps> = (props) => {
   )
 
   const canUse = useMemo(() => {
-    if(!data?.point || !myStep.data) return false
+    if (!data?.point || !myStep.data) return false
     return myStep.data.allPoint > parseInt(data.point)
   }, [data, myStep])
 
@@ -56,7 +59,7 @@ const PropPopup: React.FC<PropPopupProps> = (props) => {
           <div className={styles.buttons}>
             <Button size="xm" theme="cheese" onClick={props.onCancel}>取消</Button>
             {canUse && <Button loading={mutation.isLoading} size="xm" theme="hot" onClick={handleOnUse}>确定使用</Button>}
-            {!canUse && <Button theme="hot">去赚积分</Button>}
+            {!canUse && <Button size="xm" theme="hot" onClick={() => history.push("/point")}>去赚积分</Button>}
           </div>
         </div>
       </div>
