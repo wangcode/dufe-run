@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-import { Col, Divider, DrawerProps, Row, Spin } from "antd";
+import { Divider, DrawerProps, Spin } from "antd";
 
 import Avatar from 'components/Base/Avatar';
 import { PropCard } from "components/PropCard";

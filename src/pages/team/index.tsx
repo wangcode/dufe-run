@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Col, Empty, Row, Space } from 'antd';
+import { Empty, Space } from 'antd';
 import { useHistory } from 'react-router';
 import { useQuery } from 'react-query';
 
