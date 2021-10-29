@@ -66,7 +66,6 @@ const Search: React.FC<SearchProps> = ({ searchKey, loading, users, reSearch }) 
         ))}
         {users?.length === 0 && searchKey && !loading && <div className={styles.empty}>
           <Empty description={`未查询到 “${searchKey}”`} />
-          {/* {<Button theme="success" onClick={() => {}}>去关注</Button>} */}
         </div>}
       </div>
     </Spin>

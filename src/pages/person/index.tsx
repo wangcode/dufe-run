@@ -14,11 +14,13 @@ import { AvatarBox, GetPointButton, ToggleButton } from 'components/FloatCompone
 import { getCumIntegral, getMyFollowList, getMySteps } from 'services';
 
 import styles from './index.module.scss';
+import SelfDetailPanel from 'components/Panels/SelfDetailPanel';
 
 function PersonMap() {
 
   const history = useHistory()
 
+  const [selfVisible, setSelfVisible] = useState(false)
   const [popup, setPopup] = useState(true)
   const [userId, setUserId] = useState("")
 
@@ -51,15 +53,15 @@ function PersonMap() {
             onClick={() => setUserId(user.userId)}
           />
         ))}
-        <StepPoint center={!userId} step={mySteps.data?.allStep || "0"} />
+        <StepPoint center={!userId && selfVisible} step={mySteps.data?.allStep || "0"} onClick={() => setSelfVisible(true)} />
       </Map>
 
       <div className={styles.bottomBar}>
         <PersonRunBar hideDrawer={!!userId} onUserClick={setUserId} />
       </div>
 
-      <UserDetailPanel haveProp={false} visible={!!userId} userId={userId} onClose={() => setUserId("")} />
-
+      <UserDetailPanel height="240px" haveProp={false} visible={!!userId} userId={userId} maskClosable={false} onClose={() => setUserId("")} />
+      <SelfDetailPanel height="230px" visible={selfVisible} onClose={() => setSelfVisible(false)} />
       <PersonPopup visible={popup} onClose={() => setPopup(false)} />
 
     </div>

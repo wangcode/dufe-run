@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query"
-import { Col, Row } from "antd";
+import { Col, Empty, Row, Spin } from "antd";
 
 import { getMyStepTeamPersonRank, getStepTeamPerson } from "services"
 
@@ -42,7 +42,7 @@ const Teammates: React.FC<TeammatesProps> = ({ teamId, onUserClick }) => {
       <div className={styles.head}>
         <div style={{ paddingRight: 50 }} className={styles.subTitle}>
           <img src={UserIcon} alt="flag" />
-          <div>{myTeamates.data?.length} 人</div>
+          <div>{myTeamates.data?.length || 0} 人</div>
         </div>
 
         <div style={{ padding: "10px 35px 20px 35px" }}>
@@ -57,7 +57,7 @@ const Teammates: React.FC<TeammatesProps> = ({ teamId, onUserClick }) => {
             <Col><Button onClick={() => setSearchKey(keyword)} theme="hot">搜索</Button></Col>
           </Row>
         </div>
-        <div>
+        <Spin spinning={myTeam.isLoading}>
           <div className={`${styles.lineItem} ${styles.selfLine}`}>
             <TeamUserLine
               type="person"
@@ -69,30 +69,33 @@ const Teammates: React.FC<TeammatesProps> = ({ teamId, onUserClick }) => {
               hidden
             />
           </div>
-        </div>
+        </Spin>
       </div>
 
-      <div className={styles.teammatesContent}>
-        {myTeamates.data?.map((user, index) => (
-          <div key={user.userId} className={styles.lineItem}>
-            <TeamUserLine
-              type="person"
-              rank={index + 1}
-              id={user.userId}
-              avatar={user.pic}
-              name={user.name}
-              number={`${user.allKm}KM`}
-              follow={{
-                follow: user.flag === "1",
-                followId: user.followId
-              }}
-              onFav={myTeamates.refetch}
-              onAvatarClick={() => onUserClick?.(user.userId)}
-              onMapClick={() => onUserClick?.(user.userId)}
-            />
-          </div>
-        ))}
-      </div>
+      <Spin spinning={myTeamates.isLoading}>
+        <div className={styles.teammatesContent}>
+          {myTeamates.data?.map((user, index) => (
+            <div key={user.userId} className={styles.lineItem}>
+              <TeamUserLine
+                type="person"
+                rank={index + 1}
+                id={user.userId}
+                avatar={user.pic}
+                name={user.name}
+                number={`${user.allKm}KM`}
+                follow={{
+                  follow: user.flag === "1",
+                  followId: user.followId
+                }}
+                onFav={myTeamates.refetch}
+                onAvatarClick={() => onUserClick?.(user.userId)}
+                onMapClick={() => onUserClick?.(user.userId)}
+              />
+            </div>
+          ))}
+          {myTeamates.data?.length === 0 && <Empty description="暂无队友" />}
+        </div>
+      </Spin>
 
     </div>
   )

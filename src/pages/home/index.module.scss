@@ -56,7 +56,7 @@
     right: 0;
     width: 200px;
     text-align: center;
-    span{
+    span {
       color: #fdae87;
       font-weight: bold;
     }
@@ -79,10 +79,10 @@
   font-size: 15px;
   background-image: linear-gradient(to right, #f98b4f, #f7cd3d);
 }
-.totalSteps{
+.totalSteps {
   position: absolute;
   bottom: 20px;
-  right: 0;
+  left: 220px;
   font-size: 12px;
   color: #999999;
 }
@@ -96,7 +96,7 @@
   .progressbar {
     position: absolute;
     bottom: 0;
-    svg{
+    svg {
       transform: scaleX(-1);
     }
   }

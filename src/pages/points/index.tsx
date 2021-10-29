@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import Button from 'components/Base/Button';
 import { getCumIntegral, getMySteps, saveStepIntegral, TOTAL_LENGTH } from 'services';
@@ -11,6 +11,8 @@ import styles from './index.module.scss';
 
 const Point = () => {
 
+  const queryClient = useQueryClient()
+
   const myStep = useQuery("mySteps", getMySteps)
 
   const points = useQuery(
@@ -21,6 +23,7 @@ const Point = () => {
   const mutation = useMutation(saveStepIntegral, {
     onSuccess: () => {
       message.success("领取成功！")
+      queryClient.invalidateQueries("mySteps")
       points.refetch()
     }
   })

@@ -1,13 +1,12 @@
 import { message } from "antd";
 import { useMemo } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getMySteps, getStepPropInfo, useStepProp } from "services";
 
 import Button from "components/Base/Button";
 import Popup from "..";
 
 import styles from './index.module.scss';
-import { useHistory } from "react-router";
 
 interface PropPopupProps {
   id?: number;
@@ -18,7 +17,7 @@ interface PropPopupProps {
 
 const PropPopup: React.FC<PropPopupProps> = (props) => {
 
-  const history = useHistory()
+  const queryClient = useQueryClient()
 
   const myStep = useQuery("mySteps", getMySteps)
 
@@ -36,6 +35,7 @@ const PropPopup: React.FC<PropPopupProps> = (props) => {
   const mutation = useMutation(useStepProp, {
     onSuccess: () => {
       message.success("使用成功！")
+      queryClient.invalidateQueries(["props", props.id])
       props.onUse?.()
     }
   })

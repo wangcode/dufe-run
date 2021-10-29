@@ -50,11 +50,8 @@ const Home = () => {
           strokeWidth={5}
           width={255}
           trailColor="#B9B9CD"
-          strokeColor={{
-            '0%': '#5e71c0',
-            '100%': '#8115fc',
-          }}
-          percent={parseInt(mySteps?.allStep || "0") / TOTAL_STEPS}
+          strokeColor={{ '0%': '#5e71c0', '100%': '#8115fc' }}
+          percent={parseInt(mySteps?.allStep || "0") / TOTAL_STEPS * 100}
         />
         <div className={styles.totalSteps}>{mySteps?.allStep || 0}</div>
         <div className={styles.title}>今日步数</div>

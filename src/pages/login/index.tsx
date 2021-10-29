@@ -13,7 +13,7 @@ const Login = () => {
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token)
-      history.replace("/")
+      window.location.href = "/webview"
     }
   }, [history, token])
 

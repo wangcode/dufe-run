@@ -1,4 +1,4 @@
-import { Spin } from "antd";
+import { Empty, Spin } from "antd";
 import moment from "moment";
 import { useQuery } from "react-query";
 import { propUseMe, propUseOther } from "services";
@@ -52,6 +52,7 @@ export const MePropsLogs: React.FC<MePropsLogsProps> = ({ onClick }) => {
           />
         </div>
       ))}
+      {data?.length === 0 && <Empty description="暂无记录" />}
     </Spin>
   )
 
@@ -77,6 +78,7 @@ export const OtherPropsLogs: React.FC<OtherPropsLogsProps> = ({ onClick }) => {
           />
         </div>
       ))}
+      {data?.length === 0 && <Empty description="暂无记录" />}
     </Spin>
   )
 

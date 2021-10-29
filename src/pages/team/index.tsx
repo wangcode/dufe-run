@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Empty, Space } from 'antd';
 import { useHistory } from 'react-router';
 import { useQuery } from 'react-query';
@@ -36,6 +36,17 @@ const Team = () => {
     return points.data?.some(item => item.flag === "1") || false
   }, [points.data])
 
+  // 当popup关闭时，重新请求数据
+  const handleOnTeamReset = () => {
+    setTeamId("")
+    teams.refetch()
+  }
+
+  const handleOnUserReset = () => {
+    setUserId("")
+    mySteps.refetch()
+  }
+
   return (
     <div className={styles.root}>
 
@@ -72,7 +83,7 @@ const Team = () => {
         visible={!!userId}
         userId={userId}
         height="450px"
-        onClose={() => setUserId("")}
+        onClose={handleOnUserReset}
         destroyOnClose
         haveProp
       />
@@ -82,7 +93,7 @@ const Team = () => {
         height="60vh"
         destroyOnClose
         visible={!!teamId && !userId}
-        onClose={() => setTeamId("")}
+        onClose={handleOnTeamReset}
         teamId={teamId}
       />
 

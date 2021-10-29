@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Divider, DrawerProps, Progress, Spin } from 'antd';
-import { getMySteps, getMyStepTeam, TOTAL_LENGTH } from 'services';
+import { getMySteps, getMyStepTeam, TOTAL_KM, TOTAL_LENGTH } from 'services';
 import { useQuery } from 'react-query';
 import DrawerPanel from 'components/Base/DrawerPanel';
 
@@ -58,7 +58,9 @@ const TeamProgressPanel: React.FC<TeamProgressPanelProps> = (props) => {
         <Divider />
         <div className={styles.progress}>
           <div className={styles.total}>全程：<strong>{TotalKM}<em>KM</em></strong></div>
-          {myTeam.data?.allKm && <div className={styles.surplus}>还差 {(TotalKM - myTeam.data.allKm) || TotalKM}km 到达终点</div>}
+          {/* {myTeam.data?.allKm && <div className={styles.surplus}>还差 {(TotalKM - myTeam.data.allKm) || TotalKM}km 到达终点</div>} */}
+          {(myTeam.data?.allKm || 0) < TOTAL_KM && <div className={styles.surplus}>还差 {TOTAL_KM - (myTeam.data?.allKm || 0)}km 到达终点</div>}
+          {(myTeam.data?.allKm || 0) >= TOTAL_KM && <div className={styles.surplus}>您已经到达终点</div>}
         </div>
         <Progress strokeColor={{ from: "#c216fb", to: "#1244A8" }} percent={percent * 100} showInfo={false} />
       </Spin>

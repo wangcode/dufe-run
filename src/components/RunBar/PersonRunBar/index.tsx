@@ -7,7 +7,7 @@ import ProgressPanel from 'components/Panels/ProgressPanel';
 import foot from 'assets/images/foot_icon.png';
 import logo from 'assets/images/logo_btn.png';
 
-import { TOTAL_LENGTH } from 'services';
+import { TOTAL_KM, TOTAL_LENGTH } from 'services';
 
 import styles from '../index.module.scss';
 
@@ -30,7 +30,7 @@ const PersonRunBar: React.FC<PersonRunBarProps> = ({ onUserClick, hideDrawer }) 
       <div className={styles.line}>
         <div className={styles.detail} onClick={() => setVisible(true)} >
           <img src={logo} alt="logo" />
-          <div>全程 {TOTAL_LENGTH / 1000} 公里</div>
+          <div>全程 {TOTAL_KM} 公里</div>
         </div>
         <div>
           {toastVisible && <div className={styles.toast}>

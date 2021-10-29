@@ -24,7 +24,6 @@ type MyTeamActiveKeys = "MyTeammates" | "allTeam" | "follow"
 const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
 
   const [active, setActive] = useState<MyTeamActiveKeys>("MyTeammates")
-  const [teamId, setTeamId] = useState("")
 
   const mySteps = useQuery(
     ["mySteps"],
@@ -54,16 +53,6 @@ const MyTeamPanel: React.FC<MyTeamPanelProps> = (props) => {
       {active === "MyTeammates" && <Teammates onUserClick={props.onUserClick} teamId={mySteps.data?.teamId || "1"} />}
       {active === "allTeam" && <Teams onTeamClick={props.onTeamClick} teamId={mySteps.data?.teamId || "1"} />}
       {active === "follow" && <Follows onTeamClick={props.onTeamClick} onUserClick={props.onUserClick} teamId={mySteps.data?.teamId || '1'} />}
-
-      <TeamDetailPanel
-        type="show"
-        onUserClick={props.onUserClick}
-        height="70vh"
-        destroyOnClose
-        visible={!!teamId}
-        onClose={() => setTeamId("")}
-        teamId={teamId}
-      />
 
     </DrawerPanel>
   )

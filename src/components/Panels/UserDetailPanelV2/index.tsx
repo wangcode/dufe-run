@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { Divider, DrawerProps, Spin } from "antd";
 
 import Avatar from 'components/Base/Avatar';
@@ -21,14 +21,16 @@ interface UserDetailPanelProps extends DrawerProps {
 
 const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = false, ...props }) => {
 
+  const queryClient = useQueryClient()
+
   const [propId, setPropId] = useState<number | undefined>(undefined)
 
-  const user = useQuery(["user", userId, "detail"], () => getSomeoneStep(userId), {
+  const user = useQuery(["teams", "users", userId], () => getSomeoneStep(userId), {
     enabled: !!props.visible,
     onSuccess: () => setPropId(undefined)
   })
 
-  const propData = useQuery(["props"], getStepProp, { enabled: !!props.visible })
+  const propData = useQuery(["props"], getStepProp, { enabled: !!props.visible && haveProp })
 
   return (
     <DrawerPanel
@@ -110,7 +112,11 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
             </div>)}
           </div>
         </div>
-        <PropPopup id={propId} onCancel={() => setPropId(undefined)} userId={parseInt(userId)} onUse={user.refetch} />
+        <PropPopup
+          id={propId}
+          onCancel={() => setPropId(undefined)}
+          userId={parseInt(userId)}
+          onUse={() => queryClient.invalidateQueries(["teams", "users", userId])} />
       </Spin>}
     </DrawerPanel>
   )
