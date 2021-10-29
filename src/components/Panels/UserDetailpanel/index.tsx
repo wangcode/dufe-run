@@ -5,7 +5,7 @@ import { Divider, DrawerProps, Spin } from "antd";
 // import Button from 'components/Base/Button';
 import Avatar from 'components/Base/Avatar';
 import FollowButton from "components/FollowButton";
-import { FollowFlag, getSomeoneStep } from "services";
+import { getSomeoneStep } from "services";
 
 import DrawerPanel from "components/Base/DrawerPanel";
 
@@ -38,7 +38,7 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, ...props }) =
         </div>
         <div className={styles.buttons}>
           {/* <Button onClick={() => history.push(`/person?user=${data?.userId}`)}>查看</Button> */}
-          <FollowButton onChange={refetch} userId={userId} followId={data?.followId} follow={data?.followFlag === FollowFlag.follow} />
+          <FollowButton onChange={refetch} userId={userId} followId={data?.followId} follow={data?.followFlag === "1"} />
         </div>
       </Spin>
     </DrawerPanel>

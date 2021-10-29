@@ -103,7 +103,7 @@ export const FollowTeamButton: React.FC<FollowTeamButtonProps> = ({ follow, foll
 }
 
 
-interface FollowTeamUserButtonProps {
+interface FollowTeamOrUserButtonProps {
   id: string;
   followId?: number;
   follow: boolean;
@@ -115,7 +115,7 @@ interface FollowTeamUserButtonProps {
 }
 
 // 关注战队/战队用户
-export const FollowTeamUserButton: React.FC<FollowTeamUserButtonProps> = ({ mapBtn = true, follow, followId, id, size, border, type = "person", onChange }) => {
+export const FollowTeamOrUserButton: React.FC<FollowTeamOrUserButtonProps> = ({ mapBtn = true, follow, followId, id, size, border, type = "person", onChange }) => {
 
   const teamFollowMutation = useMutation(followStepTeam, {
     onSuccess: () => {

@@ -4,7 +4,7 @@ import { Empty, Space, Spin } from 'antd';
 
 import Avatar from 'components/Base/Avatar';
 import FollowButton from 'components/FollowButton';
-import { FollowFlag, JoinFlag } from 'services';
+import { JoinFlag } from 'services';
 import { transStep2Kilometer } from 'utils';
 
 import styles from './index.module.scss';
@@ -12,7 +12,7 @@ export interface SearchUserPorps {
   pic: string;
   name: string;
   joinFlag: JoinFlag;
-  followFlag: FollowFlag;
+  followFlag: "0" | "1";
   allStep: string;
   userId: string;
   allRank: string;

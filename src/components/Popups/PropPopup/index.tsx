@@ -59,7 +59,7 @@ const PropPopup: React.FC<PropPopupProps> = (props) => {
           <div className={styles.buttons}>
             <Button size="xm" theme="cheese" onClick={props.onCancel}>取消</Button>
             {canUse && <Button loading={mutation.isLoading} size="xm" theme="hot" onClick={handleOnUse}>确定使用</Button>}
-            {!canUse && <Button size="xm" theme="hot" onClick={() => history.push("/point")}>去赚积分</Button>}
+            {!canUse && <Button size="xm" theme="hot" onClick={() => wx.miniProgram.navigateTo({ url: '/pages/Point/EarnPoints/index' })}>去赚积分</Button>}
           </div>
         </div>
       </div>

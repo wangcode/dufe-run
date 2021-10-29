@@ -6,9 +6,9 @@ import Avatar from 'components/Base/Avatar';
 import { PropCard } from "components/PropCard";
 import PropPopup from "components/Popups/PropPopup";
 import DrawerPanel from "components/Base/DrawerPanel";
-import FollowButton, { FollowTeamUserButton } from "components/FollowButton";
+import FollowButton, { FollowTeamOrUserButton } from "components/FollowButton";
 
-import { FollowFlag, getSomeoneStep, getStepProp } from "services";
+import { getSomeoneStep, getStepProp } from "services";
 
 import TeamOutloneIcon from 'assets/images/group_outline_icon.png';
 
@@ -46,19 +46,19 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
               <div>{user.data?.teamName}</div>
             </div>}
             <div className={styles.extra}>
-              {haveProp && <FollowTeamUserButton
+              {haveProp && <FollowTeamOrUserButton
                 type="person"
                 mapBtn={false}
                 onChange={user.refetch}
                 id={userId}
                 followId={parseInt(user.data?.followId || "0")}
-                follow={user.data?.followFlag === FollowFlag.follow}
+                follow={user.data?.followFlag === "1"}
               />}
               {!haveProp && <FollowButton
                 onChange={user.refetch}
                 userId={userId}
                 followId={user.data?.followId}
-                follow={user.data?.followFlag === FollowFlag.follow}
+                follow={user.data?.followFlag === "1"}
               />}
             </div>
           </div>

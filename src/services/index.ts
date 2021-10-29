@@ -7,11 +7,12 @@ import qs from 'qs';
 export const TOTAL_STEPS = 100000; // 步
 export const TOTAL_LENGTH = 20000; // 米
 
-// const token = localStorage.getItem("token")
+const token = localStorage.getItem("token")
+// "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3RfdG9rZW4iLCJpYXQiOjE2MzUxMjMyOTAsInN1YiI6IntcIm9wZW5JZFwiOlwiMjkzXCIsXCJsb2dpbkRhdGVcIjpcIjIwMjEtMTAtMjUgMDg6NTQ6NTBcIixcIm9yZ0lkXCI6XCIxZDdkOThkMmE2N2Q0Zjc0YWE0OWE3OTdmNjMwYjI3YlwiLFwib3JnQ29kZVwiOlwiZHVmZVwiLFwidXNlck1vYmlsZVwiOlwiMTU2MTQ0NzIxMDZcIixcInVzZXJOYW1lXCI6XCIxNTYxNDQ3MjEwNlwiLFwidXNlcklkXCI6XCIxYzdkNmYxYjk5ZmM0MjJkOTk5NWM0ZWU2NjI0ZjNlMlwiLFwibmFtZVwiOlwi6bqm5Y-vXCIsXCJ1c2VyTWFjXCI6XCIyMTE0MDMxOTk2MTAyMjgyMTZcIn0iLCJleHAiOjE2Mzc3MTUyOTB9.eQ5KyRur9UNXkQpGCV0PAfrgErB3Z8mqbnSwyieGA28"
 
 axios.interceptors.request.use(config => {
     config.headers = {
-        token: "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3RfdG9rZW4iLCJpYXQiOjE2MzUxMjMyOTAsInN1YiI6IntcIm9wZW5JZFwiOlwiMjkzXCIsXCJsb2dpbkRhdGVcIjpcIjIwMjEtMTAtMjUgMDg6NTQ6NTBcIixcIm9yZ0lkXCI6XCIxZDdkOThkMmE2N2Q0Zjc0YWE0OWE3OTdmNjMwYjI3YlwiLFwib3JnQ29kZVwiOlwiZHVmZVwiLFwidXNlck1vYmlsZVwiOlwiMTU2MTQ0NzIxMDZcIixcInVzZXJOYW1lXCI6XCIxNTYxNDQ3MjEwNlwiLFwidXNlcklkXCI6XCIxYzdkNmYxYjk5ZmM0MjJkOTk5NWM0ZWU2NjI0ZjNlMlwiLFwibmFtZVwiOlwi6bqm5Y-vXCIsXCJ1c2VyTWFjXCI6XCIyMTE0MDMxOTk2MTAyMjgyMTZcIn0iLCJleHAiOjE2Mzc3MTUyOTB9.eQ5KyRur9UNXkQpGCV0PAfrgErB3Z8mqbnSwyieGA28",
+        token: token,
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
@@ -28,17 +29,7 @@ axios.interceptors.response.use(
     }
 )
 
-const apiurl = "http://172.16.1.19:9091"
-
-export enum FollowFlag {
-    follow = "1",
-    unFollow = "0"
-}
-
-export enum GoodFlag {
-    good = "1",
-    unGood = "0"
-}
+const apiurl = "/webview/api"
 
 export enum JoinFlag {
     join = "1",
@@ -69,7 +60,7 @@ interface StepsType {
 }
 
 interface RankType {
-    goodFlag: GoodFlag;
+    goodFlag: "0" | "1";
     name: string;
     nowStep: string;
     pic: string;
@@ -83,7 +74,7 @@ interface UserStepDetailType {
     nowRank: number;
     name: string;
     nowStep: string;
-    followFlag: FollowFlag;
+    followFlag: "0" | "1";
     pic: string;
     allStep: string;
     userId: string;
@@ -107,7 +98,7 @@ interface UserDetailType {
 
 interface SearchUserType {
     name: string;
-    followFlag: FollowFlag;
+    followFlag: "0" | "1";
     joinFlag: JoinFlag;
     pic: string;
     allStep: string;
@@ -371,7 +362,7 @@ export const getStepPropInfo = (id: number) => {
  * @param userId
  * @url http://yapi.dufe.tech/project/73/interface/api/9223
  */
-export const useStepProp = ({id, userId}: {id: string, userId: string}) => {
+export const useStepProp = ({ id, userId }: { id: string, userId: string }) => {
     return axios.post<SuccessData<boolean>>(`${apiurl}/alumni/useStepProp`, qs.stringify({ id, userId })).then(res => res.data.data)
 }
 

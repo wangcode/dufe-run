@@ -5,7 +5,7 @@ import React from 'react';
 import { Col, Row } from 'antd';
 
 import Avatar from 'components/Base/Avatar';
-import { FollowTeamUserButton } from 'components/FollowButton';
+import { FollowTeamOrUserButton } from 'components/FollowButton';
 
 import MapIcon from 'assets/images/map_circle_icon.png';
 // import FavIcon from 'assets/images/fav_map_circle_icon.png';
@@ -57,7 +57,7 @@ const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
           <Row gutter={10} wrap={false} align="middle">
             {!props.hiddenMap && <Col onClick={props.onMapClick} className={styles.mapIcon}><img src={MapIcon} alt="mapBtn" /></Col>}
             <Col className={styles.iconBtn}>
-              <FollowTeamUserButton
+              <FollowTeamOrUserButton
                 type={props.type}
                 size="small"
                 id={props.id}

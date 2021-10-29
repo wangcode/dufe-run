@@ -4,7 +4,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import UserLine from 'components/LineItem/UserLine';
-import { getMySteps, getNowRank, GoodFlag } from 'services';
+import { getMySteps, getNowRank } from 'services';
 
 import styles from './index.module.scss';
 import classNames from 'classnames';
@@ -40,7 +40,7 @@ export const RankList: React.FC<RankListProps> = ({ title, medal, box = true }) 
                 like={{
                   likeId: rank.goodId,
                   likeNum: rank.goodNum.toString(),
-                  isLike: rank.goodFlag === GoodFlag.good,
+                  isLike: rank.goodFlag === "1",
                   onChange: refetch
                 }}
                 steps={rank.nowStep || "0"}
