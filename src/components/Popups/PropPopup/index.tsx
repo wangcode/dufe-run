@@ -29,7 +29,7 @@ const PropPopup: React.FC<PropPopupProps> = (props) => {
 
   const canUse = useMemo(() => {
     if (!data?.point || !myStep.data) return false
-    return myStep.data.allPoint > parseInt(data.point)
+    return myStep.data.allPoint >= parseInt(data.point)
   }, [data, myStep])
 
   const mutation = useMutation(useStepProp, {

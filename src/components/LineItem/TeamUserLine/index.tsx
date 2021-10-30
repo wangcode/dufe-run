@@ -39,9 +39,9 @@ const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
     <div
       className={styles.userItem}
     >
-      <div className={styles.rank}>
+      {props.rank && <div className={styles.rank}>
         <span className={styles.ranktext}>{props.rank}</span>
-      </div>
+      </div>}
       <Row gutter={10} wrap={false} className={styles.detail} align="middle" justify="space-between">
 
         <Col onClick={props.onAvatarClick}>

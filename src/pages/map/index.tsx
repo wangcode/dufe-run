@@ -1,15 +1,15 @@
 // import React, { useEffect, useMemo, useState } from 'react'
-import { MapContainer, ImageOverlay } from 'react-leaflet'
+import { MapContainer, ImageOverlay, FeatureGroup } from 'react-leaflet'
 
-import MapPNG from './img/map.png';
+import MapPNG from './img/map45.jpg';
 
 import { CRS } from 'leaflet';
 
 // import GeoUtils from 'leaflet-geometryutil';
 
-// import { EditControl } from "react-leaflet-draw"
+import { EditControl } from "react-leaflet-draw"
+import 'leaflet-draw/dist/leaflet.draw.css'
 
-// import "react-leaflet-draw/dist/leaflet.draw.css";
 import "leaflet/dist/leaflet.css";
 
 import styles from './index.module.scss';
@@ -88,11 +88,14 @@ function Map() {
         zoomControl={false}
         zoomDelta={0.5}
         zoomSnap={0.5}
-        maxBounds={[[0, 0], [3361, 3839]]}
+        maxBounds={[[0, 0], [3361, 3845]]}
         // 超出拖动弹性值
         maxBoundsViscosity={1}
       >
-        <ImageOverlay url={MapPNG} bounds={[[0, 0], [3361, 3839]]} />
+        <FeatureGroup>
+          <EditControl onCreated={(e: any) => console.log(e.layer._latlng)} onEdited={console.log} draw={{}} position="bottomleft" />
+        </FeatureGroup>
+        <ImageOverlay url={MapPNG} bounds={[[0, 0], [3361, 3845]]} />
       </MapContainer>
     </div>
   )

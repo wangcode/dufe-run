@@ -19,7 +19,7 @@ export const RankList: React.FC<RankListProps> = ({ title, medal, box = true }) 
 
   const history = useHistory()
 
-  const { data, refetch, isLoading } = useQuery("ranks", getNowRank)
+  const { data, refetch, isLoading } = useQuery("rank", getNowRank)
 
   return (
     <div className={classNames({ [styles.rankPanel]: box })}>

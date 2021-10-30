@@ -32,6 +32,14 @@ function PersonMap() {
     return points.data?.some(item => item.flag === "1") || false
   }, [points.data])
 
+  const handleGoTeam = () => {
+    if (mySteps.data?.teamId) {
+      history.replace("/team")
+    } else {
+      history.replace("/teamselect")
+    }
+  }
+
   return (
     <div className={styles.main}>
 
@@ -40,7 +48,7 @@ function PersonMap() {
           <AvatarBox name={mySteps.data?.name} score={`${mySteps.data?.allPoint || 0} 分`} avatar={mySteps.data?.pic} />
           <GetPointButton dot={hasPoint} />
         </Space>
-        <ToggleButton value="person" onChange={() => history.replace("/team")} />
+        <ToggleButton value="person" onChange={handleGoTeam} />
       </div>
 
       <Map>

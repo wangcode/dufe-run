@@ -30,8 +30,8 @@ axios.interceptors.response.use(
     }
 )
 
-const apiurl = "/webview/api"
-// const apiurl = "http://172.16.1.19:9091"
+// const apiurl = "/webview/api"
+const apiurl = "http://172.16.1.19:9091"
 
 export enum JoinFlag {
     join = "1",
@@ -455,4 +455,26 @@ export const getCumIntegral = () => {
  */
 export const getStepTeamFollow = () => {
     return axios.get<SuccessData<TeamFollowListType>>(`${apiurl}/alumni/getStepTeamFollow`).then(res => res.data.data)
+}
+
+
+export const getTreasureChest = async () => {
+
+    const list = [
+        [1341.910266054414, 2086.2246657674827],
+        [1665.062722443912, 2293.923338216057],
+        [1517.3101795569842, 1718.4115229486251],
+        [1861.6803674185674, 2155.286076692026],
+        [2255.3014029091264, 2625.8553930120033],
+        [2731.6072714388856, 2644.1173970620316],
+        [2516.60092585509, 2079.6656894284774],
+        [2380.807444433745, 1681.5015555758253],
+        [1872.6106158263415, 1168.6209143292022],
+        [1422.6661555494447, 1367.188584752762]
+    ]
+
+    const points = await getStepMapIntegral()
+
+    return Promise.resolve(list.map((item, index) => ({step: (index+1) * 10000, position: item, ...points[index]})))
+
 }

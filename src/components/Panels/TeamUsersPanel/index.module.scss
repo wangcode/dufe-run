@@ -1,0 +1,40 @@
+.userList {
+  .user {
+    border-bottom: 1px solid #eeeeee;
+    // padding: 11px 0;
+    height: 60px;
+  }
+  margin-bottom: 20px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .title {
+    display: flex;
+    font-weight: bold;
+    font-size: 15px;
+    img {
+      width: 19px;
+      height: 19.5px;
+      margin-right: 10px;
+    }
+  }
+  .extend {
+    font-size: 13px;
+    color: #cccccc;
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+    img {
+      width: 12px;
+      height: 12px;
+      margin-right: 10px;
+    }
+  }
+}
+
+.search {
+  padding: 10px 0;
+}

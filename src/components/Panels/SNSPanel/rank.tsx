@@ -7,24 +7,32 @@ import UserLine from 'components/LineItem/UserLine';
 import styles from './index.module.scss';
 
 interface RankListProps {
-  onClick?: () => void;
+  onClick?: (id: string) => void;
 }
 
 const RankList: React.FC<RankListProps> = ({ onClick }) => {
 
-  const { data, isLoading, isFetching } = useQuery("rank", getNowRank)
+  const { data, isLoading, isFetching, refetch } = useQuery("rank", getNowRank)
 
   return (
     <Spin spinning={isLoading || isFetching}>
       <div className={styles.searchList}>
-        {data?.map((item, index) => (
-          <div key={item.userId} className={styles.searchItem}>
+        {data?.map((rank, index) => (
+          <div key={rank.userId} className={styles.searchItem}>
             <UserLine
+              userId={rank.userId}
               rank={index + 1}
-              name={item.name}
-              pic={item.pic}
-              // length={transStep2Kilometer(item.allStep)}
-              userId={item.userId}
+              medal
+              name={rank.name}
+              pic={rank.pic}
+              like={{
+                likeId: rank.goodId,
+                likeNum: rank.goodNum.toString(),
+                isLike: rank.goodFlag === "1",
+                onChange: refetch
+              }}
+              onUserClick={() => onClick?.(rank.userId)}
+              steps={rank.nowStep || "0"}
             />
           </div>
         ))}

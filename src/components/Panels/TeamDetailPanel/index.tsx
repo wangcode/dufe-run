@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { Col, Divider, DrawerProps, message, Modal, Row } from 'antd';
 import { useHistory } from 'react-router';
@@ -15,6 +15,7 @@ import TeamIcon from 'assets/images/group_icon.png'
 import CrownIcon from 'assets/images/crown_outline_icon.png';
 
 import styles from './index.module.scss';
+import TeamUsersPanel from '../TeamUsersPanel';
 
 interface TeamDetailPanelProps extends DrawerProps {
   type?: "select" | "show"
@@ -25,6 +26,8 @@ interface TeamDetailPanelProps extends DrawerProps {
 const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId, onUserClick, ...props }) => {
 
   const history = useHistory()
+
+  const [moreVisible, setMoreVisible] = useState(false)
 
   const { data, isLoading, refetch } = useQuery(["teams", teamId], () => getMyStepTeam(teamId!), { enabled: !!teamId })
 
@@ -89,10 +92,9 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
             <div className={styles.content}>{data?.info}</div>
           </div>}
 
-          {/* todo */}
           <div className={styles.headline}>
             <div className={styles.left}><img src={UserIcon} alt="user" /><span>队员</span></div>
-            <div>全部 {'>'}</div>
+            <div onClick={() => setMoreVisible(true)}>全部 {'>'}</div>
           </div>
         </div>
       }
@@ -123,6 +125,8 @@ const TeamDetailPanel: React.FC<TeamDetailPanelProps> = ({ type = "show", teamId
       {type === "select" && <div className={styles.joinBtn}>
         <Button loading={joinTeamMutation.isLoading} theme="success" onClick={handleOnJoinTeam}>加入战队</Button>
       </div>}
+
+      <TeamUsersPanel haveFollow={type === "show"} height="60vh" visible={moreVisible} onClose={() => setMoreVisible(false)} id={teamId} />
 
     </DrawerPanel>
   )

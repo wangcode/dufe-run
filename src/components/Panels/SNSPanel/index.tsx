@@ -6,7 +6,7 @@ import { getPeopleInStep } from 'services';
 import DrawerPanel from 'components/Base/DrawerPanel';
 import Button from 'components/Base/Button';
 import Search from './search';
-import { RankList } from 'pages/rank';
+import RankList from './rank';
 import MyFollowPerson from './follow';
 
 import styles from './index.module.scss';
@@ -27,11 +27,11 @@ const SNSPanel: React.FC<SNSPanelProps> = (props) => {
   const [searchValue, setSearchValue] = useState("")
   const [searchKey, setSearchKey] = useState("")
 
-  const [, setSearch] = useState(false)
+  // const [, setSearch] = useState(false)
 
   const { data, isLoading, isFetching, refetch } = useQuery(["search", searchKey], () => getPeopleInStep(searchKey), {
     enabled: searchKey !== "",
-    onSuccess: () => setSearch(false)
+    // onSuccess: () => setSearch(false)
   })
 
   const reset = () => {
@@ -64,7 +64,7 @@ const SNSPanel: React.FC<SNSPanelProps> = (props) => {
     >
       {active === "follow" && <MyFollowPerson onClick={() => setActive("search")} onUserClick={props.onUserClick} />}
       {active === "search" && <Search reSearch={refetch} loading={isLoading || isFetching} searchKey={searchKey} users={data || []} />}
-      {active === "rank" && <RankList box={false} />}
+      {active === "rank" && <RankList onClick={props.onUserClick} />}
     </DrawerPanel>
   )
 
