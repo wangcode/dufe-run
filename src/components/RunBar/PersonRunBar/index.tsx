@@ -7,7 +7,7 @@ import ProgressPanel from 'components/Panels/ProgressPanel';
 import foot from 'assets/images/foot_icon.png';
 import logo from 'assets/images/logo_btn.png';
 
-import { TOTAL_KM, TOTAL_LENGTH } from 'services';
+import { TOTAL_KM } from 'services';
 
 import styles from '../index.module.scss';
 

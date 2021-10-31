@@ -12,7 +12,6 @@ import Follows from './follows';
 
 import tabStyles from 'components/Base/Tabs/index.module.scss';
 // import styles from './index.module.scss';
-import TeamDetailPanel from '../TeamDetailPanel';
 
 interface MyTeamPanelProps extends DrawerProps {
   onUserClick?: (id: string) => void;

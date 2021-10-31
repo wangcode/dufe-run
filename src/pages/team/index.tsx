@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Empty, Space } from 'antd';
 import { useHistory } from 'react-router';
 import { useQuery } from 'react-query';

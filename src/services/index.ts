@@ -30,8 +30,8 @@ axios.interceptors.response.use(
     }
 )
 
-// const apiurl = "/webview/api"
-const apiurl = "http://172.16.1.19:9091"
+const apiurl = "/webview/api"
+// const apiurl = "http://172.16.1.19:9091"
 
 export enum JoinFlag {
     join = "1",
