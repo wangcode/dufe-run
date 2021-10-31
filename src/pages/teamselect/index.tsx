@@ -14,12 +14,15 @@ import GroupOutlineIcon from 'assets/images/group_outline_icon.png';
 import styles from './index.module.scss';
 import { useQuery } from 'react-query';
 import { getAllStepTeam } from 'services';
+import { useHistory } from 'react-router';
 
 interface TeamSelectProps {
 
 }
 
 const TeamSelect: React.FC<TeamSelectProps> = () => {
+
+  const history = useHistory()
 
   const [selected, setSelected] = useState<number | undefined>(undefined)
 
@@ -38,7 +41,7 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
               <img src={RuleIcon} alt="" />
               <div>战队赛规则</div>
             </div>
-            <div className={styles.content}>啊手动阀手动阀手动阀手动阀手动阀手动阀</div>
+            <div className={styles.content}>这里等待补充文案</div>
           </div>
 
           <div>
@@ -46,11 +49,11 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
               <img src={TimeOutlineIcon} alt="" />
               <div>活动时间</div>
             </div>
-            <strong className={styles.content}>啊手动阀手动阀手动阀手动阀手动阀手动阀</strong>
+            <strong className={styles.content}>这里等待补充文案</strong>
           </div>
 
           <div className={styles.detailBtn}>
-            <Button size="middle" theme="hot">活动具体说明</Button>
+            <Button size="middle" theme="hot" onClick={() => history.push("/introduction/team")}>活动具体说明</Button>
           </div>
 
           <div>

@@ -3,7 +3,6 @@ import { message } from 'antd';
 import qs from 'qs';
 
 // steps === length * 0.5
-
 export const TOTAL_STEPS = 100000; // 步
 export const TOTAL_LENGTH = 20000; // 米
 export const TOTAL_KM = TOTAL_LENGTH / 1000 // 千米
