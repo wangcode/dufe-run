@@ -6,13 +6,15 @@ import { useSearchParam } from 'react-use';
 const Login = () => {
 
   const token = useSearchParam("token")
+  const refreshToken = useSearchParam("refreshToken")
 
   useEffect(() => {
-    if (token) {
+    if (token && refreshToken) {
       localStorage.setItem("token", token)
+      localStorage.setItem("refreshToken", refreshToken)
       window.location.replace("/webview")
     }
-  }, [token])
+  }, [token, refreshToken])
 
   return (
     <Spin spinning={true}>
