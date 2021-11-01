@@ -115,7 +115,7 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
         <PropPopup
           id={propId}
           onCancel={() => setPropId(undefined)}
-          userId={parseInt(userId)}
+          userId={userId}
           onUse={() => queryClient.invalidateQueries(["teams", "users", userId])} />
       </Spin>}
     </DrawerPanel>

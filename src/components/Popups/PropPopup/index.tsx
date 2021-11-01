@@ -10,7 +10,7 @@ import styles from './index.module.scss';
 
 interface PropPopupProps {
   id?: number;
-  userId?: number;
+  userId?: string;
   onCancel?: () => void;
   onUse?: () => void;
 }
@@ -42,7 +42,7 @@ const PropPopup: React.FC<PropPopupProps> = (props) => {
 
   const handleOnUse = () => {
     if (props.id && props.userId) {
-      mutation.mutate({ id: props.id.toString(), userId: props.userId.toString() })
+      mutation.mutate({ id: props.id.toString(), userId: props.userId })
     }
   }
 
