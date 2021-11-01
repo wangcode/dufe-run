@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import { Spin } from 'antd';
 import { useSearchParam } from 'react-use';
-
+import {useHistory} from "react-router-dom"
 
 const Login = () => {
 
+  const history = useHistory();
   const token = useSearchParam("token")
 
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token)
-      window.location.replace("/webview")
+      history.replace("/")
     }
   }, [token])
 
