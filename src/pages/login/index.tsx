@@ -7,13 +7,16 @@ const Login = () => {
 
   const history = useHistory();
   const token = useSearchParam("token")
+  const refreshToken = useSearchParam("refreshToken")
 
   useEffect(() => {
-    if (token) {
+    if (token && refreshToken) {
       localStorage.setItem("token", token)
       history.replace("/")
+      localStorage.setItem("refreshToken", refreshToken)
+      window.location.replace("/webview")
     }
-  }, [token])
+  }, [token, refreshToken])
 
   return (
     <Spin spinning={true}>
