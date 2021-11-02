@@ -35,7 +35,7 @@ const Point = () => {
         当前积分：<span>{myStep.data?.allPoint || 0}</span> 积分
       </div>
       <div className={styles.total}>
-        <div>今日行程：<span>{myStep.data?.nowStep || 0}KM</span></div>
+        <div>今日行程：<span>{myStep.data?.nowStep || 0}步</span></div>
         <div>累计行程：<span>{myStep.data?.allKm || 0}KM</span></div>
         <div>全程：<span> {TOTAL_LENGTH / 1000}KM</span></div>
       </div>
