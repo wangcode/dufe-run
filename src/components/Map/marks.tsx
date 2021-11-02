@@ -12,7 +12,7 @@ export const getPersonMark = (size = [60, 60]) => {
 }
 
 
-export const getTreasureMark = (size = [40, 40]) => {
+export const getTreasureMark = (size = [45, 45]) => {
   const [width, height] = size;
   return new L.Icon({
     iconUrl: TreasuresMark,
