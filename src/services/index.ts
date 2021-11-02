@@ -29,7 +29,7 @@ axios.interceptors.response.use(
             message.error(error.response?.data?.message)
         }
         if (error.response?.status === 401 && error.response.data.code === "2001") {
-            const { token, refreshToken } = error.response.data
+            const { token, refreshToken } = error.response.data.data
             localStorage.setItem("token", token)
             localStorage.setItem("refreshToken", refreshToken)
             return axios.request({ ...error.config, headers: { token, refreshToken } })
