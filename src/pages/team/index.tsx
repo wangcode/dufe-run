@@ -52,7 +52,7 @@ const Team = () => {
 
       <div className={styles.topToolbar}>
         <Space>
-          <AvatarBox shadow avatar={mySteps.data?.pic} score={`${mySteps.data?.allPoint || 0} 分`} />
+          <AvatarBox shadow name={mySteps.data?.name} avatar={mySteps.data?.pic} score={`${mySteps.data?.allPoint || 0} 分`} />
           <GetPointButton shadow dot={hasPoint} />
         </Space>
         <ToggleButton shadow value="team" onChange={() => history.replace("/person")} />
