@@ -73,8 +73,8 @@ const Rank = () => {
             disabled: true,
             likeId: ""
           }}
-          steps={data.allStep || "0"}
-          rank={data.allRank || 0}
+          steps={data.nowStep || "0"}
+          rank={data.nowRank || 0}
           name={data.name || "--"}
           pic={data.pic}
         />
