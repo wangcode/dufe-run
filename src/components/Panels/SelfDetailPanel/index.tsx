@@ -31,7 +31,7 @@ const SelfDetailPanel: React.FC<SelfDetailPanelProps> = (props) => {
         </div>
         <div className={styles.blocks}>
           <div className={styles.box}>
-            <div className={styles.detail}>总步数：<br /><strong>{numeral(data?.allStep).format("0,0")}</strong></div>
+            <div className={styles.detail}>总步数：<br /><strong>{numeral(data?.allStep).format("0,0")} 步</strong></div>
             {/* <div className={styles.extra}>千里之行，始于足下</div> */}
           </div>
           <div className={styles.box}>

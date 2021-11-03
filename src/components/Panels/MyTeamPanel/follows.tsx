@@ -74,7 +74,7 @@ const Follows: React.FC<FollowsProps> = ({ teamId, onUserClick, onTeamClick }) =
               />
             </div>
           ))}
-          {teamFollows.data?.teamList?.length === 0 && <Empty description="暂无关注的队友" />}
+          {teamFollows.data?.personList?.length === 0 && <Empty description="暂无关注的队友" />}
         </div>
       </div>
     </Spin>

@@ -65,7 +65,7 @@ const Teammates: React.FC<TeammatesProps> = ({ teamId, onUserClick }) => {
               rank={myTeam.data?.allRank}
               avatar={myTeam.data?.pic}
               name={myTeam.data?.name || "--"}
-              number={`${myTeam.data?.allKm || "0"}KM`}
+              number={`${myTeam.data?.allKm || 0}KM`}
               hidden
             />
           </div>
@@ -81,8 +81,8 @@ const Teammates: React.FC<TeammatesProps> = ({ teamId, onUserClick }) => {
                 rank={index + 1}
                 id={user.userId}
                 avatar={user.pic}
-                name={user.name}
-                number={`${user.allKm}KM`}
+                name={user.name || "--"}
+                number={`${user.allKm || 0}KM`}
                 follow={{
                   follow: user.flag === "1",
                   followId: user.followId
