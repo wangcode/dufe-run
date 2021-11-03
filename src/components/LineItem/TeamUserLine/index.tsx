@@ -46,7 +46,7 @@ const TeamUserLine: React.FC<TeamUserLineProps> = (props) => {
 
         <Col onClick={props.onAvatarClick}>
           <Row gutter={10} wrap={false} align="middle">
-            {props.avatar !== undefined && <Col className={styles.avatar}><Avatar text="Wang" /></Col>}
+            {props.avatar !== undefined && <Col className={styles.avatar}><Avatar src={props.avatar} text={props.name} /></Col>}
             {props.name && <Col className={styles.name}>{props.name}</Col>}
           </Row>
         </Col>
