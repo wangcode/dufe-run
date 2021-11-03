@@ -31,12 +31,12 @@ const SelfDetailPanel: React.FC<SelfDetailPanelProps> = (props) => {
         </div>
         <div className={styles.blocks}>
           <div className={styles.box}>
-            <div className={styles.detail}>总步数：<strong>{numeral(data?.allStep).format("0,0")}</strong></div>
-            <div className={styles.extra}>千里之行，始于足下</div>
+            <div className={styles.detail}>总步数：<br /><strong>{numeral(data?.allStep).format("0,0")}</strong></div>
+            {/* <div className={styles.extra}>千里之行，始于足下</div> */}
           </div>
           <div className={styles.box}>
-            <div className={styles.detail}>消耗卡路里：<strong>{parseInt(data?.allStep || "0") * 0.5}</strong></div>
-            <div className={styles.extra}>准备燃烧我的卡路里</div>
+            <div className={styles.detail}>总公里数：<strong>{data?.allKm || "0"}KM</strong></div>
+            <div className={styles.extra}>千里之行，始于足下</div>
           </div>
         </div>
       </Spin>
