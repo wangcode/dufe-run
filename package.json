@@ -52,5 +52,6 @@
     "not dead",
     "not op_mini all"
   ],
-  "homepage": "/webview"
+  "homepage": "/webview",
+  "proxy": "http://172.16.1.19:9091"
 }
