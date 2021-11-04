@@ -17,9 +17,10 @@ import styles from './index.module.scss';
 interface UserDetailPanelProps extends DrawerProps {
   userId: string;
   haveProp?: boolean;
+  canFollow?: boolean;
 }
 
-const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = false, ...props }) => {
+const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = false, canFollow = true, ...props }) => {
 
   const queryClient = useQueryClient()
 
@@ -31,6 +32,11 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
   })
 
   const propData = useQuery(["props"], getStepProp, { enabled: !!props.visible && haveProp })
+
+  const handleOnPropUse = () => {
+    propData.refetch()
+    queryClient.invalidateQueries(["teams", "users", userId])
+  }
 
   return (
     <DrawerPanel
@@ -48,7 +54,7 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
               <div>{user.data?.teamName}</div>
             </div>}
             <div className={styles.extra}>
-              {haveProp && <FollowTeamOrUserButton
+              {haveProp && canFollow && <FollowTeamOrUserButton
                 type="person"
                 mapBtn={false}
                 onChange={user.refetch}
@@ -56,7 +62,7 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
                 followId={parseInt(user.data?.followId || "0")}
                 follow={user.data?.followFlag === "1"}
               />}
-              {!haveProp && <FollowButton
+              {!haveProp && canFollow && <FollowButton
                 onChange={user.refetch}
                 userId={userId}
                 followId={user.data?.followId}
@@ -116,7 +122,7 @@ const UserDetailPanel: React.FC<UserDetailPanelProps> = ({ userId, haveProp = fa
           id={propId}
           onCancel={() => setPropId(undefined)}
           userId={userId}
-          onUse={() => queryClient.invalidateQueries(["teams", "users", userId])} />
+          onUse={handleOnPropUse} />
       </Spin>}
     </DrawerPanel>
   )
