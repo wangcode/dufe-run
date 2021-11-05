@@ -82,6 +82,7 @@ const Team = () => {
       </Map>}
 
       <UserDetailPanel
+        canFollow={false}
         visible={!!userId}
         userId={userId}
         height="450px"
