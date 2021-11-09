@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, DrawerProps, Row, Tabs } from 'antd';
+import { Col, DrawerProps, message, Row, Tabs } from 'antd';
 import { useQuery } from 'react-query';
 import { getPeopleInStep } from 'services';
 
@@ -44,6 +44,14 @@ const SNSPanel: React.FC<SNSPanelProps> = (props) => {
     return reset
   }, [props.visible])
 
+  const handleOnSearch = () => {
+    if (searchValue === "" && searchKey === "") {
+      message.info("请输入要搜索的名字！")
+    } else {
+      setSearchKey(searchValue)
+    }
+  }
+
   return (
     <DrawerPanel
       {...props}
@@ -55,7 +63,7 @@ const SNSPanel: React.FC<SNSPanelProps> = (props) => {
           <Tabs.TabPane tab="搜索校友" key="search">
             <Row className={styles.searchHeader} gutter={12}>
               <Col flex={1}><input value={searchValue} onChange={e => setSearchValue(e.target.value)} className={styles.searchInput} type="text" /></Col>
-              <Col><Button onClick={() => setSearchKey(searchValue)} theme="hot">搜索</Button></Col>
+              <Col><Button onClick={handleOnSearch} theme="hot">搜索</Button></Col>
             </Row>
           </Tabs.TabPane>
           <Tabs.TabPane tab="排行榜" key="rank" />

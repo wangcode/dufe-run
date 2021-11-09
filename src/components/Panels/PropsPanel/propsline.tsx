@@ -24,7 +24,7 @@ export const PropsLine: React.FC<PropsLineProps> = (props) => {
     <div className={styles.propsItem}>
       <div className={styles.datetime}>
         <div>{moment(props.createTime, "X").format("YYYY-MM-DD")}</div>
-        <span>{moment(props.createTime, "X").format("HH:mm:ss")}</span>
+        {/* <span>{moment(props.createTime, "X").format("HH:mm:ss")}</span> */}
       </div>
       <div className={styles.content}>{props.content}</div>
       <div onClick={props.onClick} className={styles.mapIcon}><img src={MapIcon} alt="map" /></div>

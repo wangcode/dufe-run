@@ -45,13 +45,13 @@ const Follows: React.FC<FollowsProps> = ({ teamId, onUserClick, onTeamClick }) =
               />
             </div>
           ))}
-          {teamFollows.data?.teamList?.length === 0 && <Empty description="暂无关注的战队" />}
+          {teamFollows.data?.teamList?.length === 0 && <Empty description="暂无关注的战队~" />}
         </div>
       </div>
 
       <div>
         <div className={styles.followTitle}>
-          <div>关注的队友</div>
+          <div>关注的战队赛成员</div>
           <span className={styles.count}>{teamFollows.data?.personList.length || 0} / {persons.data?.length || 0}</span>
         </div>
         <div className={styles.lineList}>
@@ -74,7 +74,7 @@ const Follows: React.FC<FollowsProps> = ({ teamId, onUserClick, onTeamClick }) =
               />
             </div>
           ))}
-          {teamFollows.data?.teamList?.length === 0 && <Empty description="暂无关注的队友" />}
+          {teamFollows.data?.personList?.length === 0 && <Empty description="暂无关注的战队赛成员哦~" />}
         </div>
       </div>
     </Spin>

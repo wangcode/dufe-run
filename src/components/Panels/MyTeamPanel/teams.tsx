@@ -42,7 +42,7 @@ const Teams: React.FC<TeamsProps> = (props) => {
         <div key={team.id} className={styles.lineItem}>
           <TeamUserLine
             id={team.id.toString()}
-            type="person"
+            type="team"
             follow={{
               followId: team.followId,
               follow: team.flag === "1"

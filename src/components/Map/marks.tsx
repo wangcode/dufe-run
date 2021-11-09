@@ -1,6 +1,6 @@
 import L from 'leaflet';
 import PersonMark from 'assets/images/person.svg';
-import TreasuresMark from 'assets/images/box_icon.png';
+import TreasuresMark from 'assets/images/box_icon.gif';
 
 export const getPersonMark = (size = [60, 60]) => {
   const [width, height] = size;
@@ -12,7 +12,7 @@ export const getPersonMark = (size = [60, 60]) => {
 }
 
 
-export const getTreasureMark = (size = [60, 60]) => {
+export const getTreasureMark = (size = [45, 45]) => {
   const [width, height] = size;
   return new L.Icon({
     iconUrl: TreasuresMark,

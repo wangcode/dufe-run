@@ -53,7 +53,7 @@ export const AvatarBox: React.FC<AvatarBoxProps> = (props) => {
         { [styles.shadow]: props.shadow }
       )}
     >
-      <div className={styles.avatar} onClick={() => setVisible(true)}><Avatar src={props.avatar}>{props.name}</Avatar></div>
+      <div className={styles.avatar} onClick={() => setVisible(true)}><Avatar text={props.name} src={props.avatar} /></div>
       <div className={styles.text}>{props.score}</div>
       {/* {props.score && <div className={styles.text}>{props.score}</div>}
       {(props.name || props.number) && <Space>

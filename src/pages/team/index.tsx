@@ -52,7 +52,7 @@ const Team = () => {
 
       <div className={styles.topToolbar}>
         <Space>
-          <AvatarBox shadow avatar={mySteps.data?.pic} score={`${mySteps.data?.allPoint || 0} 分`} />
+          <AvatarBox shadow name={mySteps.data?.name} avatar={mySteps.data?.pic} score={`${mySteps.data?.allPoint || 0} 分`} />
           <GetPointButton shadow dot={hasPoint} />
         </Space>
         <ToggleButton shadow value="team" onChange={() => history.replace("/person")} />
@@ -65,14 +65,16 @@ const Team = () => {
           <TeamRankItem single rank={myTeam.data.allRank} name={myTeam.data.name} people={myTeam.data.personNum} length={`${myTeam.data.aveKm || "0"}KM`} />
         </div>}
 
-        <Card title="战队排行榜">
-          {teams.data?.map((item, index) => (
-            <div key={item.id} className={styles.teamListItem} onClick={() => setTeamId(item.id.toString())}>
-              <TeamRankItem rank={index + 1} name={item.name} people={item.personNum || 0} length={`${item.aveKm || 0}KM`} />
-            </div>
-          ))}
-          {teams.data?.length === 0 && <Empty description="暂无排行" />}
-        </Card>
+        <div className={styles.card}>
+          <Card title="战队排行榜">
+            {teams.data?.map((item, index) => (
+              <div key={item.id} className={styles.teamListItem} onClick={() => setTeamId(item.id.toString())}>
+                <TeamRankItem rank={index + 1} name={item.name} people={item.personNum || 0} length={`${item.aveKm || 0}KM`} />
+              </div>
+            ))}
+            {teams.data?.length === 0 && <Empty description="暂无排行" />}
+          </Card>
+        </div>
       </div>
 
       {!!userId && <Map style={{ height: "70vh", marginBottom: "30vh" }}>
@@ -80,6 +82,7 @@ const Team = () => {
       </Map>}
 
       <UserDetailPanel
+        canFollow={false}
         visible={!!userId}
         userId={userId}
         height="450px"

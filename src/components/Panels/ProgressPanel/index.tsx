@@ -31,7 +31,7 @@ const ProgressPanel: React.FC<ProgressPanelProps> = (props) => {
         <Divider />
         <div className={styles.progress}>
           <div className={styles.total}>全程：<strong>{TOTAL_KM}<em>KM</em></strong></div>
-          {(data?.allKm || 0) < TOTAL_KM && <div className={styles.surplus}>还差 {TOTAL_KM - (data?.allKm || 0)}km 到达终点</div>}
+          {(data?.allKm || 0) < TOTAL_KM && <div className={styles.surplus}>还差 {(TOTAL_KM - (data?.allKm || 0)).toFixed(2)}km 到达终点</div>}
           {(data?.allKm || 0) >= TOTAL_KM && <div className={styles.surplus}>您已经到达终点</div>}
         </div>
         <Progress strokeColor={{ from: "#c216fb", to: "#1244A8" }} percent={(data?.allKm || 0) / TOTAL_KM * 100} showInfo={false} />
