@@ -62,8 +62,8 @@ const SNSPanel: React.FC<SNSPanelProps> = (props) => {
           <Tabs.TabPane tab="我的关注" key="follow" />
           <Tabs.TabPane tab="搜索校友" key="search">
             <Row className={styles.searchHeader} gutter={12}>
-              <Col flex={1}><input value={searchValue} onChange={e => setSearchValue(e.target.value)} className={styles.searchInput} type="text" /></Col>
-              <Col><Button onClick={handleOnSearch} theme="hot">搜索</Button></Col>
+              <Col span={16}><input value={searchValue} onChange={e => setSearchValue(e.target.value)} className={styles.searchInput} type="text" /></Col>
+              <Col span={8}><Button onClick={handleOnSearch} theme="hot">搜索</Button></Col>
             </Row>
           </Tabs.TabPane>
           <Tabs.TabPane tab="排行榜" key="rank" />
