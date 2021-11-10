@@ -41,7 +41,7 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
               <img src={RuleIcon} alt="" />
               <div>战队赛规则</div>
             </div>
-            <div className={styles.content}>这里等待补充文案</div>
+            <div className={styles.content}>每名校友只能选择一个战队加入，加入战队将不可更改。加入战队后，每日步数将会折算计入战队总路程。战队将按照人均路程（战队总路程/战队人数）进行排位，并设冠、亚、季各一队。</div>
           </div>
 
           <div>
@@ -49,7 +49,7 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
               <img src={TimeOutlineIcon} alt="" />
               <div>活动时间</div>
             </div>
-            <strong className={styles.content}>这里等待补充文案</strong>
+            <strong className={styles.content}>11月15日至11月30日</strong>
           </div>
 
           <div className={styles.detailBtn}>
