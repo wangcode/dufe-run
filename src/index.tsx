@@ -28,7 +28,7 @@ export const queryClient = new QueryClient({
 
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter basename="/webview">
+    <BrowserRouter basename="/webview/dufe-run">
       <Route exact path="/"><Home /></Route>
       <Route exact path="/map"><Map /></Route>
       <Route exact path="/person"><PersonMap /></Route>
