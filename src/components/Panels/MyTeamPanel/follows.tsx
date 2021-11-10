@@ -1,7 +1,7 @@
 import { Empty, Spin } from "antd";
 import TeamUserLine from "components/LineItem/TeamUserLine";
 import { useQuery } from "react-query";
-import { getStepTeamFollow, getStepTeamNum, getStepTeamPerson } from "services";
+import { getStepTeamFollow, getStepTeamNum } from "services";
 
 import styles from "./index.module.scss";
 
@@ -14,7 +14,6 @@ interface FollowsProps {
 const Follows: React.FC<FollowsProps> = ({ teamId, onUserClick, onTeamClick }) => {
 
   const teams = useQuery(["team", "total"], getStepTeamNum)
-  const persons = useQuery(["team", teamId, "persons"], () => getStepTeamPerson(teamId), { enabled: !!teamId })
 
   const teamFollows = useQuery(["team", "follows"], getStepTeamFollow);
 
@@ -52,7 +51,7 @@ const Follows: React.FC<FollowsProps> = ({ teamId, onUserClick, onTeamClick }) =
       <div>
         <div className={styles.followTitle}>
           <div>关注的战队赛成员</div>
-          <span className={styles.count}>{teamFollows.data?.personList.length || 0} / {persons.data?.length || 0}</span>
+          <span className={styles.count}>{teamFollows.data?.personList.length || 0}</span>
         </div>
         <div className={styles.lineList}>
           {teamFollows.data?.personList.map((person, index) => (
