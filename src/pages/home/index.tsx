@@ -70,7 +70,7 @@ const Home = () => {
 
       <RankList title />
 
-      <HomePopup visible={visible} onClose={() => setVisible(false)} />
+      {/*<HomePopup visible={visible} onClose={() => setVisible(false)} />*/}
 
     </div>
   )
