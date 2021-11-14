@@ -65,7 +65,7 @@ const TeamSelect: React.FC<TeamSelectProps> = () => {
               <Row gutter={[25, 15]}>
                 {data?.map((team, index) => (
                   <Col key={team.id} onClick={() => setSelected(team.id)} span={6}>
-                    <TeamBox name={team.name} rank={index + 1} count={team.personNum} />
+                    <TeamBox name={team.name} rank={index + 1} count={team.personNum || 0} />
                   </Col>
                 ))}
               </Row>
