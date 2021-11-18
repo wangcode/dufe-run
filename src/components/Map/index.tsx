@@ -3,7 +3,7 @@ import { CRS } from 'leaflet';
 import { MapContainer, ImageOverlay } from 'react-leaflet'
 import "leaflet/dist/leaflet.css";
 
-import MapPNG from './map45.jpg';
+import MapPNG from './map1.jpg';
 
 interface MapProps {
   style?: CSSProperties;
